@@ -1,12 +1,14 @@
 import React from 'react';
-import { Box } from '@chakra-ui/react';
+import { Flex, Image, Text } from '@chakra-ui/react';
+import logo from './react-logo.svg';
 import './App.scss';
 
 function App() {
   return (
-    <Box bg="tomato" w="100%" p={4} color="white">
-      hello world
-    </Box>
+    <Flex bg="tomato" w="100%" p={4} color="white">
+      <Image src={logo} w="26px" h="26px" />
+      <Text ml="4px">Hoteler</Text>
+    </Flex>
   );
 }
 
