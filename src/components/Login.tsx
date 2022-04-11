@@ -12,11 +12,13 @@ import {
   Text,
 } from '@chakra-ui/react';
 import { Formik } from 'formik';
+import { useNavigate } from 'react-router-dom';
 import { fetchToken } from '../slices/TokenSlice';
 import { useAppDispatch, useAppSelector } from '../lib/reduxHooks';
 
 const Login = () => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const token = useAppSelector((state) => state.token);
 
@@ -42,7 +44,10 @@ const Login = () => {
               await dispatch(fetchToken({ username: values.username, password: values.password }));
               // eslint-disable-next-line no-console
               console.log(token);
-              setSubmitting(false);
+              if (token && token.accessToken) {
+                navigate('/home');
+                setSubmitting(false);
+              }
             }}
           >
             {({

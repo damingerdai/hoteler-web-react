@@ -37,6 +37,7 @@ export const tokenSlice = createSlice({
         state.accessToken = token.accessToken;
         state.refreshToken = token.refreshToken;
         state.exp = token.exp;
+        localStorage.setItem('hoteler-web-react', JSON.stringify(token));
       }
     });
   },

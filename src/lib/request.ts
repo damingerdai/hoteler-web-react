@@ -18,7 +18,7 @@ export const request = async (options: AxiosRequestConfig) => {
     if (data.status === -1) {
       const toast = createStandaloneToast();
       toast({
-        title: 'error',
+        title: '错误',
         description: data.error.message,
         position: 'top-right',
         status: 'error',
