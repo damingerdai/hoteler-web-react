@@ -14,20 +14,28 @@ module.exports = {
     ecmaVersion: 'latest',
     sourceType: 'module'
   },
-  plugins: ['react', 'prettier', '@typescript-eslint'],
+  plugins: ['react', 'prettier'],
   rules: {
     'jsx-quotes': ['error', 'prefer-single'],
     'import/no-extraneous-dependencies': [
       'error',
       {
-        devDependencies: ['**/*.test.ts', '**/*.test.tsx', 'src/setupTests.ts']
+        devDependencies: [
+          '**/*.test.ts',
+          '**/*.test.tsx',
+          'src/setupTests.ts',
+          'src/setupProxy.js'
+        ]
       }
     ],
+    'import/prefer-default-export': ['off'],
     'react/function-component-definition': [
       'error',
       {
         namedComponents: ['arrow-function', 'function-expression']
       }
-    ]
+    ],
+    'no-console': ['error', { allow: ['warn', 'error'] }],
+    'no-param-reassign': ['error', { props: false }]
   }
 };
