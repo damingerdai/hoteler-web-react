@@ -2,11 +2,12 @@ import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
-import { ChakraProvider } from '@chakra-ui/react';
+import { ChakraProvider, ColorModeScript } from '@chakra-ui/react';
 import './index.scss';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { store } from './store';
+import theme from './theme';
 
 const container = document.getElementById('root');
 const root = createRoot(container!);
@@ -15,6 +16,7 @@ const app = (
     <BrowserRouter>
       <Provider store={store}>
         <ChakraProvider>
+          <ColorModeScript initialColorMode={theme.config.initialColorMode} />
           <App />
         </ChakraProvider>
       </Provider>

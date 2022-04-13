@@ -1,25 +1,28 @@
-import { SunIcon } from '@chakra-ui/icons';
+import { MoonIcon, SunIcon } from '@chakra-ui/icons';
 import {
-  Flex, Box, Button, Image, Text, Link,
+  Flex, Box, Button, Image, Text, useColorMode,
 } from '@chakra-ui/react';
 import React from 'react';
-import { Link as ReactLink } from 'react-router-dom';
 import logo from '../react-logo.svg';
+import RouterLink from './RouterLink';
 
-const Navbar = () => (
+const Navbar = () => {
+  const { colorMode, toggleColorMode } = useColorMode();
 
-  <Flex p='9px 16px' w='100%' color='white' bg='cyan.500' h={16} flexWrap='wrap' alignItems='center'>
-    <Image src={logo} w='26px' h='26px' />
-    <Text ml='4px'>Hoteler</Text>
-    <Link ml={1} as={ReactLink} to='/'>
-      Dashboard
-    </Link>
-    <Box flexGrow={1} />
+  return (
+    <Flex p='9px 16px' w='100%' color='white' bg='cyan.500' h={16} flexWrap='wrap' alignItems='center'>
+      <Image src={logo} w='26px' h='26px' />
+      <Text ml='4px'>Hoteler</Text>
+      <RouterLink to='/dashboard' name='Dashborad' />
+      <RouterLink to='/customer' name='Customer' />
+      <RouterLink to='/room' name='Room' />
+      <Box flexGrow={1} />
 
-    <Button bg='cyan.500' variant='ghost' _hover={{ bg: 'cyan.500' }} _active={{ bg: 'cyan.500' }}>
-      <SunIcon />
-    </Button>
-  </Flex>
-);
+      <Button bg='cyan.500' variant='ghost' _hover={{ bg: 'cyan.500' }} _active={{ bg: 'cyan.500' }} onClick={toggleColorMode}>
+        { colorMode === 'light' ? <SunIcon /> : <MoonIcon />}
+      </Button>
+    </Flex>
+  );
+};
 
 export default Navbar;

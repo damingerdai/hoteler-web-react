@@ -14,6 +14,11 @@ module.exports = {
     ecmaVersion: 'latest',
     sourceType: 'module'
   },
+  settings: {
+    react: {
+      version: '18'
+    }
+  },
   plugins: ['react', 'prettier'],
   rules: {
     'jsx-quotes': ['error', 'prefer-single'],
