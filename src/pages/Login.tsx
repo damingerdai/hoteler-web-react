@@ -42,8 +42,6 @@ const Login = () => {
             }}
             onSubmit={async (values, { setSubmitting }) => {
               await dispatch(fetchToken({ username: values.username, password: values.password }));
-              // eslint-disable-next-line no-console
-              console.log(token);
               if (token && token.accessToken) {
                 navigate('/home');
                 setSubmitting(false);
