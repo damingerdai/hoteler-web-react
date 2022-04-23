@@ -8,4 +8,6 @@ export interface CommonResponse {
   }
 }
 
+export type DataResponse<T> = CommonResponse & { data: T };
+
 export type UserTokenResponse = CommonResponse & { userToken: UserToken };

@@ -5,6 +5,7 @@ import {
 import React from 'react';
 import logo from '../react-logo.svg';
 import RouterLink from './RouterLink';
+import UserProfle from './UserProfile';
 
 const Navbar = () => {
   const { colorMode, toggleColorMode } = useColorMode();
@@ -21,6 +22,7 @@ const Navbar = () => {
       <Button bg='cyan.500' variant='ghost' _hover={{ bg: 'cyan.500' }} _active={{ bg: 'cyan.500' }} onClick={toggleColorMode}>
         { colorMode === 'light' ? <SunIcon /> : <MoonIcon />}
       </Button>
+      <UserProfle />
     </Flex>
   );
 };

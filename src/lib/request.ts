@@ -24,7 +24,7 @@ client.interceptors.request.use((config) => {
 });
 
 // eslint-disable-next-line consistent-return
-export const request = async (options: AxiosRequestConfig) => {
+export async function request<T = any>(options: AxiosRequestConfig): Promise<T> {
   try {
     const { data } = await client(options);
     if (data.status === -1) {
@@ -39,15 +39,15 @@ export const request = async (options: AxiosRequestConfig) => {
       });
     }
 
-    return data;
+    return data as T;
   } catch (err) {
-    if (err?.response?.status === 401) {
-      window.location.href = '/401';
-    } else if (err?.response?.status === 403) {
-      window.location.href = '/403';
-    } else if (err?.response?.status === 404) {
-      window.location.href = '/404';
-    }
+    // if (err?.response?.status === 401) {
+    //   window.location.href = '/login';
+    // } else if (err?.response?.status === 403) {
+    //   window.location.href = '/login';
+    // } else if (err?.response?.status === 404) {
+    //   window.location.href = '/login';
+    // }
     if (err.response) {
       console.error({
         status: err.response.status,
@@ -59,7 +59,7 @@ export const request = async (options: AxiosRequestConfig) => {
       throw err;
     }
   }
-};
+}
 
 export const login = async (username: string, password: string) => {
   try {

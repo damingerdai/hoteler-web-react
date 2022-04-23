@@ -14,6 +14,7 @@ import {
 import { Formik } from 'formik';
 import { useNavigate } from 'react-router-dom';
 import { fetchToken } from '../slices/TokenSlice';
+import { setUsername } from '../slices/UserSlice';
 import { useAppDispatch, useAppSelector } from '../lib/reduxHooks';
 
 const Login = () => {
@@ -40,10 +41,11 @@ const Login = () => {
 
               return errors;
             }}
-            onSubmit={async (values, { setSubmitting }) => {
-              await dispatch(fetchToken({ username: values.username, password: values.password }));
+            onSubmit={async ({ username, password }, { setSubmitting }) => {
+              await dispatch(fetchToken({ username, password }));
 
               if (token && token.accessToken) {
+                dispatch(setUsername(username));
                 navigate('/dashboard');
                 setSubmitting(false);
               }
