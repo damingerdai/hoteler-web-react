@@ -1,4 +1,3 @@
-import React from 'react';
 import {
   Box,
   Button,
@@ -12,6 +11,7 @@ import {
   Text,
 } from '@chakra-ui/react';
 import { Formik } from 'formik';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { fetchToken } from '../slices/TokenSlice';
 import { setUsername } from '../slices/UserSlice';
@@ -22,6 +22,12 @@ const Login = () => {
   const navigate = useNavigate();
 
   const token = useAppSelector((state) => state.token);
+
+  useEffect(() => {
+    if (token && token.accessToken) {
+      navigate('/dashboard');
+    }
+  }, [token]);
 
   return (
     <Container>
@@ -43,12 +49,8 @@ const Login = () => {
             }}
             onSubmit={async ({ username, password }, { setSubmitting }) => {
               await dispatch(fetchToken({ username, password }));
-
-              if (token && token.accessToken) {
-                dispatch(setUsername(username));
-                navigate('/dashboard');
-                setSubmitting(false);
-              }
+              dispatch(setUsername(username));
+              setSubmitting(false);
             }}
           >
             {({

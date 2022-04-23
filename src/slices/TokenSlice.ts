@@ -30,7 +30,9 @@ export const fetchToken = createAsyncThunk('auth/fetchToken', async (args: { use
 export const tokenSlice = createSlice({
   name: 'auth',
   initialState,
-  reducers: {},
+  reducers: {
+    clearToken: () => initialState,
+  },
   extraReducers: (builder) => {
     builder.addCase(fetchToken.pending, (state) => {
       state.requestStatus = RequestStatus.LOADING;
@@ -51,5 +53,5 @@ export const tokenSlice = createSlice({
   },
 });
 
-export const userSliceActions = tokenSlice.actions;
+export const { clearToken } = tokenSlice.actions;
 export default tokenSlice.reducer;

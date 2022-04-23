@@ -14,10 +14,15 @@ const initialState: UserState = {
   roles: [],
 };
 
-export const fetchUser = createAsyncThunk('user/fetchUser', async () => {
+export const fetchUser = createAsyncThunk('user/fetchUser', async (token?: string) => {
+  const headers = {} as any;
+  if (token) {
+    headers.Authorization = `Bearer ${token}`;
+  }
   const res = await request<DataResponse<User>>({
     url: '/api/v1/user',
     method: 'get',
+    headers,
   });
 
   return res;
