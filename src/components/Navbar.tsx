@@ -1,6 +1,6 @@
 import { MoonIcon, SunIcon } from '@chakra-ui/icons';
 import {
-  Flex, Box, Button, Image, Text, useColorMode,
+  Flex, Button, Image, Text, useColorMode, Spacer,
 } from '@chakra-ui/react';
 import React from 'react';
 import logo from '../react-logo.svg';
@@ -17,7 +17,7 @@ const Navbar = () => {
       <RouterLink to='/dashboard' name='Dashborad' />
       <RouterLink to='/customer' name='Customer' />
       <RouterLink to='/room' name='Room' />
-      <Box flexGrow={1} />
+      <Spacer />
 
       <Button bg='cyan.500' variant='ghost' _hover={{ bg: 'cyan.500' }} _active={{ bg: 'cyan.500' }} onClick={toggleColorMode}>
         { colorMode === 'light' ? <SunIcon /> : <MoonIcon />}
