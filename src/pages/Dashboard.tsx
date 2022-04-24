@@ -46,6 +46,7 @@ const DefaultPastWeekCustomerCountOption: ApexOptions = {
     id: 'pastWeekCustomerCountChart',
     type: 'line',
   },
+  series: [],
 };
 
 const Dashborad = () => {
@@ -94,22 +95,26 @@ const Dashborad = () => {
         mt={4}
       >
         <Box w={{ base: '100', sm: '50%' }} boxShadow='xs' m={2} p={2}>
+          { roomStatusDonutOption && (
           <Chart
             options={roomStatusDonutOption}
-            series={roomStatusDonutOption.series}
+            series={roomStatusDonutOption?.series}
             type='donut'
             width='100%'
             height={320}
           />
+          )}
         </Box>
         <Box w={{ base: '100', sm: '50%' }} boxShadow='xs' m={2} p={2}>
+          { pastWeekCustomerCountOption && (
           <Chart
             options={pastWeekCustomerCountOption}
-            series={pastWeekCustomerCountOption.series}
+            series={pastWeekCustomerCountOption?.series}
             type='line'
             width='100%'
             height={320}
           />
+          )}
         </Box>
       </Flex>
     </Box>

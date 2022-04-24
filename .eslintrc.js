@@ -40,6 +40,7 @@ module.exports = {
         namedComponents: ['arrow-function', 'function-expression']
       }
     ],
+    'react/require-default-props': ['off'],
     'no-console': ['error', { allow: ['warn', 'error'] }],
     'no-param-reassign': ['error', { props: false }]
   }

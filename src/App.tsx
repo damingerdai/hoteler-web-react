@@ -8,6 +8,7 @@ const Dashboard = React.lazy(() => import('./pages/Dashboard'));
 const Customer = React.lazy(() => import('./pages/Customer'));
 const Room = React.lazy(() => import('./pages/Room'));
 const Login = React.lazy(() => import('./pages/Login'));
+const Forbidden = React.lazy(() => import('./pages/Forbidden'));
 
 const App = () => (
   <>
@@ -18,6 +19,7 @@ const App = () => (
         <Route path='customer' element={<React.Suspense fallback={<div>...</div>}><Customer /></React.Suspense>} />
         <Route path='/room' element={<React.Suspense fallback={<div>...</div>}><Room /></React.Suspense>} />
         <Route path='login' element={<React.Suspense fallback={<div>...</div>}><Login /></React.Suspense>} />
+        <Route path='403' element={<React.Suspense fallback={<div>...</div>}><Forbidden /></React.Suspense>} />
       </Routes>
     </Box>
   </>
