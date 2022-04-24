@@ -1,9 +1,11 @@
 /* eslint-disable import/no-named-as-default */
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import statSlice from './slices/StatSlice';
 import tokenSlice from './slices/TokenSlice';
 import userSlice from './slices/UserSlice';
 
 const reducer = combineReducers({
+  stat: statSlice,
   token: tokenSlice,
   user: userSlice,
 });
