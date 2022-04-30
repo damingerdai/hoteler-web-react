@@ -7,6 +7,8 @@ const RouterLink = ({ to, name }: { to: string, name: string }) => (
     ml={2}
     as={ReactLink}
     textDecoration='none'
+    minW='64px'
+    cursor='pointer'
     _hover={{
       textDecoration: 'none',
     }}
