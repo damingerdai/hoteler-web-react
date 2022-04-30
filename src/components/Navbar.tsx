@@ -11,6 +11,17 @@ const Navbar = () => {
   const { colorMode, toggleColorMode } = useColorMode();
   const isMobile = useBreakpointValue({ base: true, sm: false });
 
+  const routes = [{
+    to: '/dashboard',
+    name: '仪表盘',
+  }, {
+    to: '/customer',
+    name: '客户信息',
+  }, {
+    to: '/room',
+    name: '房间信息',
+  }];
+
   return (
     <>
       <Flex p='8px 16px' w='100%' color='white' bg='cyan.500' h={16} flexWrap='wrap' alignItems='center'>
@@ -18,9 +29,7 @@ const Navbar = () => {
         <Text ml='4px'>Hoteler</Text>
         {!isMobile && (
           <>
-            <RouterLink to='/dashboard' name='Dashborad' />
-            <RouterLink to='/customer' name='Customer' />
-            <RouterLink to='/room' name='Room' />
+            { routes.map((r) => <RouterLink key={r.to} to={r.to} name={r.name} />)}
           </>
         )}
 
@@ -33,9 +42,7 @@ const Navbar = () => {
       </Flex>
       { isMobile && (
         <Flex p='8px 16px' w='100%' color='white' bg='cyan.500' h={14} flexWrap='wrap' alignItems='center' justifyContent='space-around'>
-          <RouterLink to='/dashboard' name='Dashborad' />
-          <RouterLink to='/customer' name='Customer' />
-          <RouterLink to='/room' name='Room' />
+          { routes.map((r) => <RouterLink key={r.to} to={r.to} name={r.name} />)}
         </Flex>
       )}
     </>
