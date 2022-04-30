@@ -96,24 +96,24 @@ const Dashborad = () => {
       >
         <Box w={{ base: '100', sm: '50%' }} boxShadow='xs' m={2} p={2}>
           { roomStatusDonutOption && (
-          <Chart
-            options={roomStatusDonutOption}
-            series={roomStatusDonutOption?.series}
-            type='donut'
-            width='100%'
-            height={320}
-          />
+            <Chart
+              options={roomStatusDonutOption}
+              series={roomStatusDonutOption?.series}
+              type='donut'
+              width='100%'
+              height={320}
+            />
           )}
         </Box>
         <Box w={{ base: '100', sm: '50%' }} boxShadow='xs' m={2} p={2}>
           { pastWeekCustomerCountOption && (
-          <Chart
-            options={pastWeekCustomerCountOption}
-            series={pastWeekCustomerCountOption?.series}
-            type='line'
-            width='100%'
-            height={320}
-          />
+            <Chart
+              options={pastWeekCustomerCountOption}
+              series={pastWeekCustomerCountOption?.series}
+              type='line'
+              width='100%'
+              height={320}
+            />
           )}
         </Box>
       </Flex>

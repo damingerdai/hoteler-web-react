@@ -21,6 +21,7 @@ module.exports = {
   },
   plugins: ['react', 'prettier'],
   rules: {
+    indent: ['error', 2, { SwitchCase: 1 }],
     'jsx-quotes': ['error', 'prefer-single'],
     'import/no-extraneous-dependencies': [
       'error',
