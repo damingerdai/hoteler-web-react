@@ -1,5 +1,8 @@
-import { Box, Flex } from '@chakra-ui/react';
+import {
+  Box, Button, Divider, Flex, Portal, useDisclosure,
+} from '@chakra-ui/react';
 import React, { useEffect } from 'react';
+import CreateUserModal from '../components/CreateUserModal';
 import CustomerCard from '../components/CustomerCard';
 import { useAppDispatch, useAppSelector } from '../lib/reduxHooks';
 import { fetchCustomers } from '../slices/CustomerSlice';
@@ -9,9 +12,28 @@ const Customer: React.FC = () => {
   const dispatch = useAppDispatch();
   const { list: customers, status: requestStatus } = useAppSelector((state) => state.customer);
 
+  const {
+    isOpen: isCreateUserModalOpen,
+    onOpen: onCreateUserModalOpen,
+    onClose: onCreateUserModalClose,
+  } = useDisclosure();
+
+  const openCreateUserModal = async () => {
+    // eslint-disable-next-line no-console
+    console.log('hello11');
+    await onCreateUserModalOpen();
+    // eslint-disable-next-line no-console
+    console.log('hello');
+  };
+
   useEffect(() => {
     dispatch(fetchCustomers());
   }, []);
+
+  useEffect(() => {
+    // eslint-disable-next-line no-console
+    console.log(isCreateUserModalOpen);
+  }, [isCreateUserModalOpen]);
 
   if (requestStatus === RequestStatus.LOADING) {
     return <Box>loading...</Box>;
@@ -19,6 +41,10 @@ const Customer: React.FC = () => {
 
   return (
     <Box p='20px 40px'>
+      <Flex p={2} justifyContent='right'>
+        <Button colorScheme='teal' onClick={openCreateUserModal}>创建用户</Button>
+      </Flex>
+      <Divider />
       <Flex flexDir='row' flexWrap='wrap' boxSizing='border-box' alignContent='center' justifyContent='start'>
         { customers.map((c) => (
           <Box
@@ -36,8 +62,10 @@ const Customer: React.FC = () => {
           </Box>
         ))}
       </Flex>
+      <Portal>
+        <CreateUserModal isOpen={isCreateUserModalOpen} onClose={() => onCreateUserModalClose()} />
+      </Portal>
     </Box>
-
   );
 };
 
