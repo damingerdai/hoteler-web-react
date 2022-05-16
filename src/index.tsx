@@ -8,6 +8,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { store } from './store';
 import theme from './theme';
+import { ToastContainer } from './components/Toast';
 
 const container = document.getElementById('root');
 const root = createRoot(container!);
@@ -18,6 +19,7 @@ const app = (
       <Provider store={store}>
         <ChakraProvider theme={theme}>
           <App />
+          <ToastContainer />
         </ChakraProvider>
       </Provider>
     </BrowserRouter>
