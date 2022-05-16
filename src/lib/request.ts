@@ -1,5 +1,5 @@
-import { createStandaloneToast } from '@chakra-ui/react';
 import axios, { AxiosRequestConfig } from 'axios';
+import { toastInstance } from '../components/Toast';
 import { UserToken, UserTokenResponse } from '../types';
 import { toast } from './toast';
 
@@ -28,7 +28,6 @@ export async function request<T = any>(options: AxiosRequestConfig): Promise<T> 
   try {
     const { data } = await client(options);
     if (data.status === -1) {
-      const toastInstance = createStandaloneToast();
       toastInstance({
         title: '错误',
         description: data.error.message,

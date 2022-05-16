@@ -1,10 +1,9 @@
-import { createStandaloneToast, ToastPositionWithLogical } from '@chakra-ui/react';
-
-const toastInstance = createStandaloneToast();
+import { ToastPosition } from '@chakra-ui/react';
+import { toastInstance } from '../components/Toast';
 
 export const toast = {
 
-  error: (title: string, description: string, position: ToastPositionWithLogical = 'top-right') => {
+  error: (title: string, description: string, position: ToastPosition = 'top-right') => {
     toastInstance({
       title,
       description,
