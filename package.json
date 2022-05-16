@@ -12,6 +12,7 @@
     "prepare": "is-ci || husky install"
   },
   "dependencies": {
+    "@babel/core": "^7.0.0",
     "@chakra-ui/icons": "^1.1.7",
     "@chakra-ui/react": "^1.8.8",
     "@chakra-ui/system": "^1.12.1",
@@ -23,9 +24,9 @@
     "axios": "^0.26.1",
     "formik": "^2.2.9",
     "framer-motion": "3.10.6",
-    "react": "^18.0.0",
+    "react": "^17.0.0",
     "react-apexcharts": "^1.4.0",
-    "react-dom": "^18.0.0",
+    "react-dom": "^17.0.0",
     "react-icons": "^4.3.1",
     "react-redux": "^7.2.8",
     "react-router-dom": "^6.3.0",
@@ -33,15 +34,18 @@
     "web-vitals": "^2.1.4"
   },
   "devDependencies": {
+    "@babel/plugin-syntax-flow": "^7.14.5",
+    "@babel/plugin-transform-react-jsx": "^7.14.9",
     "@commitlint/cli": "^16.2.3",
     "@commitlint/config-conventional": "^16.2.1",
+    "@testing-library/dom": "~7.21.4",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.0.0",
     "@testing-library/user-event": "^14.0.0",
     "@types/jest": "^27.4.1",
     "@types/node": "^16.11.26",
-    "@types/react": "^18.0.0",
-    "@types/react-dom": "^18.0.0",
+    "@types/react": "^17.0.43",
+    "@types/react-dom": "^17.0.43",
     "@typescript-eslint/eslint-plugin": "^5.0.0",
     "@typescript-eslint/parser": "^5.0.0",
     "commitlint": "^16.2.3",
@@ -76,5 +80,13 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "pnpm": {
+    "peerDependencyRules": {
+      "allowedVersions": {
+        "react": "17",
+        "react-dom": "17"
+      }
+    }
   }
 }
