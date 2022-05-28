@@ -1,5 +1,9 @@
 import {
-  Box, Button, Divider, Flex, Portal, useDisclosure,
+  Box,
+  Button,
+  Divider,
+  Flex,
+  useDisclosure,
 } from '@chakra-ui/react';
 import React, { useEffect } from 'react';
 import CreateUserModal from '../components/CreateUserModal';
@@ -10,7 +14,9 @@ import { RequestStatus } from '../types';
 
 const Customer: React.FC = () => {
   const dispatch = useAppDispatch();
-  const { list: customers, status: requestStatus } = useAppSelector((state) => state.customer);
+  const { list: customers, status: requestStatus } = useAppSelector(
+    (state) => state.customer,
+  );
 
   const {
     isOpen: isCreateUserModalOpen,
@@ -18,22 +24,14 @@ const Customer: React.FC = () => {
     onClose: onCreateUserModalClose,
   } = useDisclosure();
 
-  const openCreateUserModal = async () => {
-    // eslint-disable-next-line no-console
-    console.log('hello11');
-    await onCreateUserModalOpen();
-    // eslint-disable-next-line no-console
-    console.log('hello');
-  };
-
   useEffect(() => {
     dispatch(fetchCustomers());
   }, []);
 
-  useEffect(() => {
-    // eslint-disable-next-line no-console
-    console.log(isCreateUserModalOpen);
-  }, [isCreateUserModalOpen]);
+  const closeCreateUserModal = () => {
+    onCreateUserModalClose();
+    dispatch(fetchCustomers());
+  };
 
   if (requestStatus === RequestStatus.LOADING) {
     return <Box>loading...</Box>;
@@ -42,11 +40,20 @@ const Customer: React.FC = () => {
   return (
     <Box p='20px 40px'>
       <Flex p={2} justifyContent='right'>
-        <Button colorScheme='teal' onClick={openCreateUserModal}>创建用户</Button>
+        <Button colorScheme='teal' onClick={onCreateUserModalOpen}>
+          创建客户
+        </Button>
       </Flex>
       <Divider />
-      <Flex flexDir='row' flexWrap='wrap' boxSizing='border-box' alignContent='center' justifyContent='start'>
-        { customers.map((c) => (
+      <Flex
+        flexDir='row'
+        flexWrap='wrap'
+        boxSizing='border-box'
+        alignContent='center'
+        justifyContent='start'
+        mt='16px'
+      >
+        {customers.map((c) => (
           <Box
             key={c.id}
             pl={2}
@@ -55,16 +62,20 @@ const Customer: React.FC = () => {
             flex='1 1 50%'
             maxW='450px'
             width={{
-              base: '100%', sm: '50%', md: '33%', lg: '25%',
+              base: '100%',
+              sm: '50%',
+              md: '33%',
+              lg: '25%',
             }}
           >
             <CustomerCard customer={c} />
           </Box>
         ))}
       </Flex>
-      <Portal>
-        <CreateUserModal isOpen={isCreateUserModalOpen} onClose={() => onCreateUserModalClose()} />
-      </Portal>
+      <CreateUserModal
+        isOpen={isCreateUserModalOpen}
+        onClose={closeCreateUserModal}
+      />
     </Box>
   );
 };

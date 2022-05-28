@@ -13,6 +13,7 @@ import {
 import { Formik } from 'formik';
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import * as Yup from 'yup';
 import { fetchToken } from '../slices/TokenSlice';
 import { setUsername } from '../slices/UserSlice';
 import { useAppDispatch, useAppSelector } from '../lib/reduxHooks';
@@ -22,6 +23,11 @@ const Login = () => {
   const navigate = useNavigate();
 
   const token = useAppSelector((state) => state.token);
+
+  const validationSchemas = Yup.object().shape({
+    username: Yup.string().required('请输入用户名').nullable(),
+    password: Yup.string().required('请输入密码').nullable(),
+  });
 
   useEffect(() => {
     if (token && token.accessToken) {
@@ -36,17 +42,19 @@ const Login = () => {
           <Text as='h1' textAlign='center' size='xl'> Hoteler系统登录 </Text>
           <Formik
             initialValues={{ username: '', password: '' }}
-            validate={(values: { username?: string, password?: string }) => {
-              const errors = {} as { username?: string, password?: string };
-              if (!values.username) {
-                errors.username = '请输入用户名';
-              }
-              if (!values.password) {
-                errors.password = '请输入密码';
-              }
+            // validate={(values: { username?: string, password?: string }) => {
+            //   const errors = {} as { username?: string, password?: string };
+            //   if (!values.username) {
+            //     errors.username = '请输入用户名';
+            //   }
+            //   if (!values.password) {
+            //     errors.password = '请输入密码';
+            //   }
 
-              return errors;
-            }}
+            //   return errors;
+            // }}
+            // eslint-disable-next-line react/jsx-props-no-multi-spaces
+            validationSchema={validationSchemas}
             onSubmit={async ({ username, password }, { setSubmitting }) => {
               await dispatch(fetchToken({ username, password }));
               dispatch(setUsername(username));
@@ -68,7 +76,7 @@ const Login = () => {
                   <FormLabel htmlFor='username'>用户名</FormLabel>
                   <Input id='username' type='text' onChange={handleChange} onBlur={handleBlur} value={values.username} />
                   {!!errors.username && touched.username
-                    ? <FormErrorMessage>请输入你的用户名</FormErrorMessage>
+                    ? <FormErrorMessage>{errors.username}</FormErrorMessage>
                     : <FormHelperText>请输入你的用户名</FormHelperText>}
                 </FormControl>
 
