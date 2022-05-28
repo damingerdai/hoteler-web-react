@@ -20,6 +20,7 @@ import { Form, Formik } from 'formik';
 import React from 'react';
 import { request } from '../lib/request';
 import { defaultToastOptions } from '../theme';
+import { CommonResponse } from '../types';
 
 interface CreateUserModalProps {
   isOpen: boolean;
@@ -52,9 +53,7 @@ const CreateUserModal: React.FC<CreateUserModalProps> = (props) => {
   });
 
   const handleSubmit = async (values) => {
-    const res = await request<
-    { status: 200 } | { status: -1; error: { code: string; message: string } }
-    >({
+    const res = await request<CommonResponse>({
       url: '/api/v1/customer',
       method: 'post',
       data: values,
@@ -67,13 +66,6 @@ const CreateUserModal: React.FC<CreateUserModalProps> = (props) => {
         ...defaultToastOptions,
       });
       onClose();
-    } else {
-      toast({
-        title: '创建客户失败',
-        description: res.error.message ?? '创建客户失败😭',
-        status: 'error',
-        ...defaultToastOptions,
-      });
     }
   };
 
