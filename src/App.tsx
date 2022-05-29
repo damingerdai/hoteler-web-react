@@ -1,6 +1,7 @@
 import { Box } from '@chakra-ui/react';
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
+import GlobalLoading from './components/GlobalLoading';
 import Navbar from './components/Navbar';
 import './App.scss';
 
@@ -15,11 +16,12 @@ const App = () => (
     <Navbar />
     <Box as='section'>
       <Routes>
-        <Route path='/dashboard' element={<React.Suspense fallback={<div>...</div>}><Dashboard /></React.Suspense>} />
-        <Route path='customer' element={<React.Suspense fallback={<div>...</div>}><Customer /></React.Suspense>} />
-        <Route path='/room' element={<React.Suspense fallback={<div>...</div>}><Room /></React.Suspense>} />
-        <Route path='login' element={<React.Suspense fallback={<div>...</div>}><Login /></React.Suspense>} />
-        <Route path='403' element={<React.Suspense fallback={<div>...</div>}><Forbidden /></React.Suspense>} />
+        <Route path='dashboard' element={<React.Suspense fallback={<GlobalLoading />}><Dashboard /></React.Suspense>} />
+        <Route path='customer' element={<React.Suspense fallback={<GlobalLoading />}><Customer /></React.Suspense>} />
+        <Route path='room' element={<React.Suspense fallback={<GlobalLoading />}><Room /></React.Suspense>} />
+        <Route path='loading' element={<React.Suspense fallback={<GlobalLoading />}><GlobalLoading /></React.Suspense>} />
+        <Route path='login' element={<React.Suspense fallback={<GlobalLoading />}><Login /></React.Suspense>} />
+        <Route path='403' element={<React.Suspense fallback={<GlobalLoading />}><Forbidden /></React.Suspense>} />
       </Routes>
     </Box>
   </>

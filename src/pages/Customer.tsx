@@ -8,6 +8,7 @@ import {
 import React, { useEffect } from 'react';
 import CreateUserModal from '../components/CreateUserModal';
 import CustomerCard from '../components/CustomerCard';
+import GlobalLoading from '../components/GlobalLoading';
 import { useAppDispatch, useAppSelector } from '../lib/reduxHooks';
 import { fetchCustomers } from '../slices/CustomerSlice';
 import { RequestStatus } from '../types';
@@ -34,7 +35,7 @@ const Customer: React.FC = () => {
   };
 
   if (requestStatus === RequestStatus.LOADING) {
-    return <Box>loading...</Box>;
+    return <GlobalLoading />;
   }
 
   return (
