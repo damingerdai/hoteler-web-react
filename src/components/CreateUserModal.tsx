@@ -74,7 +74,7 @@ const CreateUserModal: React.FC<CreateUserModalProps> = (props) => {
       <ModalOverlay />
       <Formik
         initialValues={initialValues}
-        validationSchemas={validationSchemas}
+        validationSchema={validationSchemas}
         validateOnBlur
         enableReinitialize
         validateOnChange

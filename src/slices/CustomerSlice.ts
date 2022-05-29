@@ -15,7 +15,7 @@ const initialState: CustomerSlice = {
 };
 
 export const fetchCustomers = createAsyncThunk(
-  'customer/fecthCustomers',
+  'customer/fetchCustomers',
   async () => {
     const res = await request<ListResponse<Customer>>({
       url: '/api/v1/customers',
