@@ -1,6 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
+  namespace: hoteler-namespace
   name: hoteler-web-react-config
 data:
   backend_url: http://127.0.0.1:8443
@@ -8,6 +9,7 @@ data:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  namespace: hoteler-namespace
   name: hoteler-web-react
   labels:
     app:  hoteler-web-react
@@ -45,6 +47,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
+  namespace: hoteler-namespace
   name: hoteler-web-react
   labels:
     app:  hoteler-web-react
