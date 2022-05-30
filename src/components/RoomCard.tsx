@@ -4,11 +4,12 @@ import {
 import React from 'react';
 import { useAppDispatch } from '../lib/reduxHooks';
 import { request } from '../lib/request';
-import { hideRoomById } from '../slices/RoomSlice';
+import { fetchRooms, hideRoomById } from '../slices/RoomSlice';
 import { defaultToastOptions } from '../theme';
 import { CommonResponse } from '../types';
 import { Room } from '../types/room';
 import ConfirmModal from './ConfirmModal';
+import EditRoomModal from './EditRoomModal';
 
 interface RoomCardProps {
   room: Room & { url?: string };
@@ -24,6 +25,12 @@ const RoomCard: React.FC<RoomCardProps> = (props) => {
     isOpen: isConfirmModalOpen,
     onOpen: onConfirmModalOpen,
     onClose: onConfirmModalClose,
+  } = useDisclosure();
+
+  const {
+    isOpen: isEditRoomModalOpen,
+    onOpen: onEditRoomModalOpen,
+    onClose: onEditRoomModalClose,
   } = useDisclosure();
 
   const deleteRoom = async (roomId: string) => {
@@ -74,7 +81,7 @@ const RoomCard: React.FC<RoomCardProps> = (props) => {
         <Box mt={4}>
           <Stack direction='row' spacing={4} align='center'>
             <Button colorScheme='teal'>入住</Button>
-            <Button colorScheme='orange'>修改</Button>
+            <Button colorScheme='orange' onClick={onEditRoomModalOpen}>修改</Button>
             <Button colorScheme='red' disabled={isConfirmModalOpen} onClick={onConfirmModalOpen}>删除</Button>
           </Stack>
         </Box>
@@ -89,6 +96,16 @@ const RoomCard: React.FC<RoomCardProps> = (props) => {
         }}
         title='确定删除'
         description='一旦删除，将不能够恢复'
+      />
+      <EditRoomModal
+        isOpen={isEditRoomModalOpen}
+        onClose={(res) => {
+          onEditRoomModalClose();
+          if (res === true) {
+            dispatch(fetchRooms());
+          }
+        }}
+        room={room}
       />
     </>
   );

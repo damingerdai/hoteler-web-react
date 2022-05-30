@@ -6,7 +6,7 @@ import {
   useDisclosure,
 } from '@chakra-ui/react';
 import React, { useEffect } from 'react';
-import CreateUserModal from '../components/CreateUserModal';
+import CreateCustomerModal from '../components/CreateCustomerModal';
 import CustomerCard from '../components/CustomerCard';
 import GlobalLoading from '../components/GlobalLoading';
 import { useAppDispatch, useAppSelector } from '../lib/reduxHooks';
@@ -20,19 +20,14 @@ const Customer: React.FC = () => {
   );
 
   const {
-    isOpen: isCreateUserModalOpen,
-    onOpen: onCreateUserModalOpen,
-    onClose: onCreateUserModalClose,
+    isOpen: isCreateCustomerModalOpen,
+    onOpen: onCreateCustomerModalOpen,
+    onClose: onCreateCustomerModalClose,
   } = useDisclosure();
 
   useEffect(() => {
     dispatch(fetchCustomers());
   }, []);
-
-  const closeCreateUserModal = () => {
-    onCreateUserModalClose();
-    dispatch(fetchCustomers());
-  };
 
   if (requestStatus === RequestStatus.LOADING) {
     return <GlobalLoading />;
@@ -41,7 +36,7 @@ const Customer: React.FC = () => {
   return (
     <Box p='20px 40px'>
       <Flex p={2} justifyContent='right'>
-        <Button colorScheme='teal' onClick={onCreateUserModalOpen}>
+        <Button colorScheme='teal' onClick={onCreateCustomerModalOpen}>
           创建客户
         </Button>
       </Flex>
@@ -73,9 +68,14 @@ const Customer: React.FC = () => {
           </Box>
         ))}
       </Flex>
-      <CreateUserModal
-        isOpen={isCreateUserModalOpen}
-        onClose={closeCreateUserModal}
+      <CreateCustomerModal
+        isOpen={isCreateCustomerModalOpen}
+        onClose={(res) => {
+          onCreateCustomerModalClose();
+          if (res === true) {
+            dispatch(fetchCustomers());
+          }
+        }}
       />
     </Box>
   );

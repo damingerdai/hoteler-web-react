@@ -22,9 +22,9 @@ import { request } from '../lib/request';
 import { defaultToastOptions } from '../theme';
 import { CommonResponse } from '../types';
 
-interface CreateUserModalProps {
+interface CreateCustomerModalProps {
   isOpen: boolean;
-  onClose: () => void;
+  onClose: (val?: boolean | undefined) => void;
 }
 
 interface CreateUserInput {
@@ -34,7 +34,7 @@ interface CreateUserInput {
   phone: string;
 }
 
-const CreateUserModal: React.FC<CreateUserModalProps> = (props) => {
+const CreateCustomerModal: React.FC<CreateCustomerModalProps> = (props) => {
   const toast = useToast();
   const { isOpen, onClose } = props;
 
@@ -48,7 +48,7 @@ const CreateUserModal: React.FC<CreateUserModalProps> = (props) => {
   const validationSchemas = Yup.object().shape({
     name: Yup.string().required('请输入客户名字').nullable(),
     gender: Yup.string().required('请选择客户性别').nullable(),
-    cardId: Yup.string().email('hhhh').required('请输入身份证号码').nullable(),
+    cardId: Yup.string().required('请输入身份证号码').nullable(),
     phone: Yup.string().required('请输入联系方式').nullable(),
   });
 
@@ -65,12 +65,12 @@ const CreateUserModal: React.FC<CreateUserModalProps> = (props) => {
         status: 'success',
         ...defaultToastOptions,
       });
-      onClose();
+      onClose(true);
     }
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose}>
+    <Modal isOpen={isOpen} onClose={() => onClose(false)}>
       <ModalOverlay />
       <Formik
         initialValues={initialValues}
@@ -85,6 +85,7 @@ const CreateUserModal: React.FC<CreateUserModalProps> = (props) => {
           values,
           touched,
           errors,
+          isValid,
           isSubmitting,
           handleChange,
           handleBlur,
@@ -100,12 +101,11 @@ const CreateUserModal: React.FC<CreateUserModalProps> = (props) => {
                     id='name'
                     type='text'
                     value={values.name}
-                    isInvalid={!!errors.name}
                     onBlur={handleBlur}
                     onChange={handleChange}
                   />
-                  {!!errors.name && touched.name ? (
-                    <FormErrorMessage>{errors.name}</FormErrorMessage>
+                  {errors?.name ? (
+                    <FormErrorMessage>{errors.name ?? '请输入客户名字'}</FormErrorMessage>
                   ) : (
                     <FormHelperText>请输入客户名</FormHelperText>
                   )}
@@ -155,10 +155,10 @@ const CreateUserModal: React.FC<CreateUserModalProps> = (props) => {
               </ModalBody>
 
               <ModalFooter>
-                <Button colorScheme='blue' mr={3} onClick={onClose}>
+                <Button colorScheme='blue' mr={3} onClick={() => onClose(false)}>
                   关闭
                 </Button>
-                <Button type='submit' disabled={isSubmitting} variant='ghost'>
+                <Button type='submit' variant='ghost' disabled={!isValid || isSubmitting} isLoading={isSubmitting}>
                   确定
                 </Button>
               </ModalFooter>
@@ -170,4 +170,4 @@ const CreateUserModal: React.FC<CreateUserModalProps> = (props) => {
   );
 };
 
-export default CreateUserModal;
+export default CreateCustomerModal;

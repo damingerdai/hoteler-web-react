@@ -12,32 +12,35 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
+  NumberDecrementStepper,
+  NumberIncrementStepper,
   NumberInput,
   NumberInputField,
   NumberInputStepper,
-  NumberIncrementStepper,
-  NumberDecrementStepper,
   useToast,
 } from '@chakra-ui/react';
+import React from 'react';
 import { Form, Formik } from 'formik';
 import * as Yup from 'yup';
-import React from 'react';
-import { CommonResponse } from '../types';
+import { Room } from '../types/room';
 import { request } from '../lib/request';
+import { CommonResponse } from '../types';
 import { defaultToastOptions } from '../theme';
 
-interface CreateRoomModalProps {
+interface EditRoomModalProps {
+  room: Room;
   isOpen: boolean;
   onClose: (val?: boolean | undefined) => void;
 }
 
-const CreateRoomModal: React.FC<CreateRoomModalProps> = (props) => {
-  const { isOpen, onClose } = props;
+const EditRoomModal: React.FC<EditRoomModalProps> = ({
+  isOpen,
+  onClose,
+  room,
+}) => {
   const toast = useToast();
-
   const initialValues = {
-    roomname: '',
-    price: 200,
+    ...room,
   };
 
   const validationSchema = Yup.object().shape({
@@ -45,25 +48,29 @@ const CreateRoomModal: React.FC<CreateRoomModalProps> = (props) => {
     price: Yup.number().min(1).required('请输入房间价格').nullable(),
   });
 
+  const closeEditRoomModal = (val?: boolean | undefined) => {
+    onClose(val);
+  };
+
   const handleSubmit = async (values) => {
     const res = await request<CommonResponse>({
       url: '/api/v1/room',
-      method: 'post',
+      method: 'put',
       data: values,
     });
     if (res.status === 200) {
       toast({
-        title: '创建房间成功',
-        description: '创建房间成功🚀',
+        title: '修改房间成功',
+        description: '修改房间成功🚀',
         status: 'success',
         ...defaultToastOptions,
       });
     }
-    onClose(true);
+    closeEditRoomModal(true);
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose}>
+    <Modal isOpen={isOpen} onClose={closeEditRoomModal}>
       <ModalOverlay />
       <Formik
         initialValues={initialValues}
@@ -75,11 +82,16 @@ const CreateRoomModal: React.FC<CreateRoomModalProps> = (props) => {
         onSubmit={handleSubmit}
       >
         {({
-          values, isValid, errors, handleChange, setFieldValue, isSubmitting,
+          values,
+          isValid,
+          errors,
+          handleChange,
+          setFieldValue,
+          isSubmitting,
         }) => (
           <Form>
             <ModalContent>
-              <ModalHeader>创建房间</ModalHeader>
+              <ModalHeader>修改客户</ModalHeader>
               <ModalCloseButton />
               <ModalBody>
                 <FormControl>
@@ -99,7 +111,14 @@ const CreateRoomModal: React.FC<CreateRoomModalProps> = (props) => {
                 </FormControl>
                 <FormControl mt={4}>
                   <FormLabel htmlFor='price'>房间名字</FormLabel>
-                  <NumberInput id='price' value={values.price} min={0} max={99999} onChange={(n) => setFieldValue('price', n, true)} isInvalid={!!errors.price}>
+                  <NumberInput
+                    id='price'
+                    value={values.price}
+                    min={0}
+                    max={99999}
+                    onChange={(n) => setFieldValue('price', n, true)}
+                    isInvalid={!!errors.price}
+                  >
                     <NumberInputField />
                     <NumberInputStepper>
                       <NumberIncrementStepper />
@@ -114,10 +133,15 @@ const CreateRoomModal: React.FC<CreateRoomModalProps> = (props) => {
                 </FormControl>
               </ModalBody>
               <ModalFooter>
-                <Button colorScheme='blue' mr={3} onClick={() => onClose(false)}>
+                <Button colorScheme='blue' mr={3} onClick={() => closeEditRoomModal()}>
                   关闭
                 </Button>
-                <Button type='submit' variant='ghost' disabled={!isValid || isSubmitting} isLoading={isSubmitting}>
+                <Button
+                  type='submit'
+                  variant='ghost'
+                  disabled={!isValid || isSubmitting}
+                  isLoading={isSubmitting}
+                >
                   确定
                 </Button>
               </ModalFooter>
@@ -129,4 +153,4 @@ const CreateRoomModal: React.FC<CreateRoomModalProps> = (props) => {
   );
 };
 
-export default CreateRoomModal;
+export default EditRoomModal;

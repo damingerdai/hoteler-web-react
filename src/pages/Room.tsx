@@ -25,11 +25,6 @@ const Room: React.FC = () => {
     dispatch(fetchRooms());
   }, []);
 
-  const closeCreateRoomModal = () => {
-    onCreateRoomModalOpen();
-    dispatch(fetchRooms());
-  };
-
   if (requestStatus === RequestStatus.LOADING) {
     return <GlobalLoading />;
   }
@@ -37,7 +32,7 @@ const Room: React.FC = () => {
   return (
     <Box p='20px 40px'>
       <Flex p={2} justifyContent='right'>
-        <Button colorScheme='teal' onClick={closeCreateRoomModal}>
+        <Button colorScheme='teal' onClick={onCreateRoomModalOpen}>
           创建房间
         </Button>
       </Flex>
@@ -72,7 +67,12 @@ const Room: React.FC = () => {
       </Flex>
       <CreateRoomModal
         isOpen={isCreateRoomModalOpen}
-        onClose={onCreateRoomModalClose}
+        onClose={(res) => {
+          onCreateRoomModalClose();
+          if (res === true) {
+            dispatch(fetchRooms());
+          }
+        }}
       />
     </Box>
   );
