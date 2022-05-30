@@ -8,6 +8,7 @@ import { fetchCustomers } from '../slices/CustomerSlice';
 import { defaultToastOptions } from '../theme';
 import { CommonResponse, Customer } from '../types';
 import ConfirmModal from './ConfirmModal';
+import EditCustomerModal from './EditCustomerModal';
 
 interface CustomerCardProps {
   customer: Customer;
@@ -20,6 +21,11 @@ const CustomerCard: React.FC<CustomerCardProps> = ({ customer }) => {
     isOpen: isConfirmModalOpen,
     onOpen: onConfirmModalOpen,
     onClose: onConfirmModalClose,
+  } = useDisclosure();
+  const {
+    isOpen: isEditCustomerModalOpen,
+    onOpen: onEditCustomerModalOpen,
+    onClose: onEditCustomerModalClose,
   } = useDisclosure();
 
   const deleteCustomer = async (customerId: string | number) => {
@@ -73,7 +79,7 @@ const CustomerCard: React.FC<CustomerCardProps> = ({ customer }) => {
           </Box>
         </Stack>
         <Stack direction='row' spacing={4} mt={8}>
-          <Button colorScheme='teal' variant='solid'>
+          <Button colorScheme='teal' variant='solid' onClick={onEditCustomerModalOpen}>
             修改
           </Button>
           <Button colorScheme='pink' variant='solid' onClick={onConfirmModalOpen}>
@@ -92,6 +98,16 @@ const CustomerCard: React.FC<CustomerCardProps> = ({ customer }) => {
         }}
         title='确定删除'
         description='一旦删除，将不能够恢复'
+      />
+      <EditCustomerModal
+        isOpen={isEditCustomerModalOpen}
+        customer={customer}
+        onClose={(res) => {
+          onEditCustomerModalClose();
+          if (res === true) {
+            dispatch(fetchCustomers());
+          }
+        }}
       />
     </>
   );

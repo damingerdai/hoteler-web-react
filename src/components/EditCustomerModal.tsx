@@ -1,48 +1,38 @@
 import {
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalCloseButton,
   Button,
-  ModalBody,
-  ModalFooter,
   FormControl,
+  FormErrorMessage,
+  FormHelperText,
   FormLabel,
   Input,
-  FormErrorMessage,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
   Select,
-  FormHelperText,
   useToast,
 } from '@chakra-ui/react';
-import * as Yup from 'yup';
-import { Form, Formik } from 'formik';
+import { Formik, Form } from 'formik';
 import React from 'react';
+import * as Yup from 'yup';
 import { request } from '../lib/request';
 import { defaultToastOptions } from '../theme';
-import { CommonResponse } from '../types';
+import { CommonResponse, Customer } from '../types';
 
-interface CreateCustomerModalProps {
+interface EditCustomerModalProps {
+  customer: Customer;
   isOpen: boolean;
   onClose: (val?: boolean | undefined) => void;
 }
 
-interface CreateCustomerInput {
-  name: string;
-  gender: string | null;
-  cardId: string;
-  phone: string;
-}
-
-const CreateCustomerModal: React.FC<CreateCustomerModalProps> = (props) => {
+const EditCustomerModal: React.FC<EditCustomerModalProps> = (props) => {
+  const { customer, isOpen, onClose } = props;
   const toast = useToast();
-  const { isOpen, onClose } = props;
-
-  const initialValues: CreateCustomerInput = {
-    name: '',
-    gender: 'M',
-    cardId: '',
-    phone: '',
+  const initialValues = {
+    ...customer,
   };
 
   const validationSchemas = Yup.object().shape({
@@ -55,13 +45,13 @@ const CreateCustomerModal: React.FC<CreateCustomerModalProps> = (props) => {
   const handleSubmit = async (values) => {
     const res = await request<CommonResponse>({
       url: '/api/v1/customer',
-      method: 'post',
+      method: 'put',
       data: values,
     });
     if (res.status === 200) {
       toast({
-        title: '创建客户成功',
-        description: '创建客户成功🚀',
+        title: '修改客户成功',
+        description: '修改客户成功🚀',
         status: 'success',
         ...defaultToastOptions,
       });
@@ -92,7 +82,7 @@ const CreateCustomerModal: React.FC<CreateCustomerModalProps> = (props) => {
         }) => (
           <Form>
             <ModalContent>
-              <ModalHeader>创建客户</ModalHeader>
+              <ModalHeader>修改客户</ModalHeader>
               <ModalCloseButton />
               <ModalBody>
                 <FormControl>
@@ -105,7 +95,9 @@ const CreateCustomerModal: React.FC<CreateCustomerModalProps> = (props) => {
                     onChange={handleChange}
                   />
                   {errors?.name ? (
-                    <FormErrorMessage>{errors.name ?? '请输入客户名字'}</FormErrorMessage>
+                    <FormErrorMessage>
+                      {errors.name ?? '请输入客户名字'}
+                    </FormErrorMessage>
                   ) : (
                     <FormHelperText>请输入客户名</FormHelperText>
                   )}
@@ -155,10 +147,19 @@ const CreateCustomerModal: React.FC<CreateCustomerModalProps> = (props) => {
               </ModalBody>
 
               <ModalFooter>
-                <Button colorScheme='blue' mr={3} onClick={() => onClose(false)}>
+                <Button
+                  colorScheme='blue'
+                  mr={3}
+                  onClick={() => onClose(false)}
+                >
                   关闭
                 </Button>
-                <Button type='submit' variant='ghost' disabled={!isValid || isSubmitting} isLoading={isSubmitting}>
+                <Button
+                  type='submit'
+                  variant='ghost'
+                  disabled={!isValid || isSubmitting}
+                  isLoading={isSubmitting}
+                >
                   确定
                 </Button>
               </ModalFooter>
@@ -170,4 +171,4 @@ const CreateCustomerModal: React.FC<CreateCustomerModalProps> = (props) => {
   );
 };
 
-export default CreateCustomerModal;
+export default EditCustomerModal;
