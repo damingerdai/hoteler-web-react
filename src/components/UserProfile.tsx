@@ -1,5 +1,6 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import {
-  Box, Menu, MenuButton, MenuItem, MenuList, Portal,
+  Box, ChakraProps, Menu, MenuButton, MenuItem, MenuList, Portal,
 } from '@chakra-ui/react';
 import React, { useEffect } from 'react';
 import { MdExitToApp } from 'react-icons/md';
@@ -9,7 +10,7 @@ import { logout as requestLogout } from '../lib/request';
 import { clearToken } from '../slices/TokenSlice';
 import { fetchUser, resetState } from '../slices/UserSlice';
 
-const UserProfle = () => {
+const UserProfile: React.FC<ChakraProps> = (props) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const token = useAppSelector((state) => state.token);
@@ -29,7 +30,7 @@ const UserProfle = () => {
   };
 
   return (
-    <Box>
+    <Box {...props}>
       <Menu>
         <MenuButton textTransform='capitalize'>{ username }</MenuButton>
         <Portal>
@@ -42,4 +43,4 @@ const UserProfle = () => {
   );
 };
 
-export default UserProfle;
+export default UserProfile;
