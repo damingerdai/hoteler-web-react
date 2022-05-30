@@ -28,7 +28,13 @@ export const fetchRooms = createAsyncThunk(
 const roomSlice = createSlice({
   name: 'room',
   initialState,
-  reducers: {},
+  reducers: {
+    hideRoomById(state, { payload: id }) {
+      state.list = state.list.filter(
+        (item) => item.id !== id,
+      );
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(fetchRooms.pending, (state) => {
       state.status = RequestStatus.LOADING;
@@ -42,5 +48,7 @@ const roomSlice = createSlice({
     });
   },
 });
+
+export const { hideRoomById } = roomSlice.actions;
 
 export default roomSlice.reducer;
