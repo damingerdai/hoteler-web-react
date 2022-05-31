@@ -8,6 +8,7 @@ import { fetchRooms, hideRoomById } from '../slices/RoomSlice';
 import { defaultToastOptions } from '../theme';
 import { CommonResponse } from '../types';
 import { Room } from '../types/room';
+import AddCustomerRoomModal from './AddCustomerRoomModal';
 import ConfirmModal from './ConfirmModal';
 import EditRoomModal from './EditRoomModal';
 
@@ -31,6 +32,12 @@ const RoomCard: React.FC<RoomCardProps> = (props) => {
     isOpen: isEditRoomModalOpen,
     onOpen: onEditRoomModalOpen,
     onClose: onEditRoomModalClose,
+  } = useDisclosure();
+
+  const {
+    isOpen: isAddCustomerRoomModalOpen,
+    onOpen: onAddCustomerRoomModalOpen,
+    onClose: onAddCustomerRoomModalClose,
   } = useDisclosure();
 
   const deleteRoom = async (roomId: string) => {
@@ -80,8 +87,8 @@ const RoomCard: React.FC<RoomCardProps> = (props) => {
         </Box>
         <Box mt={4}>
           <Stack direction='row' spacing={4} align='center'>
-            <Button colorScheme='teal'>入住</Button>
-            <Button colorScheme='orange' onClick={onEditRoomModalOpen}>修改</Button>
+            <Button colorScheme='teal' disabled={isAddCustomerRoomModalOpen} onClick={onAddCustomerRoomModalOpen}>入住</Button>
+            <Button colorScheme='orange' disabled={isEditRoomModalOpen} onClick={onEditRoomModalOpen}>修改</Button>
             <Button colorScheme='red' disabled={isConfirmModalOpen} onClick={onConfirmModalOpen}>删除</Button>
           </Stack>
         </Box>
@@ -105,6 +112,11 @@ const RoomCard: React.FC<RoomCardProps> = (props) => {
             dispatch(fetchRooms());
           }
         }}
+        room={room}
+      />
+      <AddCustomerRoomModal
+        isOpen={isAddCustomerRoomModalOpen}
+        onClose={onAddCustomerRoomModalClose}
         room={room}
       />
     </>
