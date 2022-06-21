@@ -12,8 +12,8 @@ specifiers:
   '@chakra-ui/react': 2.1.2
   '@chakra-ui/system': 2.1.1
   '@chakra-ui/theme-tools': 2.0.1
-  '@commitlint/cli': 17.0.1
-  '@commitlint/config-conventional': 17.0.0
+  '@commitlint/cli': 17.0.2
+  '@commitlint/config-conventional': 17.0.2
   '@emotion/react': 11.9.0
   '@emotion/styled': 11.8.1
   '@reduxjs/toolkit': 1.8.2
@@ -29,7 +29,7 @@ specifiers:
   '@typescript-eslint/parser': 5.26.0
   apexcharts: 3.35.3
   axios: 0.26.1
-  commitlint: 17.0.1
+  commitlint: 17.0.2
   eslint: 8.16.0
   eslint-config-airbnb: 19.0.4
   eslint-config-airbnb-typescript: 16.2.0
@@ -83,8 +83,8 @@ devDependencies:
   '@babel/core': 7.18.2
   '@babel/plugin-syntax-flow': 7.17.12_@babel+core@7.18.2
   '@babel/plugin-transform-react-jsx': 7.17.12_@babel+core@7.18.2
-  '@commitlint/cli': 17.0.1
-  '@commitlint/config-conventional': 17.0.0
+  '@commitlint/cli': 17.0.2
+  '@commitlint/config-conventional': 17.0.2
   '@testing-library/dom': 7.21.8
   '@testing-library/jest-dom': 5.16.4
   '@testing-library/react': 13.3.0_ef5jwxihqo6n7gxfmzogljlgcm
@@ -95,7 +95,7 @@ devDependencies:
   '@types/react-dom': 18.0.5
   '@typescript-eslint/eslint-plugin': 5.26.0_hzuh7e2up357pvq3mkokjvu2lq
   '@typescript-eslint/parser': 5.26.0_xztl6dhthcahlo6akmb2bmjmle
-  commitlint: 17.0.1
+  commitlint: 17.0.2
   eslint: 8.16.0
   eslint-config-airbnb: 19.0.4_dwfgiixbwetqupsqmiuv57rzoi
   eslint-config-airbnb-typescript: 16.2.0_omfmjsp36rj32txxzmcgovksfy
@@ -2260,8 +2260,8 @@ packages:
       react: 18.1.0
     dev: false
 
-  /@commitlint/cli/17.0.1:
-    resolution: {integrity: sha512-5xT1G5pnynR0tk/ms8Ji7yr9lZCeQs4GLVVtyK/gw20w+enoLTVuRKKY9zg88hy9FoCycc/W8iip2xv3c8payg==}
+  /@commitlint/cli/17.0.2:
+    resolution: {integrity: sha512-Axe89Js0YzGGd4gxo3JLlF7yIdjOVpG1LbOorGc6PfYF+drBh14PvarSDLzyd2TNqdylUCq9wb9/A88ZjIdyhA==}
     engines: {node: '>=v14'}
     hasBin: true
     dependencies:
@@ -2280,11 +2280,11 @@ packages:
       - '@swc/wasm'
     dev: true
 
-  /@commitlint/config-conventional/17.0.0:
-    resolution: {integrity: sha512-jttJXBIq3AuQCvUVwxSctCwKfHxxbALE0IB9OIHYCu/eQdOzPxN72pugeZsWDo1VK/T9iFx+MZoPb6Rb1/ylsw==}
+  /@commitlint/config-conventional/17.0.2:
+    resolution: {integrity: sha512-MfP0I/JbxKkzo+HXWB7B3WstGS4BiniotU3d3xQ9gK8cR0DbeZ4MuyGCWF65YDyrcDTS3WlrJ3ndSPA1pqhoPw==}
     engines: {node: '>=v14'}
     dependencies:
-      conventional-changelog-conventionalcommits: 4.6.3
+      conventional-changelog-conventionalcommits: 5.0.0
     dev: true
 
   /@commitlint/config-validator/17.0.0:
@@ -4915,12 +4915,12 @@ packages:
     engines: {node: ^12.20.0 || >=14}
     dev: true
 
-  /commitlint/17.0.1:
-    resolution: {integrity: sha512-SpBgzm6KJnT+2IX7y38+4w4hHW9XZFXI7Lg1VAYDuHviuGs0lBBabJ4qBX+ZFWS5PjJsNnsApklB1ZCVXXD7sw==}
+  /commitlint/17.0.2:
+    resolution: {integrity: sha512-7SKvi162t7F1WiNIZDtxLWYzMIqE0YNHVICyZ95CpFNdyGlJy8WpGojiTyCEzL2zX7V6oId+aBz6hy2P4qPpHw==}
     engines: {node: '>=v14'}
     hasBin: true
     dependencies:
-      '@commitlint/cli': 17.0.1
+      '@commitlint/cli': 17.0.2
       '@commitlint/types': 17.0.0
     transitivePeerDependencies:
       - '@swc/core'
@@ -5006,8 +5006,8 @@ packages:
       q: 1.5.1
     dev: true
 
-  /conventional-changelog-conventionalcommits/4.6.3:
-    resolution: {integrity: sha512-LTTQV4fwOM4oLPad317V/QNQ1FY4Hju5qeBIM1uTHbrnCE+Eg4CdRZ3gO2pUeR+tzWdp80M2j3qFFEDWVqOV4g==}
+  /conventional-changelog-conventionalcommits/5.0.0:
+    resolution: {integrity: sha512-lCDbA+ZqVFQGUj7h9QBKoIpLhl8iihkO0nCTyRNzuXtcd7ubODpYB04IFy31JloiJgG0Uovu8ot8oxRzn7Nwtw==}
     engines: {node: '>=10'}
     dependencies:
       compare-func: 2.0.0
@@ -7180,7 +7180,7 @@ packages:
     dev: true
 
   /is-arrayish/0.2.1:
-    resolution: {integrity: sha1-d8mYQFJ6qOyxqLppe4BkWnqSap0=}
+    resolution: {integrity: sha512-zz06S8t0ozoDXMG+ube26zeCTNXcKIPJZJi8hBrF4idCLms4CG9QtK7qBl1boi5ODzFpjswb5JPmHCbMpjaYzg==}
 
   /is-bigint/1.0.4:
     resolution: {integrity: sha512-zB9CruMamjym81i2JZ3UMn54PKGsQzsJeo6xvN3HJJ4CAsQNB6iRutp2To77OfCNuoxspsIhzaPoO1zyCEhFOg==}
@@ -8756,7 +8756,7 @@ packages:
     dev: true
 
   /p-locate/2.0.0:
-    resolution: {integrity: sha1-IKAQOyIqcMj9OcwuWAaA893l7EM=}
+    resolution: {integrity: sha512-nQja7m7gSKuewoVRen45CtVfODR3crN3goVQ0DDZ9N3yHxgpkuBhZqsaiotSQRrADUrne346peY7kT3TSACykg==}
     engines: {node: '>=4'}
     dependencies:
       p-limit: 1.3.0
@@ -8799,7 +8799,7 @@ packages:
     dev: true
 
   /p-try/1.0.0:
-    resolution: {integrity: sha1-y8ec26+P1CKOE/Yh8rGiN8GyB7M=}
+    resolution: {integrity: sha512-U1etNYuMJoIz3ZXSrrySFjsXQTWOx2/jdi86L+2pRvph/qMKL6sbcCYdH23fqsbm8TH2Gn0OybpT4eSFlCVHww==}
     engines: {node: '>=4'}
     dev: true
 
@@ -8847,7 +8847,7 @@ packages:
     dev: true
 
   /path-exists/3.0.0:
-    resolution: {integrity: sha1-zg6+ql94yxiSXqfYENe1mwEP1RU=}
+    resolution: {integrity: sha512-bpC7GYwiDYQ4wYLe+FA8lhRjhQCMcQGuSgGGqDkg/QerRWw9CmGRT0iSOVRSZJ29NMLZgIzqaljJ63oaL4NIJQ==}
     engines: {node: '>=4'}
     dev: true
 
@@ -9790,7 +9790,7 @@ packages:
     dev: true
 
   /q/1.5.1:
-    resolution: {integrity: sha1-fjL3W0E4EpHQRhHxvxQQmsAGUdc=}
+    resolution: {integrity: sha512-kV/CThkXo6xyFEZUugw/+pIOywXcDbFYgSct5cT3gqlbkBE1SJdwy6UQoZvodiWF/ckQLZyDE/Bu1M6gVu5lVw==}
     engines: {node: '>=0.6.0', teleport: '>=0.2.0'}
     dev: true
 
@@ -10322,7 +10322,7 @@ packages:
     dev: true
 
   /require-directory/2.1.1:
-    resolution: {integrity: sha1-jGStX9MNqxyXbiNE/+f3kqam30I=}
+    resolution: {integrity: sha512-fGxEI7+wsG9xrvdjsrlmL22OMTTiHRwAMroiEeMgq8gzoLC/PQr7RsRDSTLUg/bZAZtF+TVIkHc6/4RIKrui+Q==}
     engines: {node: '>=0.10.0'}
     dev: true
 
@@ -11310,7 +11310,7 @@ packages:
     dev: true
 
   /through/2.3.8:
-    resolution: {integrity: sha1-DdTJ/6q8NXlgsbckEV1+Doai4fU=}
+    resolution: {integrity: sha512-w89qg7PI8wAdvX60bMDP+bFoD5Dvhm9oLheFp5O4a2QF0cSBGsBX4qZmadPMvVqlLJBBci+WqGGOAPvcDeNSVg==}
     dev: true
 
   /through2/4.0.2:
@@ -11615,7 +11615,7 @@ packages:
     dev: false
 
   /util-deprecate/1.0.2:
-    resolution: {integrity: sha1-RQ1Nyfpw3nMnYvvS1KKJgUGaDM8=}
+    resolution: {integrity: sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==}
     dev: true
 
   /util.promisify/1.0.1:
