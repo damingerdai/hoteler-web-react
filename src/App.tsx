@@ -16,12 +16,14 @@ const App = () => (
     <Navbar />
     <Box as='section'>
       <Routes>
+        <Route path='/' element={<Dashboard />} />
         <Route path='dashboard' element={<React.Suspense fallback={<GlobalLoading />}><Dashboard /></React.Suspense>} />
         <Route path='customer' element={<React.Suspense fallback={<GlobalLoading />}><Customer /></React.Suspense>} />
         <Route path='room' element={<React.Suspense fallback={<GlobalLoading />}><Room /></React.Suspense>} />
         <Route path='loading' element={<React.Suspense fallback={<GlobalLoading />}><GlobalLoading /></React.Suspense>} />
         <Route path='login' element={<React.Suspense fallback={<GlobalLoading />}><Login /></React.Suspense>} />
         <Route path='403' element={<React.Suspense fallback={<GlobalLoading />}><Forbidden /></React.Suspense>} />
+        <Route path='*/*' element={<React.Suspense fallback={<GlobalLoading />}><Dashboard /></React.Suspense>} />
       </Routes>
     </Box>
   </>
