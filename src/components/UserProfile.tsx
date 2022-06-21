@@ -17,7 +17,8 @@ const UserProfile: React.FC<ChakraProps> = (props) => {
   const { username } = useAppSelector((state) => state.user);
 
   useEffect(() => {
-    if (token && token.accessToken) {
+    const tokenString = localStorage.getItem('user_token');
+    if (tokenString || (token && token.accessToken)) {
       dispatch(fetchUser(token.accessToken));
     }
   }, [token]);
