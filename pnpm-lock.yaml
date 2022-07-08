@@ -2,7 +2,7 @@ lockfileVersion: 5.4
 
 overrides:
   '@types/react': 18.0.15
-  '@types/react-dom': 18.0.5
+  '@types/react-dom': 18.0.6
 
 specifiers:
   '@babel/core': 7.18.6
@@ -24,7 +24,7 @@ specifiers:
   '@types/jest': 27.5.1
   '@types/node': 16.11.36
   '@types/react': 18.0.15
-  '@types/react-dom': 18.0.5
+  '@types/react-dom': 18.0.6
   '@typescript-eslint/eslint-plugin': 5.26.0
   '@typescript-eslint/parser': 5.26.0
   apexcharts: 3.35.3
@@ -92,7 +92,7 @@ devDependencies:
   '@types/jest': 27.5.1
   '@types/node': 16.11.36
   '@types/react': 18.0.15
-  '@types/react-dom': 18.0.5
+  '@types/react-dom': 18.0.6
   '@typescript-eslint/eslint-plugin': 5.26.0_hzuh7e2up357pvq3mkokjvu2lq
   '@typescript-eslint/parser': 5.26.0_xztl6dhthcahlo6akmb2bmjmle
   commitlint: 17.0.3
@@ -3331,7 +3331,7 @@ packages:
     dependencies:
       '@babel/runtime': 7.17.9
       '@testing-library/dom': 8.13.0
-      '@types/react-dom': 18.0.5
+      '@types/react-dom': 18.0.6
       react: 18.1.0
       react-dom: 18.1.0_react@18.1.0
     dev: true
@@ -3585,8 +3585,8 @@ packages:
     resolution: {integrity: sha512-EEhsLsD6UsDM1yFhAvy0Cjr6VwmpMWqFBCb9w07wVugF7w9nfajxLuVmngTIpgS6svCnm6Vaw+MZhoDCKnOfsw==}
     dev: true
 
-  /@types/react-dom/18.0.5:
-    resolution: {integrity: sha512-OWPWTUrY/NIrjsAPkAk1wW9LZeIjSvkXRhclsFO8CZcZGCOg2G0YZy4ft+rOyYxy8B7ui5iZzi9OkDebZ7/QSA==}
+  /@types/react-dom/18.0.6:
+    resolution: {integrity: sha512-/5OFZgfIPSwy+YuIBP/FgJnQnsxhZhjjrnxudMddeblOouIodEQ75X14Rr4wGSG/bknL+Omy9iWlLo1u/9GzAA==}
     dependencies:
       '@types/react': 18.0.15
     dev: true
