@@ -31,7 +31,11 @@ export const tokenSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    clearToken: () => initialState,
+    clearToken: () => {
+      localStorage.clear();
+
+      return initialState;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchToken.pending, (state) => {

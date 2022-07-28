@@ -59,6 +59,7 @@ const Navbar = () => {
         <Button
           bg='cyan.500'
           variant='ghost'
+          mr={4}
           _hover={{ bg: 'cyan.500' }}
           _active={{ bg: 'cyan.500' }}
           onClick={toggleColorMode}

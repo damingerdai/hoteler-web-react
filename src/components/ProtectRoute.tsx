@@ -1,7 +1,6 @@
 /* eslint-disable no-console */
 export const ProtectRoute = (WrappedComponent) => {
   const tokenString = localStorage.getItem('user_token');
-  console.log(tokenString);
   if (!tokenString) {
     window.location.href = '/login';
   }
