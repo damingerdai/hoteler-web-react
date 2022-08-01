@@ -12,10 +12,10 @@
     "prepare": "is-ci || husky install"
   },
   "dependencies": {
-    "@chakra-ui/icons": "2.0.1",
-    "@chakra-ui/react": "2.1.2",
-    "@chakra-ui/system": "2.1.1",
-    "@chakra-ui/theme-tools": "2.0.1",
+    "@chakra-ui/icons": "2.0.4",
+    "@chakra-ui/react": "2.2.4",
+    "@chakra-ui/system": "2.2.2",
+    "@chakra-ui/theme-tools": "2.0.5",
     "@emotion/react": "11.9.0",
     "@emotion/styled": "11.8.1",
     "@reduxjs/toolkit": "1.8.2",
