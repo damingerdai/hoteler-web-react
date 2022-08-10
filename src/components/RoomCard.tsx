@@ -1,7 +1,14 @@
 import {
-  Badge, Box, Button, Image, Stack, Text, useDisclosure, useToast,
+  Badge,
+  Box,
+  Button,
+  Image,
+  Stack,
+  Text,
+  useDisclosure,
+  useToast,
 } from '@chakra-ui/react';
-import React from 'react';
+import React, { useState } from 'react';
 import { useAppDispatch } from '../lib/reduxHooks';
 import { request } from '../lib/request';
 import { fetchRooms, hideRoomById } from '../slices/RoomSlice';
@@ -21,6 +28,7 @@ const RoomCard: React.FC<RoomCardProps> = (props) => {
   const dispatch = useAppDispatch();
 
   const toast = useToast();
+  const [blurValue, setBlurValue] = useState<string>('10px');
 
   const {
     isOpen: isConfirmModalOpen,
@@ -62,6 +70,8 @@ const RoomCard: React.FC<RoomCardProps> = (props) => {
         p='18px'
         boxShadow='md'
         borderWidth='1px'
+        filter='auto'
+        blur={blurValue}
         _hover={{ transform: 'scale(1.05)', boxShadow: 'lg' }}
       >
         <Text fontSize='xl' fontWeight='bold'>
@@ -83,13 +93,38 @@ const RoomCard: React.FC<RoomCardProps> = (props) => {
           )}
         </Text>
         <Box w='100%' mt={4}>
-          <Image w='100%' src={room.url} />
+          <Image
+            w='100%'
+            loading='lazy'
+            src={room.url}
+            onLoad={() => {
+              setTimeout(() => setBlurValue('0'), 1000);
+            }}
+          />
         </Box>
         <Box mt={4}>
           <Stack direction='row' spacing={4} align='center'>
-            <Button colorScheme='teal' disabled={isAddCustomerRoomModalOpen} onClick={onAddCustomerRoomModalOpen}>入住</Button>
-            <Button colorScheme='orange' disabled={isEditRoomModalOpen} onClick={onEditRoomModalOpen}>修改</Button>
-            <Button colorScheme='red' disabled={isConfirmModalOpen} onClick={onConfirmModalOpen}>删除</Button>
+            <Button
+              colorScheme='teal'
+              disabled={isAddCustomerRoomModalOpen}
+              onClick={onAddCustomerRoomModalOpen}
+            >
+              入住
+            </Button>
+            <Button
+              colorScheme='orange'
+              disabled={isEditRoomModalOpen}
+              onClick={onEditRoomModalOpen}
+            >
+              修改
+            </Button>
+            <Button
+              colorScheme='red'
+              disabled={isConfirmModalOpen}
+              onClick={onConfirmModalOpen}
+            >
+              删除
+            </Button>
           </Stack>
         </Box>
       </Box>
