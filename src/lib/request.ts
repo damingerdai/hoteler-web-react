@@ -41,10 +41,13 @@ export async function request<T = any>(options: AxiosRequestConfig): Promise<T> 
     return data as T;
   } catch (err) {
     if (err?.response?.status === 401) {
+      localStorage.removeItem('user_token');
       window.location.href = '/login';
     } else if (err?.response?.status === 403) {
+      localStorage.removeItem('user_token');
       window.location.href = '/login';
     } else if (err?.response?.status === 404) {
+      localStorage.removeItem('user_token');
       window.location.href = '/login';
     }
     if (err.response) {
