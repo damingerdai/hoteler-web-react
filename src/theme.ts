@@ -1,8 +1,7 @@
-import { createBreakpoints, mode } from '@chakra-ui/theme-tools';
+import { mode } from '@chakra-ui/theme-tools';
 import { extendTheme } from '@chakra-ui/react';
-import { ColorModeOptions } from '@chakra-ui/system';
 
-const config: ColorModeOptions = {
+const config = {
   useSystemColorMode: false,
   initialColorMode: 'light',
 };
@@ -16,13 +15,13 @@ const config: ColorModeOptions = {
     '2xl': '96em',
   });
  */
-const breakpoints = createBreakpoints({
+const breakpoints = {
   sm: '480px',
   md: '600px',
   lg: '960px',
   xl: '1280px',
   '2xl': '1920px',
-});
+};
 
 const customTheme = extendTheme({
   config,
