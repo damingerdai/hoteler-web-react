@@ -13,7 +13,7 @@ COPY package.json pnpm-lock.yaml /app/
 RUN pnpm install
 
 COPY . .
-RUN yarn build
+RUN pnpm build
 
 
 FROM nginx:1.23.1
