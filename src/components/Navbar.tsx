@@ -8,14 +8,16 @@ import {
   Spacer,
   useBreakpointValue,
 } from '@chakra-ui/react';
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useSystemColorMode } from '../hooks/useSystemColorMode';
 import logo from '../react-logo.svg';
 import GithubIcon from './GithubIcon';
 import RouterLink from './RouterLink';
 import UserProfile from './UserProfile';
 
 const Navbar = () => {
-  const { colorMode, toggleColorMode } = useColorMode();
+  const systemColorMode = useSystemColorMode();
+  const { colorMode, toggleColorMode, setColorMode } = useColorMode();
   const isMobile = useBreakpointValue({ base: true, sm: false });
 
   const routes = [
@@ -33,6 +35,10 @@ const Navbar = () => {
     },
   ];
 
+  useEffect(() => {
+    setColorMode(systemColorMode);
+  }, [systemColorMode]);
+
   return (
     <>
       <Flex
@@ -45,7 +51,10 @@ const Navbar = () => {
         alignItems='center'
       >
         <Image src={logo} w='26px' h='26px' />
-        <Text ml='4px'>Hoteler</Text>
+        <Text ml='4px'>
+          Hoteler
+          {systemColorMode}
+        </Text>
         {!isMobile && (
           <>
             {routes.map((r) => (

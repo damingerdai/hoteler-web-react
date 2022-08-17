@@ -3,7 +3,7 @@ import { extendTheme } from '@chakra-ui/react';
 
 const config = {
   useSystemColorMode: false,
-  initialColorMode: 'light',
+  initialColorMode: 'system',
 };
 /**
  * https://material.angular.io/cdk/layout/overview
