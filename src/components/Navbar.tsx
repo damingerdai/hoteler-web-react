@@ -53,7 +53,6 @@ const Navbar = () => {
         <Image src={logo} w='26px' h='26px' />
         <Text ml='4px'>
           Hoteler
-          {systemColorMode}
         </Text>
         {!isMobile && (
           <>
