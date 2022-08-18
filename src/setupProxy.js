@@ -4,7 +4,7 @@ module.exports = app => {
   app.use(
     '/api',
     createProxyMiddleware({
-      target: 'http://hoteler-react.damingerdai.com',
+      target: 'http://localhost:8443',
       changeOrigin: true
     })
   );
