@@ -3,7 +3,7 @@ import React from 'react';
 import {
   Box, Fade, Flex, Text, useColorModeValue,
 } from '@chakra-ui/react';
-import '../styles/preloader.css';
+import { FoldingCube } from './FoldingCube';
 
 const GlobalLoading = ({ ...rest }) => {
   const bg = useColorModeValue('white', 'gray.700');
@@ -23,12 +23,7 @@ const GlobalLoading = ({ ...rest }) => {
       px='1rem'
       {...rest}
     >
-      <div className='sk-folding-cube'>
-        <div className='sk-cube1 sk-cube' />
-        <div className='sk-cube2 sk-cube' />
-        <div className='sk-cube4 sk-cube' />
-        <div className='sk-cube3 sk-cube' />
-      </div>
+      <FoldingCube />
       <Fade in>
         <Box mt='1rem'>
           <Box textAlign='center'>
