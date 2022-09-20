@@ -1,5 +1,13 @@
 import {
-  Badge, Box, Button, Stack, Text, useDisclosure, useToast,
+  Avatar,
+  Badge,
+  Box,
+  Button,
+  Flex,
+  Stack,
+  Text,
+  useDisclosure,
+  useToast,
 } from '@chakra-ui/react';
 import React from 'react';
 import { useAppDispatch } from '../lib/reduxHooks';
@@ -53,19 +61,23 @@ const CustomerCard: React.FC<CustomerCardProps> = ({ customer }) => {
         borderWidth='1px'
         _hover={{ transform: 'scale(1.05)', boxShadow: 'lg' }}
       >
-        <Text fontSize='xl' fontWeight='bold'>
-          {customer.name}
-          {customer.gender === 'F' && (
-            <Badge ml='1' fontSize='0.8em' colorScheme='green'>
-              女
-            </Badge>
-          )}
-          {customer.gender === 'M' && (
-            <Badge ml='1' fontSize='0.8em' colorScheme='purple'>
-              男
-            </Badge>
-          )}
-        </Text>
+        <Flex direction='row'>
+          <Avatar name={customer.name} />
+          <Text ml={2} mt={2} fontSize='xl' fontWeight='bold'>
+            {customer.name}
+            {customer.gender === 'F' && (
+              <Badge ml='1' fontSize='0.8em' colorScheme='green'>
+                女
+              </Badge>
+            )}
+            {customer.gender === 'M' && (
+              <Badge ml='1' fontSize='0.8em' colorScheme='purple'>
+                男
+              </Badge>
+            )}
+          </Text>
+        </Flex>
+
         <Stack direction='row' mt={4}>
           <Box>
             <Text>
