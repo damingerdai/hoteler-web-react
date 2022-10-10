@@ -16,7 +16,7 @@ import {
   useToast,
 } from '@chakra-ui/react';
 import { Formik, Form } from 'formik';
-import React, { useCallback, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import * as Yup from 'yup';
 import { format } from '../lib/date';
 import { useAppDispatch, useAppSelector } from '../lib/reduxHooks';
@@ -51,15 +51,12 @@ const AddCustomerRoomModal: React.FC<AddCustomerRoomModalProps> = (props) => {
     beginDate: Yup.string().required('请选择开始时间').nullable(),
     endDate: Yup.string().required('请选择结束时间').nullable(),
   });
-  const fetchCustomersCallback = useCallback(() => {
+
+  useEffect(() => {
     if (!customerList || customerList.length === 0) {
       dispatch(fetchCustomers());
     }
-  }, [customerList]);
-
-  useEffect(() => {
-    fetchCustomersCallback();
-  });
+  }, []);
 
   const handleSubmit = async (values) => {
     const res = await request<CommonResponse>({
