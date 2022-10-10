@@ -27,7 +27,7 @@ const Customer: React.FC = () => {
 
   useEffect(() => {
     dispatch(fetchCustomers());
-  }, []);
+  }, [dispatch]);
 
   if (requestStatus === RequestStatus.LOADING) {
     return <GlobalLoading />;
