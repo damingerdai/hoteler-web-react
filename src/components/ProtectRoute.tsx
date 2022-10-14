@@ -1,25 +1,26 @@
-/* eslint-disable no-console */
-export const ProtectRoute = (WrappedComponent) => {
-  const tokenString = localStorage.getItem('user_token');
-  if (!tokenString) {
-    window.location.href = '/login';
-  }
-  // const dispatch = useAppDispatch();
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-  // useEffect(() => {
-  //   const tokenString = localStorage.getItem('user_token');
-  //   // eslint-disable-next-line no-console
-  //   console.log(tokenString);
-  //   if (!tokenString) {
-  //     // navigate('/login');
-  //     window.location.href = '/login';
-  //   } else {
-  //     dispatch(fetchUser());
-  //   }
-  // }, [dispatch]);
-
-  return function Wrapper(props) {
-    // eslint-disable-next-line react/react-in-jsx-scope, react/jsx-props-no-spreading
-    return <WrappedComponent {...props} />;
+export const ProtectRoute = (WrappedComponent) => function Wrapper(props) {
+  const [authenticated, setAuthenticated] = useState(false);
+  const navigate = useNavigate();
+  const checkToken = async () => {
+    const token = localStorage.getItem('user_token');
+    if (!token) {
+      navigate('/login');
+      setAuthenticated(false);
+    } else {
+      setAuthenticated(true);
+    }
   };
+  useEffect(() => {
+    checkToken();
+  }, []);
+
+  if (!authenticated) {
+    return null;
+  }
+
+  // eslint-disable-next-line react/react-in-jsx-scope, react/jsx-props-no-spreading
+  return <WrappedComponent {...props} />;
 };
