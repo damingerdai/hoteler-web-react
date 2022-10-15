@@ -17,7 +17,7 @@ specifiers:
   '@commitlint/config-conventional': 17.1.0
   '@emotion/react': 11.9.0
   '@emotion/styled': 11.8.1
-  '@reduxjs/toolkit': 1.8.5
+  '@reduxjs/toolkit': 1.8.6
   '@testing-library/dom': 8.17.1
   '@testing-library/jest-dom': 5.16.5
   '@testing-library/react': 13.3.0
@@ -66,7 +66,7 @@ dependencies:
   '@chakra-ui/theme-tools': 2.0.12_kzevwk2hxgy6fnrjqv25jdmqp4
   '@emotion/react': 11.9.0_msyv5sllghxdhcqrv627wahqgi
   '@emotion/styled': 11.8.1_pqdyxeuluxdrsfqn4uv3giwpuq
-  '@reduxjs/toolkit': 1.8.5_7ozmmenbreubqajvpxb2pmuuau
+  '@reduxjs/toolkit': 1.8.6_7ozmmenbreubqajvpxb2pmuuau
   apexcharts: 3.35.5
   axios: 0.27.2
   formik: 2.2.9_react@18.2.0
@@ -3342,8 +3342,8 @@ packages:
     resolution: {integrity: sha512-9X2obfABZuDVLCgPK9aX0a/x4jaOEweTTWE2+9sr0Qqqevj2Uv5XorvusThmc9XGYpS9yI+fhh8RTafBtGposw==}
     dev: false
 
-  /@reduxjs/toolkit/1.8.5_7ozmmenbreubqajvpxb2pmuuau:
-    resolution: {integrity: sha512-f4D5EXO7A7Xq35T0zRbWq5kJQyXzzscnHKmjnu2+37B3rwHU6mX9PYlbfXdnxcY6P/7zfmjhgan0Z+yuOfeBmA==}
+  /@reduxjs/toolkit/1.8.6_7ozmmenbreubqajvpxb2pmuuau:
+    resolution: {integrity: sha512-4Ia/Loc6WLmdSOzi7k5ff7dLK8CgG2b8aqpLsCAJhazAzGdp//YBUSaj0ceW6a3kDBDNRrq5CRwyCS0wBiL1ig==}
     peerDependencies:
       react: ^16.9.0 || ^17.0.0 || ^18
       react-redux: ^7.2.1 || ^8.0.2
