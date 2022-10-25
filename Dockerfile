@@ -16,7 +16,7 @@ COPY . .
 RUN pnpm build
 
 
-FROM nginx:1.23.1
+FROM nginx:1.23.2
 COPY _nginx/default.template /etc/nginx/conf.d/default.template
 WORKDIR /usr/share/nginx/html
 RUN rm -rf ./*
