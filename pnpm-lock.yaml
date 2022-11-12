@@ -28,7 +28,7 @@ specifiers:
   '@types/react-dom': 18.0.5
   '@typescript-eslint/eslint-plugin': 5.35.1
   '@typescript-eslint/parser': 5.35.1
-  apexcharts: 3.35.5
+  apexcharts: 3.36.3
   axios: 0.27.2
   commitlint: 17.1.2
   eslint: 8.26.0
@@ -67,12 +67,12 @@ dependencies:
   '@emotion/react': 11.9.0_v3eeuzclnr7jur43y7v4rp2axe
   '@emotion/styled': 11.8.1_zyknefa6v2sdyrwrhpizvyyxwy
   '@reduxjs/toolkit': 1.8.6_7ozmmenbreubqajvpxb2pmuuau
-  apexcharts: 3.35.5
+  apexcharts: 3.36.3
   axios: 0.27.2
   formik: 2.2.9_react@18.2.0
   framer-motion: 6.5.1_biqbaboplfbrettd7655fr4n2y
   react: 18.2.0
-  react-apexcharts: 1.4.0_h6blzwyvqeswgdo7gczbninyvy
+  react-apexcharts: 1.4.0_g3lvop6jrvmpqnlf3mxot4n2ym
   react-dom: 18.2.0_react@18.2.0
   react-icons: 4.6.0_react@18.2.0
   react-redux: 7.2.9_biqbaboplfbrettd7655fr4n2y
@@ -4473,8 +4473,8 @@ packages:
       normalize-path: 3.0.0
       picomatch: 2.3.1
 
-  /apexcharts/3.35.5:
-    resolution: {integrity: sha512-Bi3aq35xWntI71JlywXTBBAOhuKTbB4wijKw4ClkIAFV904YDkHPIJ8N9LcZq9fvVb0VX1AEmyOFBOB2Vwsuew==}
+  /apexcharts/3.36.3:
+    resolution: {integrity: sha512-8/FXEs0ohXMff07Gv28XjhPwEJphIUdq2/wii/pcvi54Tw6z1mjrV8ydN8rlWi/ve8BAPBefJkLmRWv7UOBsLw==}
     dependencies:
       svg.draggable.js: 2.2.2
       svg.easing.js: 2.0.0
@@ -10111,13 +10111,13 @@ packages:
       unpipe: 1.0.0
     dev: true
 
-  /react-apexcharts/1.4.0_h6blzwyvqeswgdo7gczbninyvy:
+  /react-apexcharts/1.4.0_g3lvop6jrvmpqnlf3mxot4n2ym:
     resolution: {integrity: sha512-DrcMV4aAMrUG+n6412yzyATWEyCDWlpPBBhVbpzBC4PDeuYU6iF84SmExbck+jx5MUm4U5PM3/T307Mc3kzc9Q==}
     peerDependencies:
       apexcharts: ^3.18.0
       react: '>=0.13'
     dependencies:
-      apexcharts: 3.35.5
+      apexcharts: 3.36.3
       prop-types: 15.8.1
       react: 18.2.0
     dev: false
