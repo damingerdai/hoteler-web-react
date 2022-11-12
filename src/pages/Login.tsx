@@ -42,17 +42,6 @@ const Login = () => {
           <Text as='h1' textAlign='center' size='xl'> Hoteler系统登录 </Text>
           <Formik
             initialValues={{ username: '', password: '' }}
-            // validate={(values: { username?: string, password?: string }) => {
-            //   const errors = {} as { username?: string, password?: string };
-            //   if (!values.username) {
-            //     errors.username = '请输入用户名';
-            //   }
-            //   if (!values.password) {
-            //     errors.password = '请输入密码';
-            //   }
-
-            //   return errors;
-            // }}
             // eslint-disable-next-line react/jsx-props-no-multi-spaces
             validationSchema={validationSchemas}
             onSubmit={async ({ username, password }, { setSubmitting }) => {
