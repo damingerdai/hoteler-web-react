@@ -14,9 +14,13 @@ const client = axios.create({
 client.interceptors.request.use((config) => {
   const tokenString = localStorage.getItem('user_token');
   if (tokenString) {
-    const token = JSON.parse(tokenString) as UserToken;
-    if (token.accessToken) {
-      config!.headers!.Authorization = `Bearer ${token.accessToken}`;
+    try {
+      const token = JSON.parse(tokenString) as UserToken;
+      if (token.accessToken) {
+        config!.headers!.Authorization = `Bearer ${token.accessToken}`;
+      }
+    } catch (e) {
+      console.error(e);
     }
   }
 
@@ -37,7 +41,6 @@ export async function request<T = any>(options: AxiosRequestConfig): Promise<T> 
         isClosable: true,
       });
     }
-
     return data as T;
   } catch (err) {
     if (err?.response?.status === 401) {
