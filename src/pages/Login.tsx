@@ -12,7 +12,7 @@ import {
 } from '@chakra-ui/react';
 import { Formik } from 'formik';
 import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link as RouteLink, useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 import { fetchToken } from '../slices/TokenSlice';
 import { setUsername } from '../slices/UserSlice';
@@ -23,7 +23,7 @@ const Login = () => {
   const navigate = useNavigate();
 
   const token = useAppSelector((state) => state.token);
-
+  const initialValues = { username: '', password: '' };
   const validationSchemas = Yup.object().shape({
     username: Yup.string().required('请输入用户名').nullable(),
     password: Yup.string().required('请输入密码').nullable(),
@@ -41,7 +41,7 @@ const Login = () => {
         <Box boxShadow='base' w='100%' maxWidth='400px' p={2}>
           <Text as='h1' textAlign='center' size='xl'> Hoteler系统登录 </Text>
           <Formik
-            initialValues={{ username: '', password: '' }}
+            initialValues={initialValues}
             // eslint-disable-next-line react/jsx-props-no-multi-spaces
             validationSchema={validationSchemas}
             onSubmit={async ({ username, password }, { setSubmitting }) => {
@@ -90,7 +90,12 @@ const Login = () => {
               </form>
             )}
           </Formik>
-
+          <Box mt={8}>
+            没有账号?
+            <Box as='span' ml={2} color='teal.500'>
+              <RouteLink to='/register'>点此创建一个</RouteLink>
+            </Box>
+          </Box>
         </Box>
       </Center>
     </Container>
