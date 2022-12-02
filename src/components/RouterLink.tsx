@@ -1,13 +1,14 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
-import { Link } from '@chakra-ui/react';
+import { Link, LinkProps } from '@chakra-ui/react';
 import { Link as ReactLink } from 'react-router-dom';
 
-interface RouterLinkProps {
+interface RouterLinkProps extends LinkProps {
   to: string,
   name: string
 }
 
-const RouterLink: React.FC<RouterLinkProps> = ({ to, name }) => (
+const RouterLink: React.FC<RouterLinkProps> = ({ to, name, ...rest }) => (
   <Link
     ml={4}
     as={ReactLink}
@@ -20,6 +21,7 @@ const RouterLink: React.FC<RouterLinkProps> = ({ to, name }) => (
       boxShadow: 'none',
     }}
     to={to}
+    {...rest}
   >
     {name}
   </Link>
