@@ -27,6 +27,27 @@ client.interceptors.request.use((config) => {
   return config;
 });
 
+client.interceptors.response.use(
+  (res) => res,
+  (err) => {
+    const { code, message } = err;
+    const toastOption = {
+      id: 'NETWORK_ERROR',
+      title: '网络超时 - 刷新页面以恢复',
+      status: 'error' as 'info' | 'warning' | 'success' | 'error' | 'loading' | undefined,
+      duration: 3000,
+      isClosable: true,
+    };
+    if (
+      (code === 'ECONNABORTED' || message === 'Network Error') && !toastInstance.isActive(toastOption.id)
+    ) {
+      toastInstance({ ...toastOption });
+    }
+
+    return Promise.reject(err);
+  },
+);
+
 // eslint-disable-next-line consistent-return
 export async function request<T = any>(options: AxiosRequestConfig): Promise<T> {
   try {
