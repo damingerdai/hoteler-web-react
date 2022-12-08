@@ -45,7 +45,7 @@ specifiers:
   husky: 8.0.2
   is-ci: 3.0.1
   lint-staged: 12.5.0
-  prettier: 2.7.1
+  prettier: 2.8.1
   react: 18.2.0
   react-apexcharts: 1.4.0
   react-dom: 18.2.0
@@ -103,14 +103,14 @@ devDependencies:
   eslint-config-airbnb-typescript: 17.0.0_n4taqa4eq2bqv2goyanfkujmfy
   eslint-plugin-import: 2.26.0_ibkfmjy7wq4guypkh5m3r33x5y
   eslint-plugin-jsx-a11y: 6.5.1_eslint@8.26.0
-  eslint-plugin-prettier: 4.0.0_5t6g5rrqvlktilv3n3sw5svbdi
+  eslint-plugin-prettier: 4.0.0_o6ckrj3jopgif5r65jayenujue
   eslint-plugin-react: 7.30.0_eslint@8.26.0
   eslint-plugin-react-hooks: 4.6.0_eslint@8.26.0
   http-proxy-middleware: 2.0.6
   husky: 8.0.2
   is-ci: 3.0.1
   lint-staged: 12.5.0
-  prettier: 2.7.1
+  prettier: 2.8.1
   react-scripts: 5.0.1_l2fz2w4lunitc3djdhy5fbat6e
   typescript: 4.8.4
 
@@ -6340,7 +6340,7 @@ packages:
       minimatch: 3.1.2
     dev: true
 
-  /eslint-plugin-prettier/4.0.0_5t6g5rrqvlktilv3n3sw5svbdi:
+  /eslint-plugin-prettier/4.0.0_o6ckrj3jopgif5r65jayenujue:
     resolution: {integrity: sha512-98MqmCJ7vJodoQK359bqQWaxOE0CS8paAz/GgjaZLyex4TTk3g9HugoO89EqWCrFiOqn9EVvcoo7gZzONCWVwQ==}
     engines: {node: '>=6.0.0'}
     peerDependencies:
@@ -6352,7 +6352,7 @@ packages:
         optional: true
     dependencies:
       eslint: 8.26.0
-      prettier: 2.7.1
+      prettier: 2.8.1
       prettier-linter-helpers: 1.0.0
     dev: true
 
@@ -10025,8 +10025,8 @@ packages:
       fast-diff: 1.2.0
     dev: true
 
-  /prettier/2.7.1:
-    resolution: {integrity: sha512-ujppO+MkdPqoVINuDFDRLClm7D78qbDt0/NR+wp5FqEZOoTNAjPHWj17QRhu7geIHJfcNhRk1XVQmF8Bp3ye+g==}
+  /prettier/2.8.1:
+    resolution: {integrity: sha512-lqGoSJBQNJidqCHE80vqZJHWHRFoNYsSpP9AjFhlhi9ODCJA541svILes/+/1GM3VaL/abZi7cpFzOpdR9UPKg==}
     engines: {node: '>=10.13.0'}
     hasBin: true
     dev: true
