@@ -47,7 +47,7 @@
     "@types/jest": "27.5.2",
     "@types/node": "16.18.11",
     "@types/react": "18.0.25",
-    "@types/react-dom": "18.0.9",
+    "@types/react-dom": "18.0.10",
     "@typescript-eslint/eslint-plugin": "5.46.1",
     "@typescript-eslint/parser": "5.46.1",
     "commitlint": "17.3.0",
@@ -69,7 +69,7 @@
   },
   "resolutions": {
     "@types/react": "18.0.25",
-    "@types/react-dom": "18.0.9"
+    "@types/react-dom": "18.0.10"
   },
   "browserslist": {
     "production": [
