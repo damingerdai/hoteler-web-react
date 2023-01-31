@@ -3,8 +3,8 @@ import {
 } from '@chakra-ui/react';
 import React, { useEffect } from 'react';
 import CreateRoomModal from '../components/CreateRoomModal';
-import GlobalLoading from '../components/GlobalLoading';
 import RoomCard from '../components/RoomCard';
+import RoomCardSkeleton from '../components/RoomCardSkeleton';
 import { useAppDispatch, useAppSelector } from '../lib/reduxHooks';
 import { fetchRooms } from '../slices/RoomSlice';
 import { RequestStatus } from '../types';
@@ -25,10 +25,6 @@ const Room: React.FC = () => {
     dispatch(fetchRooms());
   }, []);
 
-  if (requestStatus === RequestStatus.LOADING) {
-    return <GlobalLoading />;
-  }
-
   return (
     <Box p='20px 40px'>
       <Flex p={2} justifyContent='right'>
@@ -37,7 +33,6 @@ const Room: React.FC = () => {
         </Button>
       </Flex>
       <Divider />
-
       <Flex
         flexDir='row'
         flexWrap='wrap'
@@ -46,12 +41,16 @@ const Room: React.FC = () => {
         justifyContent='start'
         mt='16px'
       >
-        {rooms.map((r, i) => (
+        {requestStatus === RequestStatus.LOADING
+        && Array.from({ length: 4 }, (_, idx) => idx).map((i) => (
+          <RoomCardSkeleton key={i} />
+        ))}
+        {requestStatus !== RequestStatus.LOADING && rooms.map((r, i) => (
           <Box
             key={r.id}
-            pl={2}
-            pr={2}
-            mb={2}
+            pl={4}
+            pr={4}
+            mb={4}
             flex='1 1 50%'
             maxW='450px'
             width={{
