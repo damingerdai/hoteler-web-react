@@ -19,7 +19,7 @@
     "@chakra-ui/theme-tools": "2.0.16",
     "@emotion/react": "11.9.0",
     "@emotion/styled": "11.8.1",
-    "@reduxjs/toolkit": "1.8.6",
+    "@reduxjs/toolkit": "1.9.3",
     "apexcharts": "3.37.1",
     "axios": "0.27.2",
     "formik": "2.2.9",
