@@ -30,7 +30,7 @@
     "react-icons": "4.7.1",
     "react-redux": "7.2.9",
     "react-router-dom": "6.8.2",
-    "sass": "1.52.1",
+    "sass": "1.58.3",
     "web-vitals": "2.1.4",
     "yup": "0.32.11"
   },
