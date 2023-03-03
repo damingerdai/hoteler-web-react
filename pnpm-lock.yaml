@@ -53,7 +53,7 @@ specifiers:
   react-redux: 7.2.9
   react-router-dom: 6.8.2
   react-scripts: 5.0.1
-  sass: 1.52.1
+  sass: 1.58.3
   typescript: 4.8.4
   web-vitals: 2.1.4
   yup: 0.32.11
@@ -77,7 +77,7 @@ dependencies:
   react-icons: 4.7.1_react@18.2.0
   react-redux: 7.2.9_biqbaboplfbrettd7655fr4n2y
   react-router-dom: 6.8.2_biqbaboplfbrettd7655fr4n2y
-  sass: 1.52.1
+  sass: 1.58.3
   web-vitals: 2.1.4
   yup: 0.32.11
 
@@ -111,7 +111,7 @@ devDependencies:
   is-ci: 3.0.1
   lint-staged: 12.5.0
   prettier: 2.8.4
-  react-scripts: 5.0.1_l2fz2w4lunitc3djdhy5fbat6e
+  react-scripts: 5.0.1_itdoftm444szdznwsufww4em2a
   typescript: 4.8.4
 
 packages:
@@ -10575,7 +10575,7 @@ packages:
       react: 18.2.0
     dev: false
 
-  /react-scripts/5.0.1_l2fz2w4lunitc3djdhy5fbat6e:
+  /react-scripts/5.0.1_itdoftm444szdznwsufww4em2a:
     resolution: {integrity: sha512-8VAmEm/ZAwQzJ+GOMLbBsTdDKOpuZh7RPs0UymvBR2vRk4iZWCskjbFnxqjrzoIvlNNRZ3QJFx6/qDSi6zSnaQ==}
     engines: {node: '>=14.0.0'}
     hasBin: true
@@ -10625,7 +10625,7 @@ packages:
       react-refresh: 0.11.0
       resolve: 1.22.0
       resolve-url-loader: 4.0.0
-      sass-loader: 12.6.0_sass@1.52.1+webpack@5.72.1
+      sass-loader: 12.6.0_sass@1.58.3+webpack@5.72.1
       semver: 7.3.7
       source-map-loader: 3.0.1_webpack@5.72.1
       style-loader: 3.3.1_webpack@5.72.1
@@ -11019,7 +11019,7 @@ packages:
     resolution: {integrity: sha512-ZRwKbh/eQ6w9vmTjkuG0Ioi3HBwPFce0O+v//ve+aOq1oeCy7jMV2qzzAlpsNuqpqCBjjriM1lbtZbF/Q8jVyA==}
     dev: true
 
-  /sass-loader/12.6.0_sass@1.52.1+webpack@5.72.1:
+  /sass-loader/12.6.0_sass@1.58.3+webpack@5.72.1:
     resolution: {integrity: sha512-oLTaH0YCtX4cfnJZxKSLAyglED0naiYfNG1iXfU5w1LNZ+ukoA5DtyDIN5zmKVZwYNJP4KRc5Y3hkWga+7tYfA==}
     engines: {node: '>= 12.13.0'}
     peerDependencies:
@@ -11040,12 +11040,12 @@ packages:
     dependencies:
       klona: 2.0.5
       neo-async: 2.6.2
-      sass: 1.52.1
+      sass: 1.58.3
       webpack: 5.72.1
     dev: true
 
-  /sass/1.52.1:
-    resolution: {integrity: sha512-fSzYTbr7z8oQnVJ3Acp9hV80dM1fkMN7mSD/25mpcct9F7FPBMOI8krEYALgU1aZoqGhQNhTPsuSmxjnIvAm4Q==}
+  /sass/1.58.3:
+    resolution: {integrity: sha512-Q7RaEtYf6BflYrQ+buPudKR26/lH+10EmO9bBqbmPh/KeLqv8bjpTNqxe71ocONqXq+jYiCbpPUmQMS+JJPk4A==}
     engines: {node: '>=12.0.0'}
     hasBin: true
     dependencies:
