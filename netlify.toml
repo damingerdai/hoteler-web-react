@@ -15,7 +15,9 @@
   [headers.values]
     cache-control = "max-age=31536000"
 [[redirects]]
-  form = "/api/*"
+  from = "/api/*"
   to = "https://hoteler-react.damingerdai.com/:splat"
-  status = 200
+  status = 301
+  force = false
+  query = {path = ":path"}
 
