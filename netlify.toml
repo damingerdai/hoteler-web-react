@@ -14,10 +14,4 @@
   for = "/assets/*"
   [headers.values]
     cache-control = "max-age=31536000"
-[[redirects]]
-  from = "/api/"
-  to = "https://hoteler-react.damingerdai.com"
-  status = 200
-  force = true
-  query = {path = ":path"}
 
