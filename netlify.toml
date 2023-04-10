@@ -21,7 +21,7 @@
 [[redirects]]
   from = "/api/"
   to = "https://hoteler-react.damingerdai.com"
-  status = 301
+  status = 200
   force = true
   query = {path = ":path"}
 
