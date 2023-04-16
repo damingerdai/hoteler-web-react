@@ -20,7 +20,7 @@
   status = 404
 [[redirects]]
   from = "/api/*"
-  to = "https://hoteler-react.damingerdai.com/:splat"
+  to = "http://hoteler-react.damingerdai.com/:splat"
   status = 200
   force = true
   query = {path = ":path"}
