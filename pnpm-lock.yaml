@@ -98,8 +98,8 @@ devDependencies:
     specifier: 14.4.1
     version: 14.4.1(@testing-library/dom@9.0.1)
   '@types/jest':
-    specifier: 29.4.0
-    version: 29.4.0
+    specifier: 29.5.0
+    version: 29.5.0
   '@types/node':
     specifier: 18.14.6
     version: 18.14.6
@@ -3959,8 +3959,8 @@ packages:
       '@types/istanbul-lib-report': 3.0.0
     dev: true
 
-  /@types/jest@29.4.0:
-    resolution: {integrity: sha512-VaywcGQ9tPorCX/Jkkni7RWGFfI11whqzs8dvxF41P17Z+z872thvEvlIbznjPJ02kl1HMX3LmLOonsj2n7HeQ==}
+  /@types/jest@29.5.0:
+    resolution: {integrity: sha512-3Emr5VOl/aoBwnWcH/EFQvlSAmjV+XtV9GGu5mwdYew5vhQh0IUZx/60x0TzHDu09Bi7HMx10t/namdJw5QIcg==}
     dependencies:
       expect: 29.4.3
       pretty-format: 29.4.3
@@ -4077,7 +4077,7 @@ packages:
   /@types/testing-library__jest-dom@5.14.3:
     resolution: {integrity: sha512-oKZe+Mf4ioWlMuzVBaXQ9WDnEm1+umLx0InILg+yvZVBBDmzV5KfZyLrCvadtWcx8+916jLmHafcmqqffl+iIw==}
     dependencies:
-      '@types/jest': 29.4.0
+      '@types/jest': 29.5.0
     dev: true
 
   /@types/trusted-types@2.0.2:
