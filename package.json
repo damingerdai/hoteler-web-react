@@ -35,8 +35,8 @@
     "yup": "1.0.2"
   },
   "devDependencies": {
-    "@babel/core": "7.21.0",
-    "@babel/plugin-syntax-flow": "7.18.6",
+    "@babel/core": "7.21.4",
+    "@babel/plugin-syntax-flow": "7.21.4",
     "@babel/plugin-transform-react-jsx": "7.21.0",
     "@commitlint/cli": "17.4.4",
     "@commitlint/config-conventional": "17.4.4",
