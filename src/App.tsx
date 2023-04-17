@@ -5,6 +5,7 @@ import {
 import { withSuspense } from './components/WithSuspense';
 import './App.scss';
 import { Layout } from './components/Layout';
+import ErrorBoundary from './components/ErrorBoundary';
 
 const Dashboard = React.lazy(() => import('./pages/Dashboard'));
 const Customer = React.lazy(() => import('./pages/Customer'));
@@ -17,6 +18,7 @@ const router = createBrowserRouter([
   {
     path: '/',
     element: <Layout />,
+    errorElement: <ErrorBoundary />,
     children: [
       {
         path: 'dashboard',
