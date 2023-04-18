@@ -35,6 +35,39 @@ const Navbar = () => {
     },
   ];
 
+  const viewTransitionAnimate = (event: React.MouseEvent<HTMLButtonElement>) => {
+    const x = event.clientX;
+    const y = event.clientY;
+    const endRadius = Math.hypot(
+      // eslint-disable-next-line no-restricted-globals
+      Math.max(x, innerWidth - x),
+      // eslint-disable-next-line no-restricted-globals
+      Math.max(y, innerHeight - y),
+    );
+    const isDark = colorMode === 'dark';
+    // @ts-ignore
+    const transition = document.startViewTransition(() => {
+      toggleColorMode();
+    });
+
+    transition.ready.then(() => {
+      const clipPath = [
+        `circle(0px at ${x}px ${y}px)`,
+        `circle(${endRadius}px at ${x}px ${y}px)`,
+      ];
+      document.documentElement.animate(
+        {
+          clipPath: isDark ? [...clipPath].reverse() : clipPath,
+        },
+        {
+          duration: 500,
+          easing: 'ease-in',
+          pseudoElement: isDark ? '::view-transition-old(root)' : '::view-transition-new(root)',
+        },
+      );
+    });
+  };
+
   useEffect(() => {
     setColorMode(systemColorMode);
   }, [systemColorMode]);
@@ -70,7 +103,13 @@ const Navbar = () => {
           mr={4}
           _hover={{ bg: 'cyan.500' }}
           _active={{ bg: 'cyan.500' }}
-          onClick={toggleColorMode}
+          onClick={(event: React.MouseEvent<HTMLButtonElement>) => {
+            if (!document || !('startViewTransition' in document)) {
+              toggleColorMode();
+              return;
+            }
+            viewTransitionAnimate(event);
+          }}
         >
           {colorMode === 'light' ? <SunIcon /> : <MoonIcon />}
         </Button>
