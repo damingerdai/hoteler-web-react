@@ -9,6 +9,7 @@ import React, { useEffect } from 'react';
 import CreateCustomerModal from '../components/CreateCustomerModal';
 import CustomerCard from '../components/CustomerCard';
 import GlobalLoading from '../components/GlobalLoading';
+import { ProtectRoute } from '../components/ProtectRoute';
 import { useAppDispatch, useAppSelector } from '../lib/reduxHooks';
 import { fetchCustomers } from '../slices/CustomerSlice';
 import { RequestStatus } from '../types';
@@ -81,4 +82,4 @@ const Customer: React.FC = () => {
   );
 };
 
-export default Customer;
+export default ProtectRoute(Customer);

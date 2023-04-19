@@ -3,6 +3,7 @@ import {
 } from '@chakra-ui/react';
 import React, { useEffect } from 'react';
 import CreateRoomModal from '../components/CreateRoomModal';
+import { ProtectRoute } from '../components/ProtectRoute';
 import RoomCard from '../components/RoomCard';
 import RoomCardSkeleton from '../components/RoomCardSkeleton';
 import { useAppDispatch, useAppSelector } from '../lib/reduxHooks';
@@ -77,4 +78,4 @@ const Room: React.FC = () => {
   );
 };
 
-export default Room;
+export default ProtectRoute(Room);
