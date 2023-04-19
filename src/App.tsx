@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  createBrowserRouter, RouterProvider,
+  createBrowserRouter, Navigate, RouterProvider,
 } from 'react-router-dom';
 import { withSuspense } from './components/WithSuspense';
 import './App.scss';
@@ -20,6 +20,10 @@ const router = createBrowserRouter([
     element: <Layout />,
     errorElement: <ErrorBoundary />,
     children: [
+      {
+        path: '/',
+        element: <Navigate replace to='/login' />,
+      },
       {
         path: 'dashboard',
         element: withSuspense(<Dashboard />),
