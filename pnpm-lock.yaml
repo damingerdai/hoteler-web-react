@@ -30,8 +30,8 @@ dependencies:
     specifier: 1.9.5
     version: 1.9.5(react-redux@8.0.5)(react@18.2.0)
   apexcharts:
-    specifier: 3.39.0
-    version: 3.39.0
+    specifier: 3.40.0
+    version: 3.40.0
   axios:
     specifier: 1.4.0
     version: 1.4.0
@@ -46,7 +46,7 @@ dependencies:
     version: 18.2.0
   react-apexcharts:
     specifier: 1.4.0
-    version: 1.4.0(apexcharts@3.39.0)(react@18.2.0)
+    version: 1.4.0(apexcharts@3.40.0)(react@18.2.0)
   react-dom:
     specifier: 18.2.0
     version: 18.2.0(react@18.2.0)
@@ -4632,8 +4632,8 @@ packages:
       normalize-path: 3.0.0
       picomatch: 2.3.1
 
-  /apexcharts@3.39.0:
-    resolution: {integrity: sha512-GRvdTg+ZaD55P7/jxqEXpbdCMZQOaej9qE9f7zKkN/oWAbBuuE3mnSCi44UkGMS2X249uEOEXWx0A96jjP3lcA==}
+  /apexcharts@3.40.0:
+    resolution: {integrity: sha512-dSi3BUfCJkFd67uFp+xffrJVd3lDT7AAUUyRp0qPYiglJ76CeZLddVhM3FAk1P9GCzf8VewqGYUPCYQvXm+b9A==}
     dependencies:
       svg.draggable.js: 2.2.2
       svg.easing.js: 2.0.0
@@ -10607,13 +10607,13 @@ packages:
       unpipe: 1.0.0
     dev: true
 
-  /react-apexcharts@1.4.0(apexcharts@3.39.0)(react@18.2.0):
+  /react-apexcharts@1.4.0(apexcharts@3.40.0)(react@18.2.0):
     resolution: {integrity: sha512-DrcMV4aAMrUG+n6412yzyATWEyCDWlpPBBhVbpzBC4PDeuYU6iF84SmExbck+jx5MUm4U5PM3/T307Mc3kzc9Q==}
     peerDependencies:
       apexcharts: ^3.18.0
       react: '>=0.13'
     dependencies:
-      apexcharts: 3.39.0
+      apexcharts: 3.40.0
       prop-types: 15.8.1
       react: 18.2.0
     dev: false
