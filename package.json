@@ -23,6 +23,7 @@
     "@reduxjs/toolkit": "1.9.5",
     "apexcharts": "3.40.0",
     "axios": "1.4.0",
+    "dom-confetti": "^0.2.2",
     "formik": "2.2.9",
     "framer-motion": "10.12.7",
     "react": "18.2.0",
@@ -91,7 +92,9 @@
   },
   "pnpm": {
     "peerDependencyRules": {
-      "ignoreMissing": ["react-scripts"]
+      "ignoreMissing": [
+        "react-scripts"
+      ]
     }
   }
 }

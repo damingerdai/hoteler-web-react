@@ -15,6 +15,7 @@ import * as React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 import { toastInstance } from '../components/Toast';
+import { createDomConfett } from '../components/DomConfett';
 import { request } from '../lib/request';
 
 const Register: React.FC = () => {
@@ -27,12 +28,16 @@ const Register: React.FC = () => {
     confirmPassword: Yup.string().required('请确认密码').nullable(),
   });
 
+  const { Container: DomConfettContainer, confett } = createDomConfett();
+
   return (
     <Container>
       <Center mt={16}>
         <Box boxShadow='base' w='100%' maxWidth='400px' p={2}>
           <Text as='h1' textAlign='center' size='xl'>
-            Hoteler系统注册
+            <DomConfettContainer>
+              Hoteler系统注册
+            </DomConfettContainer>
           </Text>
           <Formik
             initialValues={initialValues}
@@ -69,6 +74,7 @@ const Register: React.FC = () => {
                   duration: 9000,
                   isClosable: true,
                 });
+                confett();
               }
               setSubmitting(false);
             }}

@@ -31,6 +31,7 @@ specifiers:
   apexcharts: 3.40.0
   axios: 1.4.0
   commitlint: 17.6.3
+  dom-confetti: ^0.2.2
   eslint: 8.39.0
   eslint-config-airbnb: 19.0.4
   eslint-config-airbnb-typescript: 17.0.0
@@ -69,6 +70,7 @@ dependencies:
   '@reduxjs/toolkit': 1.9.5_k4ae6lp43ej6mezo3ztvx6pykq
   apexcharts: 3.40.0
   axios: 1.4.0
+  dom-confetti: 0.2.2
   formik: 2.2.9_react@18.2.0
   framer-motion: 10.12.7_biqbaboplfbrettd7655fr4n2y
   react: 18.2.0
@@ -6011,6 +6013,10 @@ packages:
   /dom-accessibility-api/0.5.16:
     resolution: {integrity: sha512-X7BJ2yElsnOJ30pZF4uIIDfBEVgF4XEBxL9Bxhy6dnrm5hkzqmsWHGTiHqRiITNhMyFLyAiWndIJP7Z1NTteDg==}
     dev: true
+
+  /dom-confetti/0.2.2:
+    resolution: {integrity: sha512-+UVH9Y85qmpTnbmFURwLWjqLIykyIrsNSRkPX/eFlBuOURz9RDX8JoZHnajZHyFuCV0w/K3+tZK0ztfoTw6ejg==}
+    dev: false
 
   /dom-converter/0.2.0:
     resolution: {integrity: sha512-gd3ypIPfOMr9h5jIKq8E3sHOTCjeirnl0WK5ZdS1AW0Odt0b1PaWaHdJ4Qk4klv+YB9aJBS7mESXjFoDQPu6DA==}
