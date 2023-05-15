@@ -5,7 +5,9 @@
   "main": "src/index.tsx",
   "scripts": {
     "start": "react-scripts start",
+    "start:rspack": "rspack serve",
     "build": "react-scripts build",
+    "build:rspack": "rspack build",
     "test": "react-scripts test",
     "lint": "eslint src/ --ext .js,.jsx,.ts,.tsx",
     "lint:fix": "eslint src/ --ext .js,.jsx,.ts,.tsx --fix",
@@ -41,6 +43,8 @@
     "@babel/plugin-transform-react-jsx": "7.21.5",
     "@commitlint/cli": "17.6.3",
     "@commitlint/config-conventional": "17.6.3",
+    "@rspack/cli": "^0.1.10",
+    "@rspack/plugin-html": "^0.1.10",
     "@testing-library/dom": "9.2.0",
     "@testing-library/jest-dom": "5.16.5",
     "@testing-library/react": "14.0.0",
@@ -65,7 +69,9 @@
     "is-ci": "3.0.1",
     "lint-staged": "13.2.2",
     "prettier": "2.8.8",
+    "react-refresh": "^0.14.0",
     "react-scripts": "5.0.1",
+    "sass-loader": "^13.2.2",
     "typescript": "5.0.4"
   },
   "overrides": {
@@ -91,7 +97,9 @@
   },
   "pnpm": {
     "peerDependencyRules": {
-      "ignoreMissing": ["react-scripts"]
+      "ignoreMissing": [
+        "react-scripts"
+      ]
     }
   }
 }
