@@ -11,14 +11,15 @@ import {
   Text,
 } from '@chakra-ui/react';
 import { Formik } from 'formik';
-import React, { useEffect } from 'react';
+import * as React from 'react';
+import { useEffect } from 'react';
 import { Link as RouteLink, useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 import { fetchToken } from '../slices/TokenSlice';
 import { setUsername } from '../slices/UserSlice';
 import { useAppDispatch, useAppSelector } from '../lib/reduxHooks';
 
-const Login = () => {
+const Login: React.FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 

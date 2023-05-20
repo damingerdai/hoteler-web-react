@@ -1,17 +1,21 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { request } from '../lib/request';
-import { DataResponse, User, UserRoles } from '../types';
+import {
+  DataResponse, Permissions, User, UserRoles,
+} from '../types';
 
 export interface UserState {
   id: string;
   username: string;
   roles: UserRoles;
+  permissions: Permissions;
 }
 
 const initialState: UserState = {
   id: '',
   username: '',
   roles: [],
+  permissions: [],
 };
 
 export const fetchUser = createAsyncThunk('user/fetchUser', async (token?: string) => {
@@ -44,6 +48,7 @@ export const userSlice = createSlice({
       state.id = user.id;
       state.username = user.username;
       state.roles = [...user.roles];
+      state.permissions = [...user.permissions];
     });
   },
 });

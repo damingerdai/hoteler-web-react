@@ -8,32 +8,55 @@ import {
   Spacer,
   useBreakpointValue,
 } from '@chakra-ui/react';
-import React, { useEffect } from 'react';
+import * as React from 'react';
+import { useEffect, useState } from 'react';
 import { useSystemColorMode } from '../hooks/useSystemColorMode';
 import logo from '../react-logo.svg';
 import GithubIcon from './GithubIcon';
 import RouterLink from './RouterLink';
 import UserProfile from './UserProfile';
+import { useAppDispatch, useAppSelector } from '../lib/reduxHooks';
+import { fetchUser } from '../slices/UserSlice';
+import { PermissionEnum, User } from '../types';
 
-const Navbar = () => {
+interface IRoute {
+  to: string;
+  name: string;
+  permission: boolean | ((user: User) => boolean) | string | string[];
+}
+
+const Routes: IRoute[] = [
+  {
+    to: '/dashboard',
+    name: '仪表盘',
+    permission: (user: User) => {
+      const permissions = user.permissions.map((p) => p.name);
+      if (permissions.includes(PermissionEnum.MANAGE_DASHBOARD)) {
+        return true;
+      }
+      return false;
+    },
+  },
+  {
+    to: '/customer',
+    name: '客户信息',
+    permission: [PermissionEnum.MANAGE_CUSTOMER],
+  },
+  {
+    to: '/room',
+    name: '房间信息',
+    permission: [PermissionEnum.MANAGE_ROOM],
+  },
+];
+
+const Navbar: React.FC = () => {
+  const dispatch = useAppDispatch();
+  const token = useAppSelector((state) => state.token);
+  const user = useAppSelector((state) => state.user);
+  const [routes, setRoutes] = useState<IRoute[]>([]);
   const systemColorMode = useSystemColorMode();
   const { colorMode, toggleColorMode, setColorMode } = useColorMode();
   const isMobile = useBreakpointValue({ base: true, sm: false });
-
-  const routes = [
-    {
-      to: '/dashboard',
-      name: '仪表盘',
-    },
-    {
-      to: '/customer',
-      name: '客户信息',
-    },
-    {
-      to: '/room',
-      name: '房间信息',
-    },
-  ];
 
   const viewTransitionAnimate = (event: React.MouseEvent<HTMLButtonElement>) => {
     const x = event.clientX;
@@ -71,6 +94,40 @@ const Navbar = () => {
   useEffect(() => {
     setColorMode(systemColorMode);
   }, [systemColorMode]);
+
+  useEffect(() => {
+    if (token && token.accessToken) {
+      dispatch(fetchUser(token.accessToken));
+    }
+  }, [token]);
+
+  useEffect(() => {
+    if (user && user.id) {
+      const routeList = Routes.filter((route) => {
+        if (typeof route.permission === 'boolean') {
+          return route.permission;
+        } if (typeof route.permission === 'string') {
+          return user.permissions.map((p) => p.name).includes(route.permission);
+        } if (Array.isArray(route.permission)) {
+          const userPermissionNames = user.permissions.map((p) => p.name);
+          // eslint-disable-next-line no-restricted-syntax
+          for (const p of route.permission) {
+            if (!userPermissionNames.includes(p)) {
+              return false;
+            }
+          }
+          return true;
+        } if (typeof route.permission === 'function') {
+          return route.permission(user);
+        }
+
+        return true;
+      });
+      setRoutes(routeList);
+    } else {
+      setRoutes([] as IRoute[]);
+    }
+  }, [user]);
 
   return (
     <>
@@ -127,7 +184,7 @@ const Navbar = () => {
           alignItems='center'
           justifyContent='space-around'
         >
-          {routes.map((r) => (
+          {routes.map((r: IRoute) => (
             <RouterLink key={r.to} to={r.to} name={r.name} />
           ))}
         </Flex>
