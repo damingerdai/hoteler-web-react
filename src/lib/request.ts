@@ -6,7 +6,7 @@ import { toast } from './toast';
 /**
  * Create an Axios Client with defaults
  */
-const client = axios.create({
+export const client = axios.create({
   withCredentials: true,
   headers: { 'Content-Type': 'application/json' },
 });

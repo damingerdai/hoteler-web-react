@@ -30,6 +30,7 @@ specifiers:
   '@typescript-eslint/parser': 5.59.6
   apexcharts: 3.40.0
   axios: 1.4.0
+  axios-hooks: ^4.0.0
   commitlint: 17.6.3
   dom-confetti: ^0.2.2
   eslint: 8.41.0
@@ -70,6 +71,7 @@ dependencies:
   '@reduxjs/toolkit': 1.9.5_k4ae6lp43ej6mezo3ztvx6pykq
   apexcharts: 3.40.0
   axios: 1.4.0
+  axios-hooks: 4.0.0_axios@1.4.0+react@18.2.0
   dom-confetti: 0.2.2
   formik: 2.2.9_react@18.2.0
   framer-motion: 10.12.12_biqbaboplfbrettd7655fr4n2y
@@ -1456,6 +1458,13 @@ packages:
   /@babel/regjsgen/0.8.0:
     resolution: {integrity: sha512-x/rqGMdzj+fWZvCOYForTghzbtqPDZ5gPwaoNGHdgDfF2QA/XZbCBp4Moo5scrkAMPhB7z26XM/AaHuIJdgauA==}
     dev: true
+
+  /@babel/runtime/7.19.0:
+    resolution: {integrity: sha512-eR8Lo9hnDS7tqkO7NsV+mKvCmv5boaXFSZ70DnfhcgiEne8hv9oCEd36Klw74EtizEqLsy4YnW8UWwpBVolHZA==}
+    engines: {node: '>=6.9.0'}
+    dependencies:
+      regenerator-runtime: 0.13.11
+    dev: false
 
   /@babel/runtime/7.21.5:
     resolution: {integrity: sha512-8jI69toZqqcsnqGGqwGS4Qb1VwLOEp4hz+CXPywcvjs60u3B4Pom/U/7rm4W8tMOYEB+E9wgD0mW1l3r8qlI9Q==}
@@ -4822,6 +4831,19 @@ packages:
     engines: {node: '>=4'}
     dev: true
 
+  /axios-hooks/4.0.0_axios@1.4.0+react@18.2.0:
+    resolution: {integrity: sha512-IYpVCh/3I99KA826+Qtms581EegvlUVzDkhljglo21Ugc6P9lQQVG6q22seZy0ieYuepjS3kvCtzUG7jAX7BTA==}
+    peerDependencies:
+      axios: '>=0.24.0'
+      react: ^16.8.0-0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      '@babel/runtime': 7.19.0
+      axios: 1.4.0
+      dequal: 2.0.3
+      lru-cache: 7.18.3
+      react: 18.2.0
+    dev: false
+
   /axios/1.4.0:
     resolution: {integrity: sha512-S4XCWMEmzvo64T9GfvQDOXgYRDJ/wsSZc7Jvdgx5u1sd0JwsuPLqb3SYmusag+edF6ziyMensPVqLTSc1PiSEA==}
     dependencies:
@@ -5987,6 +6009,11 @@ packages:
     resolution: {integrity: sha512-g7nH6P6dyDioJogAAGprGpCtVImJhpPk/roCzdb3fIh61/s/nPsfR6onyMwkCAR/OlC3yBC0lESvUoQEAssIrw==}
     engines: {node: '>= 0.8'}
     dev: true
+
+  /dequal/2.0.3:
+    resolution: {integrity: sha512-0je+qPKHEMohvfRTCEo3CrPG6cAzAYgmzKyxRiYSSDkS6eGJdyVJm7WaYA5ECaAD9wLB2T4EEeymA5aFVcYXCA==}
+    engines: {node: '>=6'}
+    dev: false
 
   /destroy/1.2.0:
     resolution: {integrity: sha512-2sJGJTaXIIaR1w4iJSNoN0hnMY7Gpc/n8D4qSCJw8QqFWXf7cuAgnEHxBpweaVcPevC2l3KpjYCx3NypQQgaJg==}
@@ -9048,6 +9075,11 @@ packages:
     dependencies:
       yallist: 4.0.0
     dev: true
+
+  /lru-cache/7.18.3:
+    resolution: {integrity: sha512-jumlc0BIUrS3qJGgIkWZsyfAM7NCWiBcCDhnd+3NNM5KbBmLTgHVfWBcg6W+rLUsIpzpERPsvwUP7CckAQSOoA==}
+    engines: {node: '>=12'}
+    dev: false
 
   /lz-string/1.5.0:
     resolution: {integrity: sha512-h5bgJWpxJNswbU7qCrV0tIKQCaS3blPDrqKWx+QxzuzL1zGUzij9XCWLrSLsJPu5t+eWA/ycetzYAO5IOMcWAQ==}

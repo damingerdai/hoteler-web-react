@@ -1,5 +1,4 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React from 'react';
 import {
   Box, Fade, Flex, Text, useColorModeValue,
 } from '@chakra-ui/react';
