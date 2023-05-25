@@ -1,7 +1,7 @@
 /* eslint-disable spaced-comment */
 import { Box, Flex } from '@chakra-ui/react';
 import Chart from 'react-apexcharts';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ApexOptions } from 'apexcharts';
 import { ProtectRoute } from '../components/ProtectRoute';
 import { useAppDispatch, useAppSelector } from '../lib/reduxHooks';
