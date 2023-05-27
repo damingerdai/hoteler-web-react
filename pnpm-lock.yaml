@@ -41,7 +41,7 @@ specifiers:
   eslint-plugin-prettier: 4.2.1
   eslint-plugin-react: 7.32.2
   eslint-plugin-react-hooks: 4.6.0
-  formik: 2.2.9
+  formik: 2.4.0
   framer-motion: 10.12.12
   http-proxy-middleware: 2.0.6
   husky: 8.0.3
@@ -73,7 +73,7 @@ dependencies:
   axios: 1.4.0
   axios-hooks: 4.0.0_axios@1.4.0+react@18.2.0
   dom-confetti: 0.2.2
-  formik: 2.2.9_react@18.2.0
+  formik: 2.4.0_react@18.2.0
   framer-motion: 10.12.12_biqbaboplfbrettd7655fr4n2y
   react: 18.2.0
   react-apexcharts: 1.4.0_fnhcsb7lygaadw7ghmriwdk5ma
@@ -7133,8 +7133,8 @@ packages:
       mime-types: 2.1.35
     dev: false
 
-  /formik/2.2.9_react@18.2.0:
-    resolution: {integrity: sha512-LQLcISMmf1r5at4/gyJigGn0gOwFbeEAlji+N9InZF6LIMXnFNkO42sCI8Jt84YZggpD4cPWObAZaxpEFtSzNA==}
+  /formik/2.4.0_react@18.2.0:
+    resolution: {integrity: sha512-QZiWztt9fD84EYcF7Bmr431ZhIm1xUVgBACbTuJ6azPrUpVp7o6q+t9HJaIQsFZrMfcBPNBotYtDgyDpzQ3z0Q==}
     peerDependencies:
       react: '>=16.8.0'
     dependencies:
