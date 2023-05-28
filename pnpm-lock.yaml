@@ -51,7 +51,7 @@ specifiers:
   react: 18.2.0
   react-apexcharts: 1.4.0
   react-dom: 18.2.0
-  react-icons: 4.8.0
+  react-icons: 4.9.0
   react-redux: 8.0.5
   react-router-dom: 6.11.2
   react-scripts: 5.0.1
@@ -78,7 +78,7 @@ dependencies:
   react: 18.2.0
   react-apexcharts: 1.4.0_fnhcsb7lygaadw7ghmriwdk5ma
   react-dom: 18.2.0_react@18.2.0
-  react-icons: 4.8.0_react@18.2.0
+  react-icons: 4.9.0_react@18.2.0
   react-redux: 8.0.5_kuusov2leqnirz6kvocub7ct4e
   react-router-dom: 6.11.2_biqbaboplfbrettd7655fr4n2y
   sass: 1.62.1
@@ -10775,8 +10775,8 @@ packages:
       use-sidecar: 1.1.2_3pi6y6cylzraaxxtldk4o6b3zi
     dev: false
 
-  /react-icons/4.8.0_react@18.2.0:
-    resolution: {integrity: sha512-N6+kOLcihDiAnj5Czu637waJqSnwlMNROzVZMhfX68V/9bu9qHaMIJC4UdozWoOk57gahFCNHwVvWzm0MTzRjg==}
+  /react-icons/4.9.0_react@18.2.0:
+    resolution: {integrity: sha512-ijUnFr//ycebOqujtqtV9PFS7JjhWg0QU6ykURVHuL4cbofvRCf3f6GMn9+fBktEFQOIVZnuAYLZdiyadRQRFg==}
     peerDependencies:
       react: '*'
     dependencies:
