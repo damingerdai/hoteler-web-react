@@ -15,9 +15,14 @@
   [headers.values]
     cache-control = "max-age=31536000"
 [[redirects]]
-  from = "/api/"
-  to = "https://hoteler-react.damingerdai.com/"
+  from = "/*"
+  to = "index.html"
+  status = 404
+[[redirects]]
+  from = "/api/*"
+  to = "https://hoteler-react.damingerdai.com/api/:splat"
   status = 200
   force = true
-  headers = {X-From = "Netlify"}
+  query = {path = ":path"}
+
 
