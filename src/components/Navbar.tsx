@@ -135,7 +135,7 @@ const Navbar: React.FC = () => {
         p='8px 16px'
         w='100%'
         color='white'
-        bg='cyan.500'
+        bg='teal.500'
         h={16}
         flexWrap='wrap'
         alignItems='center'
@@ -155,11 +155,11 @@ const Navbar: React.FC = () => {
         <Spacer />
 
         <Button
-          bg='cyan.500'
+          bg='teal.500'
           variant='ghost'
           mr={4}
-          _hover={{ bg: 'cyan.500' }}
-          _active={{ bg: 'cyan.500' }}
+          _hover={{ bg: 'teal.500' }}
+          _active={{ bg: 'teal.500' }}
           onClick={(event: React.MouseEvent<HTMLButtonElement>) => {
             if (!document || !('startViewTransition' in document)) {
               toggleColorMode();
