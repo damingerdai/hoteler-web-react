@@ -7,6 +7,7 @@ import {
   useColorMode,
   Spacer,
   useBreakpointValue,
+  Tooltip,
 } from '@chakra-ui/react';
 import * as React from 'react';
 import { useEffect, useState } from 'react';
@@ -58,7 +59,9 @@ const Navbar: React.FC = () => {
   const { colorMode, toggleColorMode, setColorMode } = useColorMode();
   const isMobile = useBreakpointValue({ base: true, sm: false });
 
-  const viewTransitionAnimate = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const viewTransitionAnimate = (
+    event: React.MouseEvent<HTMLButtonElement>,
+  ) => {
     const x = event.clientX;
     const y = event.clientY;
     const endRadius = Math.hypot(
@@ -85,7 +88,9 @@ const Navbar: React.FC = () => {
         {
           duration: 500,
           easing: 'ease-in',
-          pseudoElement: isDark ? '::view-transition-old(root)' : '::view-transition-new(root)',
+          pseudoElement: isDark
+            ? '::view-transition-old(root)'
+            : '::view-transition-new(root)',
         },
       );
     });
@@ -106,9 +111,11 @@ const Navbar: React.FC = () => {
       const routeList = Routes.filter((route) => {
         if (typeof route.permission === 'boolean') {
           return route.permission;
-        } if (typeof route.permission === 'string') {
+        }
+        if (typeof route.permission === 'string') {
           return user.permissions.map((p) => p.name).includes(route.permission);
-        } if (Array.isArray(route.permission)) {
+        }
+        if (Array.isArray(route.permission)) {
           const userPermissionNames = user.permissions.map((p) => p.name);
           // eslint-disable-next-line no-restricted-syntax
           for (const p of route.permission) {
@@ -117,7 +124,8 @@ const Navbar: React.FC = () => {
             }
           }
           return true;
-        } if (typeof route.permission === 'function') {
+        }
+        if (typeof route.permission === 'function') {
           return route.permission(user);
         }
 
@@ -141,9 +149,7 @@ const Navbar: React.FC = () => {
         alignItems='center'
       >
         <Image src={logo} w='26px' h='26px' />
-        <Text ml='4px'>
-          Hoteler
-        </Text>
+        <Text ml='4px'>Hoteler</Text>
         {!isMobile && (
           <>
             {routes.map((r) => (
@@ -154,22 +160,24 @@ const Navbar: React.FC = () => {
 
         <Spacer />
 
-        <Button
-          bg='teal.500'
-          variant='ghost'
-          mr={4}
-          _hover={{ bg: 'teal.500' }}
-          _active={{ bg: 'teal.500' }}
-          onClick={(event: React.MouseEvent<HTMLButtonElement>) => {
-            if (!document || !('startViewTransition' in document)) {
-              toggleColorMode();
-              return;
-            }
-            viewTransitionAnimate(event);
-          }}
-        >
-          {colorMode === 'light' ? <SunIcon /> : <MoonIcon />}
-        </Button>
+        <Tooltip label='切换主题'>
+          <Button
+            bg='teal.500'
+            variant='ghost'
+            mr={4}
+            _hover={{ bg: 'teal.500' }}
+            _active={{ bg: 'teal.500' }}
+            onClick={(event: React.MouseEvent<HTMLButtonElement>) => {
+              if (!document || !('startViewTransition' in document)) {
+                toggleColorMode();
+                return;
+              }
+              viewTransitionAnimate(event);
+            }}
+          >
+            {colorMode === 'light' ? <SunIcon /> : <MoonIcon />}
+          </Button>
+        </Tooltip>
         <GithubIcon />
         <UserProfile ml={4} />
       </Flex>
