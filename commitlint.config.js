@@ -1,4 +1,4 @@
-"module.exports = {extends: ['@commitlint/config-conventional']}"
+"module.exports = {extends: ['@commitlint/config-conventional']}";
 
 module.exports = {
   extends: ['@commitlint/config-conventional'],
@@ -22,7 +22,7 @@ module.exports = {
     ],
     'subject-full-stop': [0, 'never'],
     'subject-case': [0, 'never'],
-    'header-max-length': [2, 'always', '72'],
+    'header-max-length': [2, 'always', '144'],
     'scope-case': [0, 'never']
   }
-}
+};
