@@ -181,12 +181,12 @@ const Navbar: React.FC = () => {
         <GithubIcon />
         <UserProfile ml={4} />
       </Flex>
-      {isMobile && (
+      {isMobile && routes?.length > 0 && (
         <Flex
           p='8px 16px'
           w='100%'
           color='white'
-          bg='cyan.500'
+          bg='teal.500'
           h={14}
           flexWrap='wrap'
           alignItems='center'
