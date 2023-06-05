@@ -1,24 +1,20 @@
 import {
-  Box,
-  Button,
-  Divider,
-  Flex,
-  useDisclosure,
+  Box, Button, Divider, Flex, useDisclosure,
 } from '@chakra-ui/react';
-import React, { useEffect } from 'react';
+import React from 'react';
+import useSWR from 'swr';
 import CreateCustomerModal from '../components/CreateCustomerModal';
 import CustomerCard from '../components/CustomerCard';
 import GlobalLoading from '../components/GlobalLoading';
 import { ProtectRoute } from '../components/ProtectRoute';
-import { useAppDispatch, useAppSelector } from '../lib/reduxHooks';
-import { fetchCustomers } from '../slices/CustomerSlice';
-import { RequestStatus } from '../types';
+import { fetchCustomers } from '../slices/CustomerFetcher';
 
 const Customer: React.FC = () => {
-  const dispatch = useAppDispatch();
-  const { list: customers, status: requestStatus } = useAppSelector(
-    (state) => state.customer,
-  );
+  const {
+    data: customers,
+    isLoading,
+    mutate,
+  } = useSWR('api/v1/customers', fetchCustomers);
 
   const {
     isOpen: isCreateCustomerModalOpen,
@@ -26,11 +22,7 @@ const Customer: React.FC = () => {
     onClose: onCreateCustomerModalClose,
   } = useDisclosure();
 
-  useEffect(() => {
-    dispatch(fetchCustomers());
-  }, [dispatch]);
-
-  if (requestStatus === RequestStatus.LOADING) {
+  if (isLoading) {
     return <GlobalLoading />;
   }
 
@@ -50,7 +42,7 @@ const Customer: React.FC = () => {
         justifyContent='start'
         mt='16px'
       >
-        {customers.map((c) => (
+        {customers?.map((c) => (
           <Box
             key={c.id}
             pl={2}
@@ -74,7 +66,7 @@ const Customer: React.FC = () => {
         onClose={(res) => {
           onCreateCustomerModalClose();
           if (res === true) {
-            dispatch(fetchCustomers());
+            mutate();
           }
         }}
       />
