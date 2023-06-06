@@ -1,30 +1,26 @@
 import {
   Box, Button, Divider, Flex, useDisclosure,
 } from '@chakra-ui/react';
-import React, { useEffect } from 'react';
+import * as React from 'react';
+import useSWR from 'swr';
 import CreateRoomModal from '../components/CreateRoomModal';
 import { ProtectRoute } from '../components/ProtectRoute';
 import RoomCard from '../components/RoomCard';
 import RoomCardSkeleton from '../components/RoomCardSkeleton';
-import { useAppDispatch, useAppSelector } from '../lib/reduxHooks';
-import { fetchRooms } from '../slices/RoomSlice';
-import { RequestStatus } from '../types';
+import { fetchRooms } from '../slices/RoomFetcher';
 
 const Room: React.FC = () => {
-  const dispatch = useAppDispatch();
-  const { list: rooms, status: requestStatus } = useAppSelector(
-    (state) => state.room,
-  );
+  const {
+    data: rooms,
+    isLoading,
+    mutate,
+  } = useSWR('/api/v1/rooms', fetchRooms);
 
   const {
     isOpen: isCreateRoomModalOpen,
     onOpen: onCreateRoomModalOpen,
     onClose: onCreateRoomModalClose,
   } = useDisclosure();
-
-  useEffect(() => {
-    dispatch(fetchRooms());
-  }, []);
 
   return (
     <Box p='20px 40px'>
@@ -42,35 +38,41 @@ const Room: React.FC = () => {
         justifyContent='start'
         mt='16px'
       >
-        {requestStatus === RequestStatus.LOADING
-        && Array.from({ length: 4 }, (_, idx) => idx).map((i) => (
-          <RoomCardSkeleton key={i} />
-        ))}
-        {requestStatus !== RequestStatus.LOADING && rooms.map((r, i) => (
-          <Box
-            key={r.id}
-            pl={4}
-            pr={4}
-            mb={4}
-            flex='1 1 50%'
-            maxW='450px'
-            width={{
-              base: '100%',
-              sm: '50%',
-              md: '33%',
-              lg: '25%',
-            }}
-          >
-            <RoomCard room={{ ...r, url: `https://picsum.photos/200/300?random=${i}` }} />
-          </Box>
-        ))}
+        {isLoading
+          && Array.from({ length: 4 }, (_, idx) => idx).map((i) => (
+            <RoomCardSkeleton key={i} />
+          ))}
+        {!isLoading
+          && rooms?.map((r, i) => (
+            <Box
+              key={r.id}
+              pl={4}
+              pr={4}
+              mb={4}
+              flex='1 1 50%'
+              maxW='450px'
+              width={{
+                base: '100%',
+                sm: '50%',
+                md: '33%',
+                lg: '25%',
+              }}
+            >
+              <RoomCard
+                room={{
+                  ...r,
+                  url: `https://picsum.photos/200/300?random=${i}`,
+                }}
+              />
+            </Box>
+          ))}
       </Flex>
       <CreateRoomModal
         isOpen={isCreateRoomModalOpen}
         onClose={(res) => {
           onCreateRoomModalClose();
           if (res === true) {
-            dispatch(fetchRooms());
+            mutate();
           }
         }}
       />
