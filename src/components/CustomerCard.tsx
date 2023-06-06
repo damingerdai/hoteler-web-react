@@ -4,6 +4,7 @@ import {
   Box,
   Button,
   Flex,
+  Spacer,
   Stack,
   Text,
   useDisclosure,
@@ -78,17 +79,17 @@ const CustomerCard: React.FC<CustomerCardProps> = ({ customer }) => {
           </Text>
         </Flex>
 
-        <Stack direction='row' mt={4}>
-          <Box>
-            <Text>
-              手机号码：
-              {customer.phone}
-            </Text>
-            <Text>
-              身份证：
-              {customer.cardId}
-            </Text>
-          </Box>
+        <Stack direction='column' mt={4}>
+          <Flex w='100%' direction='row' justifyContent='flex-end'>
+            <Text fontWeight='bold'>手机号码：</Text>
+            <Spacer />
+            <Text>{customer.phone}</Text>
+          </Flex>
+          <Flex w='100%' direction='row' justifyContent='flex-end'>
+            <Text fontWeight='bold'>身份证</Text>
+            <Spacer />
+            <Text>{customer.cardId}</Text>
+          </Flex>
         </Stack>
         <Stack direction='row' spacing={4} mt={8}>
           <Button colorScheme='teal' variant='solid' onClick={onEditCustomerModalOpen}>
