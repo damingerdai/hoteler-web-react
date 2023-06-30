@@ -95,6 +95,9 @@ devDependencies:
   '@babel/plugin-transform-react-jsx':
     specifier: 7.21.5
     version: 7.21.5(@babel/core@7.21.8)
+  '@bazel/ibazel':
+    specifier: ^0.16.2
+    version: 0.16.2
   '@commitlint/cli':
     specifier: 17.6.6
     version: 17.6.6
@@ -1728,6 +1731,11 @@ packages:
       '@babel/helper-string-parser': 7.22.5
       '@babel/helper-validator-identifier': 7.22.5
       to-fast-properties: 2.0.0
+
+  /@bazel/ibazel@0.16.2:
+    resolution: {integrity: sha512-KgqAWMH0emL6f3xH6nqyTryoBMqlJ627LBIe9PT1PRRQPz2FtHib3FIHJPukp1slzF3hJYZvdiVwgPnHbaSOOA==}
+    hasBin: true
+    dev: true
 
   /@bcoe/v8-coverage@0.2.3:
     resolution: {integrity: sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==}

@@ -13,6 +13,7 @@ import * as React from 'react';
 import { useEffect } from 'react';
 import { useAtom } from 'jotai';
 import { useSystemColorMode } from '../hooks/useSystemColorMode';
+// @ts-ignore
 import logo from '../react-logo.svg';
 import GithubIcon from './GithubIcon';
 import UserProfile from './UserProfile';
