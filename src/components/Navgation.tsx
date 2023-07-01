@@ -8,8 +8,16 @@ import { fetchCurrenter } from '../slices/UserFetcher';
 
 const Navgation: React.FC = () => {
   const [routes, setRoutes] = useState<IRoute[]>([]);
-  const userTokenStr = localStorage.getItem('user_token');
-  const userToken = JSON.parse(userTokenStr ?? '') as { accessToken: string };
+  const getToken = () => {
+    try {
+      const userTokenStr = localStorage.getItem('user_token');
+      const userToken = JSON.parse(userTokenStr ?? '') as { accessToken: string };
+      return userToken;
+    } catch (err) {
+      return { accessToken: '' };
+    }
+  };
+  const userToken = getToken();
   const accessToken = userToken?.accessToken ?? '';
   const { data } = useSWR(['/api/user', accessToken], (url, token) => fetchCurrenter(token));
   const user = data?.data;
