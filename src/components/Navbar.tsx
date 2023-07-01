@@ -11,12 +11,14 @@ import {
 } from '@chakra-ui/react';
 import * as React from 'react';
 import { useEffect } from 'react';
+import { useAtom } from 'jotai';
 import { useSystemColorMode } from '../hooks/useSystemColorMode';
 import logo from '../react-logo.svg';
 import GithubIcon from './GithubIcon';
 import UserProfile from './UserProfile';
 import { useAppDispatch, useAppSelector } from '../lib/reduxHooks';
 import { fetchUser } from '../slices/UserSlice';
+import { siderbarAtom } from '../atom';
 
 interface NavbarProps {
   showHamburgerIcon?: boolean;
@@ -27,6 +29,7 @@ const Navbar: React.FC<NavbarProps> = ({ showHamburgerIcon = false }) => {
   const token = useAppSelector((state) => state.token);
   const systemColorMode = useSystemColorMode();
   const { colorMode, toggleColorMode, setColorMode } = useColorMode();
+  const [siderbar, setSiderbar] = useAtom(siderbarAtom);
 
   const viewTransitionAnimate = (
     event: React.MouseEvent<HTMLButtonElement>,
@@ -91,9 +94,13 @@ const Navbar: React.FC<NavbarProps> = ({ showHamburgerIcon = false }) => {
           colorScheme='teal'
           bg='teal.500'
           _hover={{ bg: 'teal.500' }}
+          _active={{ bg: 'teal.500' }}
           icon={<HamburgerIcon />}
           aria-label='hamburger menu'
           mr={2}
+          onClick={() => {
+            setSiderbar(!siderbar);
+          }}
         />
       )}
       <Image src={logo} w='26px' h='26px' />

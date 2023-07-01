@@ -7,11 +7,12 @@ import {
   DrawerBody,
   Box,
 } from '@chakra-ui/react';
+import { useAtom } from 'jotai';
 import * as React from 'react';
-import { useState } from 'react';
+import { siderbarAtom } from '../atom';
 
 const Sidebar: React.FC<React.PropsWithChildren> = ({ children }) => {
-  const [isOpen, setOpen] = useState<boolean>(true);
+  const [siderbar, setSiderbar] = useAtom(siderbarAtom);
   const isMobile = useBreakpointValue(
     { base: true, sm: false },
     { ssr: false },
@@ -19,7 +20,7 @@ const Sidebar: React.FC<React.PropsWithChildren> = ({ children }) => {
 
   if (isMobile) {
     return (
-      <Drawer isOpen={isOpen} placement='left' onClose={() => setOpen(false)}>
+      <Drawer isOpen={siderbar} placement='left' onClose={() => setSiderbar(false)}>
         <DrawerOverlay />
         <DrawerContent>
           <DrawerCloseButton />
