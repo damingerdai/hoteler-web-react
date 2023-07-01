@@ -1,4 +1,4 @@
-import { MoonIcon, SunIcon } from '@chakra-ui/icons';
+import { HamburgerIcon, MoonIcon, SunIcon } from '@chakra-ui/icons';
 import {
   Flex,
   Button,
@@ -8,6 +8,7 @@ import {
   Spacer,
   useBreakpointValue,
   Tooltip,
+  IconButton,
 } from '@chakra-ui/react';
 import * as React from 'react';
 import { useEffect, useState } from 'react';
@@ -20,7 +21,13 @@ import { useAppDispatch, useAppSelector } from '../lib/reduxHooks';
 import { fetchUser } from '../slices/UserSlice';
 import { IRoute, Routes } from '../lib/route';
 
-const Navbar: React.FC = () => {
+interface NavbarProps {
+  showHamburgerIcon?: boolean
+}
+
+const Navbar: React.FC<NavbarProps> = ({
+  showHamburgerIcon = false,
+}) => {
   const dispatch = useAppDispatch();
   const token = useAppSelector((state) => state.token);
   const user = useAppSelector((state) => state.user);
@@ -118,6 +125,7 @@ const Navbar: React.FC = () => {
         flexWrap='wrap'
         alignItems='center'
       >
+        { showHamburgerIcon && <IconButton colorScheme='teal' bg='teal.500' _hover={{ bg: 'teal.500' }} icon={<HamburgerIcon />} aria-label='hamburger menu' mr={2} /> }
         <Image src={logo} w='26px' h='26px' />
         <Text ml='4px'>Hoteler</Text>
         {!isMobile && (

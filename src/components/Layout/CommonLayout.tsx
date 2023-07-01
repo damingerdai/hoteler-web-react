@@ -6,7 +6,7 @@ import Navgation from '../Navgation';
 
 export const CommonLayout = React.memo(() => (
   <>
-    <Navbar />
+    <Navbar showHamburgerIcon />
     <Box overflow='hidden' zIndex='1' boxSizing='border-box' position='relative'>
       <Box
         width='180px'
