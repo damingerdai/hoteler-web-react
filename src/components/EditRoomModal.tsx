@@ -106,7 +106,7 @@ const EditRoomModal: React.FC<EditRoomModalProps> = ({
                   {errors.roomname ? (
                     <FormErrorMessage>{errors.roomname}</FormErrorMessage>
                   ) : (
-                    <FormHelperText>请输入客户名</FormHelperText>
+                    <FormHelperText>请输入房间名</FormHelperText>
                   )}
                 </FormControl>
                 <FormControl mt={4}>

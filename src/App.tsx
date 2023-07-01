@@ -4,7 +4,7 @@ import {
 } from 'react-router-dom';
 import { withSuspense } from './components/WithSuspense';
 import './App.scss';
-import { Layout } from './components/Layout';
+import { CommonLayout, LoginLayout } from './components/Layout';
 import ErrorBoundary from './components/ErrorBoundary';
 
 const Dashboard = React.lazy(() => import('./pages/Dashboard'));
@@ -17,7 +17,7 @@ const Forbidden = React.lazy(() => import('./pages/Forbidden'));
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Layout />,
+    element: <CommonLayout />,
     errorElement: <ErrorBoundary />,
     children: [
       {
@@ -36,6 +36,13 @@ const router = createBrowserRouter([
         path: 'room',
         element: withSuspense(<Room />),
       },
+    ],
+  },
+  {
+    path: '/',
+    element: <LoginLayout />,
+    errorElement: <ErrorBoundary />,
+    children: [
       {
         path: 'login',
         element: withSuspense(<Login />),
