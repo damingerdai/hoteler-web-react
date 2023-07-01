@@ -3,26 +3,16 @@ import * as React from 'react';
 import { Outlet } from 'react-router-dom';
 import Navbar from '../Navbar';
 import Navgation from '../Navgation';
+import Sidebar from '../Sidebar';
 
 export const CommonLayout = React.memo(() => (
   <>
     <Navbar showHamburgerIcon />
     <Box overflow='hidden' zIndex='1' boxSizing='border-box' position='relative'>
-      <Box
-        width='180px'
-        overflow='auto'
-        borderRight='1px solid rgba(0, 0, 0, .12)'
-        position='absolute'
-        top='0'
-        bottom='0'
-        zIndex='4'
-        outline='0'
-        boxSizing='border-box'
-        overflowY='auto'
-      >
+      <Sidebar>
         <Navgation />
-      </Box>
-      <Box display='block' ml='180px' height='100%' width='calc(100vw - 240px)' overflow='auto'>
+      </Sidebar>
+      <Box display='block' ml={{ base: '0', sm: '180px' }} height='100%' overflow='auto'>
         <Outlet />
       </Box>
     </Box>

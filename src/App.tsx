@@ -6,6 +6,7 @@ import { withSuspense } from './components/WithSuspense';
 import './App.scss';
 import { CommonLayout, LoginLayout } from './components/Layout';
 import ErrorBoundary from './components/ErrorBoundary';
+import NotFound from './pages/NotFound';
 
 const Dashboard = React.lazy(() => import('./pages/Dashboard'));
 const Customer = React.lazy(() => import('./pages/Customer'));
@@ -52,8 +53,20 @@ const router = createBrowserRouter([
         element: withSuspense(<Register />),
       },
       {
-        path: 'orbidden',
+        path: '403',
         element: withSuspense(<Forbidden />),
+      },
+      {
+        path: '404',
+        element: withSuspense(<NotFound />),
+      },
+      {
+        path: 'forbidden',
+        element: <Navigate replace to='/403' />,
+      },
+      {
+        path: '**',
+        element: <Navigate replace to='/404' />,
       },
     ],
   },

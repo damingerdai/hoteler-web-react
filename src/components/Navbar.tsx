@@ -6,35 +6,27 @@ import {
   Text,
   useColorMode,
   Spacer,
-  useBreakpointValue,
   Tooltip,
   IconButton,
 } from '@chakra-ui/react';
 import * as React from 'react';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useSystemColorMode } from '../hooks/useSystemColorMode';
 import logo from '../react-logo.svg';
 import GithubIcon from './GithubIcon';
-import RouterLink from './RouterLink';
 import UserProfile from './UserProfile';
 import { useAppDispatch, useAppSelector } from '../lib/reduxHooks';
 import { fetchUser } from '../slices/UserSlice';
-import { IRoute, Routes } from '../lib/route';
 
 interface NavbarProps {
-  showHamburgerIcon?: boolean
+  showHamburgerIcon?: boolean;
 }
 
-const Navbar: React.FC<NavbarProps> = ({
-  showHamburgerIcon = false,
-}) => {
+const Navbar: React.FC<NavbarProps> = ({ showHamburgerIcon = false }) => {
   const dispatch = useAppDispatch();
   const token = useAppSelector((state) => state.token);
-  const user = useAppSelector((state) => state.user);
-  const [routes, setRoutes] = useState<IRoute[]>([]);
   const systemColorMode = useSystemColorMode();
   const { colorMode, toggleColorMode, setColorMode } = useColorMode();
-  const isMobile = useBreakpointValue({ base: true, sm: false });
 
   const viewTransitionAnimate = (
     event: React.MouseEvent<HTMLButtonElement>,
@@ -83,99 +75,53 @@ const Navbar: React.FC<NavbarProps> = ({
     }
   }, [token]);
 
-  useEffect(() => {
-    if (user && user.id) {
-      const routeList = Routes.filter((route) => {
-        if (typeof route.permission === 'boolean') {
-          return route.permission;
-        }
-        if (typeof route.permission === 'string') {
-          return user.permissions.map((p) => p.name).includes(route.permission);
-        }
-        if (Array.isArray(route.permission)) {
-          const userPermissionNames = user.permissions.map((p) => p.name);
-          // eslint-disable-next-line no-restricted-syntax
-          for (const p of route.permission) {
-            if (!userPermissionNames.includes(p)) {
-              return false;
-            }
-          }
-          return true;
-        }
-        if (typeof route.permission === 'function') {
-          return route.permission(user);
-        }
-
-        return true;
-      });
-      setRoutes(routeList);
-    } else {
-      setRoutes([] as IRoute[]);
-    }
-  }, [user]);
-
   return (
-    <>
-      <Flex
-        p='8px 16px'
-        w='100%'
-        color='white'
-        bg='teal.500'
-        h={16}
-        flexWrap='wrap'
-        alignItems='center'
-      >
-        { showHamburgerIcon && <IconButton colorScheme='teal' bg='teal.500' _hover={{ bg: 'teal.500' }} icon={<HamburgerIcon />} aria-label='hamburger menu' mr={2} /> }
-        <Image src={logo} w='26px' h='26px' />
-        <Text ml='4px'>Hoteler</Text>
-        {!isMobile && (
-          <>
-            {routes.map((r) => (
-              <RouterLink key={r.to} to={r.to} name={r.name} />
-            ))}
-          </>
-        )}
-
-        <Spacer />
-
-        <Tooltip label='切换主题'>
-          <Button
-            bg='teal.500'
-            variant='ghost'
-            mr={4}
-            _hover={{ bg: 'teal.500' }}
-            _active={{ bg: 'teal.500' }}
-            onClick={(event: React.MouseEvent<HTMLButtonElement>) => {
-              if (!document || !('startViewTransition' in document)) {
-                toggleColorMode();
-                return;
-              }
-              viewTransitionAnimate(event);
-            }}
-          >
-            {colorMode === 'light' ? <SunIcon /> : <MoonIcon />}
-          </Button>
-        </Tooltip>
-        <GithubIcon />
-        <UserProfile ml={4} />
-      </Flex>
-      {isMobile && routes?.length > 0 && (
-        <Flex
-          p='8px 16px'
-          w='100%'
-          color='white'
+    <Flex
+      p='8px 16px'
+      w='100%'
+      color='white'
+      bg='teal.500'
+      h={16}
+      flexWrap='wrap'
+      alignItems='center'
+    >
+      {showHamburgerIcon && (
+        <IconButton
+          display={{ base: 'blick', md: 'none' }}
+          colorScheme='teal'
           bg='teal.500'
-          h={14}
-          flexWrap='wrap'
-          alignItems='center'
-          justifyContent='space-around'
-        >
-          {routes.map((r: IRoute) => (
-            <RouterLink key={r.to} to={r.to} name={r.name} />
-          ))}
-        </Flex>
+          _hover={{ bg: 'teal.500' }}
+          icon={<HamburgerIcon />}
+          aria-label='hamburger menu'
+          mr={2}
+        />
       )}
-    </>
+      <Image src={logo} w='26px' h='26px' />
+      <Text ml='4px'>Hoteler</Text>
+
+      <Spacer />
+
+      <Tooltip label='切换主题'>
+        <Button
+          bg='teal.500'
+          variant='ghost'
+          mr={4}
+          _hover={{ bg: 'teal.500' }}
+          _active={{ bg: 'teal.500' }}
+          onClick={(event: React.MouseEvent<HTMLButtonElement>) => {
+            if (!document || !('startViewTransition' in document)) {
+              toggleColorMode();
+              return;
+            }
+            viewTransitionAnimate(event);
+          }}
+        >
+          {colorMode === 'light' ? <SunIcon /> : <MoonIcon />}
+        </Button>
+      </Tooltip>
+      <GithubIcon />
+      <UserProfile ml={4} />
+    </Flex>
   );
 };
 
