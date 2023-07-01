@@ -1,5 +1,15 @@
 # Hoteler Web React
- 
-该项目是[hoteler-web](https://github.com/damingerdai/hoteler-web)的[react](https://reactjs.org/)实现。
 
-与原先使用的[Material Design](https://material.io/)不同，该项目使用[Chakra UI](https://chakra-ui.com/)
+This project is the [react](https://reactjs.org/) implement of [hoteler-web](https://github.com/damingerdai/hoteler-web).
+
+Different from [Material Design](https://material.io/), this project uses [Chakra UI](https://chakra-ui.com/).
+
+# Screensheets
+
+![screensheets](./screensheets/1.png)
+
+# Demo
+
+deployed by k3s: [hoteler-web-react](http://hoteler-react.damingerdai.com/)
+
+deployed by netlify: [damingerdai-hoteler-web-react.netlify.app](https://damingerdai-hoteler-web-react.netlify.app)
