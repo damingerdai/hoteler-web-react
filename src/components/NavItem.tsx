@@ -18,7 +18,13 @@ const NavItem: React.FC<React.PropsWithChildren<NavItemProps>> = ({
   const hoverColor = useColorModeValue('black', 'white');
 
   return (
-    <Link href={path ?? '/'} textDecoration='none'>
+    <Link
+      href={path ?? '/'}
+      textDecoration='none'
+      _hover={{
+        textDecoration: 'none',
+      }}
+    >
       <Flex
         align='center'
         p='4'

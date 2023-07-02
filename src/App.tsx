@@ -11,6 +11,7 @@ import NotFound from './pages/NotFound';
 const Dashboard = React.lazy(() => import('./pages/Dashboard'));
 const Customer = React.lazy(() => import('./pages/Customer'));
 const Room = React.lazy(() => import('./pages/Room'));
+const User = React.lazy(() => import('./pages/User'));
 const Login = React.lazy(() => import('./pages/Login'));
 const Register = React.lazy(() => import('./pages/Register'));
 const Forbidden = React.lazy(() => import('./pages/Forbidden'));
@@ -36,6 +37,10 @@ const router = createBrowserRouter([
       {
         path: 'room',
         element: withSuspense(<Room />),
+      },
+      {
+        path: 'user',
+        element: withSuspense(<User />),
       },
     ],
   },
