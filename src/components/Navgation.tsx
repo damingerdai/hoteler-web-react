@@ -3,8 +3,8 @@ import * as React from 'react';
 import { useEffect, useState } from 'react';
 import useSWR from 'swr';
 import { IRoute, Routes } from '../lib/route';
-import RouterLink from './RouterLink';
 import { fetchCurrenter } from '../slices/UserFetcher';
+import NavItem from './NavItem';
 
 const Navgation: React.FC = () => {
   const [routes, setRoutes] = useState<IRoute[]>([]);
@@ -59,7 +59,7 @@ const Navgation: React.FC = () => {
       {routes.map((r) => (
         <React.Fragment key={r.to}>
           <Box h={12} fontSize={16} lineHeight='24px'>
-            <RouterLink to={r.to} name={r.name} />
+            <NavItem path={r.to}>{r.name}</NavItem>
           </Box>
           <Divider />
         </React.Fragment>
