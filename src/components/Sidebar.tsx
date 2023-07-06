@@ -3,8 +3,6 @@ import {
   Drawer,
   DrawerOverlay,
   DrawerContent,
-  DrawerCloseButton,
-  DrawerBody,
   Box,
 } from '@chakra-ui/react';
 import { useAtom } from 'jotai';
@@ -20,14 +18,10 @@ const Sidebar: React.FC<React.PropsWithChildren> = ({ children }) => {
 
   if (isMobile) {
     return (
-      <Drawer isOpen={siderbar} placement='left' onClose={() => setSiderbar(false)}>
+      <Drawer isOpen={siderbar} placement='left' onClose={() => setSiderbar(false)} returnFocusOnClose={false} autoFocus={false} size='full'>
         <DrawerOverlay />
         <DrawerContent>
-          <DrawerCloseButton />
-
-          <DrawerBody>
-            {children}
-          </DrawerBody>
+          {children}
         </DrawerContent>
       </Drawer>
     );
