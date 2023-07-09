@@ -90,6 +90,7 @@ const Navbar: React.FC<NavbarProps> = ({ showHamburgerIcon = false }) => {
     >
       {showHamburgerIcon && (
         <IconButton
+          color='white'
           display={{ base: 'blick', md: 'none' }}
           colorScheme='teal'
           bg='teal.500'
