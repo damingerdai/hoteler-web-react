@@ -21,6 +21,7 @@ const NavItem: React.FC<React.PropsWithChildren<NavItemProps>> = ({
     <Link
       href={path ?? '/'}
       textDecoration='none'
+      cursor='pointer'
       _hover={{
         textDecoration: 'none',
       }}
