@@ -13,7 +13,7 @@
     "eject": "react-scripts eject",
     "prepare": "is-ci || husky install",
     "start:bazel": "ibazel run //:start",
-    "build:bazel": "bazel build //:build"
+    "build:bazel": "export DISABLE_ESLINT_PLUGIN=true && bazel build //:build"
   },
   "dependencies": {
     "@chakra-ui/icons": "2.0.19",

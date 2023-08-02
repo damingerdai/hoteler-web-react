@@ -16,6 +16,8 @@ import %workspace%/.aspect/bazelrc/javascript.bazelrc
 # Import Aspect recommended Bazel 6 settings for all projects
 import %workspace%/.aspect/bazelrc/bazel6.bazelrc
 
+build --action_env=DISABLE_ESLINT_PLUGIN=true
+
 ### YOUR PROJECT SPECIFIC SETTINGS GO HERE ###
 
 # Load any settings & overrides specific to the current user from `.aspect/bazelrc/user.bazelrc`.
