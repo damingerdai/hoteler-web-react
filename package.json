@@ -11,7 +11,9 @@
     "lint": "eslint src/ --ext .js,.jsx,.ts,.tsx",
     "lint:fix": "eslint src/ --ext .js,.jsx,.ts,.tsx --fix",
     "eject": "react-scripts eject",
-    "prepare": "is-ci || husky install"
+    "prepare": "is-ci || husky install",
+    "start:bazel": "ibazel run //:start",
+    "build:bazel": "export DISABLE_ESLINT_PLUGIN=true && bazel build //:build"
   },
   "dependencies": {
     "@chakra-ui/icons": "2.0.19",
@@ -44,6 +46,7 @@
     "@babel/core": "7.21.8",
     "@babel/plugin-syntax-flow": "7.21.4",
     "@babel/plugin-transform-react-jsx": "7.21.5",
+    "@bazel/ibazel": "^0.16.2",
     "@commitlint/cli": "17.6.6",
     "@commitlint/config-conventional": "17.6.6",
     "@testing-library/dom": "9.3.1",
@@ -69,6 +72,7 @@
     "husky": "8.0.3",
     "is-ci": "3.0.1",
     "lint-staged": "13.2.3",
+    "postcss-flexbugs-fixes": "^5.0.2",
     "prettier": "2.8.8",
     "react-scripts": "5.0.1",
     "typescript": "5.0.4"
@@ -99,6 +103,20 @@
       "ignoreMissing": [
         "react-scripts"
       ]
+    },
+    "packageExtensions": {
+      "@typescript-eslint/eslint-plugin": {
+        "peerDependencies": {
+          "eslint": "*"
+        }
+      },
+      "postcss-loader": {
+        "peerDependencies": {
+          "postcss-flexbugs-fixes": "*",
+          "postcss-preset-env": "*",
+          "postcss-normalize": "*"
+        }
+      }
     }
   }
 }

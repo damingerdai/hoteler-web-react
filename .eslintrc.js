@@ -24,7 +24,7 @@ module.exports = {
       version: '18'
     }
   },
-  plugins: ['react', 'prettier'],
+  plugins: ['react', 'prettier', '@typescript-eslint'],
   rules: {
     indent: ['error', 2, { SwitchCase: 1 }],
     'jsx-quotes': ['error', 'prefer-single'],
