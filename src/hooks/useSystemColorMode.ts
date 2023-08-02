@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-expressions, max-len, consistent-return */
 /**
 MIT License
 
@@ -21,7 +22,6 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
  */
-/* eslint-disable max-len, @typescript-eslint/no-unused-expressions, consistent-return */
 import { useEffect, useState } from 'react';
 
 const MEDIA_QUERY = '(prefers-color-scheme: dark)';

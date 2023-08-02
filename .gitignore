@@ -26,3 +26,4 @@ yarn-error.log*
 # bazel
 bazel-*
 .bazelrc.user
+.aspect/rules/

@@ -6,8 +6,8 @@ module.exports = {
   },
   extends: [
     'plugin:react/recommended',
-    'airbnb',
-    'airbnb-typescript',
+    // 'airbnb',
+    // 'airbnb-typescript',
     'plugin:react/jsx-runtime'
   ],
   parser: '@typescript-eslint/parser',
@@ -24,7 +24,7 @@ module.exports = {
       version: '18'
     }
   },
-  plugins: ['react', 'prettier'],
+  plugins: ['react', 'prettier', '@typescript-eslint'],
   rules: {
     indent: ['error', 2, { SwitchCase: 1 }],
     'jsx-quotes': ['error', 'prefer-single'],

@@ -51,8 +51,11 @@ npm_translate_lock(
         },
     },
     npmrc = "//:.npmrc",
-    pnpm_lock = "//:pnpm-lock.yaml",
+    yarn_lock="//:yarn.lock",
+    # pnpm_lock = "//:pnpm-lock.yaml",
     public_hoist_packages = {
+        "eslint-config-react-app": [""],
+        "eslint": [""],
     },
     verify_node_modules_ignored = "//:.bazelignore",
 )
