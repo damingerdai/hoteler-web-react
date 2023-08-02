@@ -60,6 +60,7 @@ ts_project(
         "//:node_modules/formik",
         "//:node_modules/react-redux",
         "//:node_modules/yup",
+        "//:node_modules/jotai",
         "//:node_modules/swr",
 
         "//:node_modules/@types/react",

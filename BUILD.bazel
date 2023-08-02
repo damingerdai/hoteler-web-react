@@ -15,6 +15,8 @@ CRA_DEPS = [
     ":node_modules/typescript",
     ":node_modules/web-vitals",
     ":node_modules/postcss-flexbugs-fixes",
+    ":node_modules/postcss-preset-env"
+
 ]
 
 cra_bin.react_scripts(
