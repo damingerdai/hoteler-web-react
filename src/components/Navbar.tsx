@@ -20,6 +20,12 @@ import { useAppDispatch, useAppSelector } from '../lib/reduxHooks';
 import { fetchUser } from '../slices/UserSlice';
 import { siderbarAtom } from '../atom';
 
+declare global {
+  interface Document {
+    startViewTransition: (params: () => void) => { ready: Promise<void> };
+  }
+}
+
 interface NavbarProps {
   showHamburgerIcon?: boolean;
 }
@@ -43,9 +49,10 @@ const Navbar: React.FC<NavbarProps> = ({ showHamburgerIcon = false }) => {
       Math.max(y, innerHeight - y),
     );
     const isDark = colorMode === 'dark';
-    // @ts-ignore
+    const root = document.documentElement;
     const transition = document.startViewTransition(() => {
-      toggleColorMode();
+      root.classList.remove(isDark ? 'chakra-ui-dark' : 'chakra-ui-light');
+      root.classList.add(!isDark ? 'chakra-ui-dark' : 'chakra-ui-light');
     });
 
     transition.ready.then(() => {
@@ -58,13 +65,14 @@ const Navbar: React.FC<NavbarProps> = ({ showHamburgerIcon = false }) => {
           clipPath: isDark ? [...clipPath].reverse() : clipPath,
         },
         {
-          duration: 500,
+          duration: 200,
           easing: 'ease-in',
           pseudoElement: isDark
             ? '::view-transition-old(root)'
             : '::view-transition-new(root)',
         },
       );
+      toggleColorMode();
     });
   };
 
