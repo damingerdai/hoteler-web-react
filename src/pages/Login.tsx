@@ -59,6 +59,7 @@ const Login: React.FC = () => {
               handleBlur,
               handleSubmit,
               isSubmitting,
+              isValid,
               /* and other goodies */
             }) => (
               <form onSubmit={handleSubmit}>
@@ -84,7 +85,7 @@ const Login: React.FC = () => {
                   colorScheme='teal'
                   isLoading={isSubmitting}
                   loadingText='提交中'
-                  disabled={isSubmitting}
+                  isDisabled={(touched && !isValid) || isSubmitting}
                 >
                   登陆
                 </Button>

@@ -5,13 +5,16 @@
   "main": "src/index.tsx",
   "packageManager": "pnpm@8.8.0",
   "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build:old": "react-scripts build",
     "test": "react-scripts test",
     "lint": "eslint src/ --ext .js,.jsx,.ts,.tsx",
     "lint:fix": "eslint src/ --ext .js,.jsx,.ts,.tsx --fix",
     "eject": "react-scripts eject",
-    "prepare": "is-ci || husky install"
+    "prepare": "is-ci || husky install",
+    "preview": "vite preview"
   },
   "dependencies": {
     "@chakra-ui/icons": "2.0.19",
@@ -56,6 +59,7 @@
     "@types/react-dom": "18.2.15",
     "@typescript-eslint/eslint-plugin": "5.62.0",
     "@typescript-eslint/parser": "5.62.0",
+    "@vitejs/plugin-react-swc": "^3.5.0",
     "commitlint": "17.8.1",
     "eslint": "8.54.0",
     "eslint-config-airbnb": "19.0.4",
@@ -71,7 +75,8 @@
     "lint-staged": "13.2.3",
     "prettier": "2.8.8",
     "react-scripts": "5.0.1",
-    "typescript": "5.0.4"
+    "typescript": "5.0.4",
+    "vite": "^5.0.0"
   },
   "overrides": {
     "@typescript-eslint/typescript-estree": "^5.57.1",
