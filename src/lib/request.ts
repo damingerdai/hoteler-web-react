@@ -30,11 +30,12 @@ client.interceptors.request.use((config) => {
 client.interceptors.response.use(
   (res) => res,
   (err) => {
+    console.error(err);
     const { code, message } = err;
     const toastOption = {
       id: 'NETWORK_ERROR',
       title: '网络超时 - 刷新页面以恢复',
-      status: 'error' as 'info' | 'warning' | 'success' | 'error' | 'loading' | undefined,
+      status: 'error' as const,
       duration: 3000,
       isClosable: true,
     };
@@ -42,6 +43,9 @@ client.interceptors.response.use(
       (code === 'ECONNABORTED' || message === 'Network Error') && !toastInstance.isActive(toastOption.id)
     ) {
       toastInstance({ ...toastOption });
+    }
+    if (code === 'ERR_BAD_RESPONSE') {
+      toastInstance({ ...toastOption, title: '服务器错误 - 请稍后再试' });
     }
 
     return Promise.reject(err);
