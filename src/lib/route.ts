@@ -1,8 +1,7 @@
-import { IconType } from 'react-icons';
-import { RiDashboardLine } from 'react-icons/ri';
-import { MdOutlineBedroomParent } from 'react-icons/md';
-import { AiFillCustomerService } from 'react-icons/ai';
-import { FaRegUser } from 'react-icons/fa';
+import { IconType } from 'react-icons/lib';
+import { CiUser } from 'react-icons/ci';
+import { MdDashboard, MdOutlineBedroomParent } from 'react-icons/md';
+import { RiCustomerService2Line } from 'react-icons/ri';
 import { PermissionEnum, User } from '../types';
 
 export interface IRoute {
@@ -15,7 +14,7 @@ export interface IRoute {
 export const Routes: IRoute[] = [
   {
     to: '/dashboard',
-    icon: RiDashboardLine,
+    icon: MdDashboard,
     name: '仪表盘',
     permission: (user: User) => {
       const permissions = user.permissions.map((p) => p.name);
@@ -28,7 +27,7 @@ export const Routes: IRoute[] = [
   {
     to: '/customer',
     name: '客户信息',
-    icon: AiFillCustomerService,
+    icon: RiCustomerService2Line,
     permission: [PermissionEnum.MANAGE_CUSTOMER],
   },
   {
@@ -40,7 +39,7 @@ export const Routes: IRoute[] = [
   {
     to: '/user',
     name: '用户管理',
-    icon: FaRegUser,
+    icon: CiUser,
     permission: [PermissionEnum.MANAGE_USER],
   },
 ];
