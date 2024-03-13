@@ -32,15 +32,20 @@ client.interceptors.response.use(
   (err) => {
     console.error(err);
     const { code, message } = err;
+    const toastId = 'NETWORK_ERROR';
+    const isActive = toastInstance.isActive(toastId);
+    if (isActive) {
+      return Promise.reject(err);
+    }
     const toastOption = {
-      id: 'NETWORK_ERROR',
+      id: toastId,
       title: '网络超时 - 刷新页面以恢复',
       status: 'error' as const,
       duration: 3000,
       isClosable: true,
     };
     if (
-      (code === 'ECONNABORTED' || message === 'Network Error') && !toastInstance.isActive(toastOption.id)
+      (code === 'ECONNABORTED' || message === 'Network Error')
     ) {
       toastInstance({ ...toastOption });
     }
