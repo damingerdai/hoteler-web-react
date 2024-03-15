@@ -8,11 +8,11 @@ import Sidebar from '../Sidebar';
 export const CommonLayout = React.memo(() => (
   <>
     <Navbar showHamburgerIcon />
-    <Box overflow='hidden' zIndex='1' boxSizing='border-box' position='relative' height='calc(100vh - 56px)'>
+    <Box overflow='hidden' zIndex='1' boxSizing='border-box' position='relative' height='calc(100vh - 64px)'>
       <Sidebar>
         <Navgation />
       </Sidebar>
-      <Box display='block' ml={{ base: '0', sm: '180px' }} height='100%' overflow='auto'>
+      <Box display='block' bg='#f5f5f5' ml={{ base: '0', sm: '180px' }} height='100%' overflow='auto'>
         <Outlet />
       </Box>
     </Box>

@@ -87,7 +87,7 @@ const Dashboard = () => {
   }, [pastWeekCustomerCounts]);
 
   return (
-    <Box m={2}>
+    <Box bg='gray.100' m={2}>
       <Flex
         flexDir={{ base: 'column', sm: 'row' }}
         alignItems='stretch'
