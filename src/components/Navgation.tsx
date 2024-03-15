@@ -76,7 +76,7 @@ const Navgation: React.FC = () => {
         {routes.map((r) => (
           <React.Fragment key={r.to}>
             <Box h={12} fontSize={16} lineHeight='24px'>
-              <NavItem path={r.to}>{r.name}</NavItem>
+              <NavItem icon={r.icon} path={r.to}>{r.name}</NavItem>
             </Box>
             <Divider />
           </React.Fragment>
