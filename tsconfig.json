@@ -36,7 +36,8 @@
       "@/styles/*": ["./src/styles"],
       "@/types": ["./src/types"],
       "@/types/*": ["./src/types"]
-    }
+    },
+    "types": ["vite/client", "jest"]
   },
   "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]
