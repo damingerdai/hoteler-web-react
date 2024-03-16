@@ -12,7 +12,7 @@ export const CommonLayout = React.memo(() => (
       <Sidebar>
         <Navgation />
       </Sidebar>
-      <Box display='block' bg='#f5f5f5' ml={{ base: '0', sm: '180px' }} height='100%' overflow='auto'>
+      <Box display='block' ml={{ base: '0', sm: '180px' }} height='100%' overflow='auto'>
         <Outlet />
       </Box>
     </Box>

@@ -114,10 +114,10 @@ const CreateRoomModal: React.FC<CreateRoomModalProps> = (props) => {
                 </FormControl>
               </ModalBody>
               <ModalFooter>
-                <Button colorScheme='blue' mr={3} onClick={() => onClose(false)}>
+                <Button variant='ghost' mr={3} onClick={() => onClose(false)}>
                   关闭
                 </Button>
-                <Button type='submit' variant='ghost' disabled={!isValid || isSubmitting} isLoading={isSubmitting}>
+                <Button type='submit' colorScheme='teal' disabled={!isValid || isSubmitting} isLoading={isSubmitting}>
                   确定
                 </Button>
               </ModalFooter>

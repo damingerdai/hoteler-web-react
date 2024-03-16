@@ -148,7 +148,7 @@ const EditCustomerModal: React.FC<EditCustomerModalProps> = (props) => {
 
               <ModalFooter>
                 <Button
-                  colorScheme='blue'
+                  variant='ghost'
                   mr={3}
                   onClick={() => onClose(false)}
                 >
@@ -156,7 +156,7 @@ const EditCustomerModal: React.FC<EditCustomerModalProps> = (props) => {
                 </Button>
                 <Button
                   type='submit'
-                  variant='ghost'
+                  colorScheme='teal'
                   disabled={!isValid || isSubmitting}
                   isLoading={isSubmitting}
                 >

@@ -133,12 +133,12 @@ const EditRoomModal: React.FC<EditRoomModalProps> = ({
                 </FormControl>
               </ModalBody>
               <ModalFooter>
-                <Button colorScheme='blue' mr={3} onClick={() => closeEditRoomModal()}>
+                <Button variant='ghost' mr={3} onClick={() => closeEditRoomModal()}>
                   关闭
                 </Button>
                 <Button
                   type='submit'
-                  variant='ghost'
+                  colorScheme='teal'
                   disabled={!isValid || isSubmitting}
                   isLoading={isSubmitting}
                 >
