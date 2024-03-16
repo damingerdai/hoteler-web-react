@@ -98,7 +98,7 @@ const CreateRoomModal: React.FC<CreateRoomModalProps> = (props) => {
                   )}
                 </FormControl>
                 <FormControl mt={4}>
-                  <FormLabel htmlFor='price'>房间名字</FormLabel>
+                  <FormLabel htmlFor='price'>房间价格</FormLabel>
                   <NumberInput id='price' value={values.price} min={0} max={99999} onChange={(n) => setFieldValue('price', n, true)} isInvalid={!!errors.price}>
                     <NumberInputField />
                     <NumberInputStepper>

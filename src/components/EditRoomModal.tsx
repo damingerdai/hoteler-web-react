@@ -110,7 +110,7 @@ const EditRoomModal: React.FC<EditRoomModalProps> = ({
                   )}
                 </FormControl>
                 <FormControl mt={4}>
-                  <FormLabel htmlFor='price'>房间名字</FormLabel>
+                  <FormLabel htmlFor='price'>房间价格</FormLabel>
                   <NumberInput
                     id='price'
                     value={values.price}
