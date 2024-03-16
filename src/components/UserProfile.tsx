@@ -1,5 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import {
+  Avatar,
   Box, ChakraProps, Menu, MenuButton, MenuItem, MenuList, Portal,
 } from '@chakra-ui/react';
 import React, { useEffect } from 'react';
@@ -33,7 +34,9 @@ const UserProfile: React.FC<ChakraProps> = (props) => {
   return (
     <Box {...props}>
       <Menu>
-        <MenuButton textTransform='capitalize'>{ username }</MenuButton>
+        <MenuButton>
+          <Avatar size='sm' name={username} />
+        </MenuButton>
         <Portal>
           <MenuList>
             <MenuItem icon={<MdExitToApp />} onClick={() => logout()}>登出</MenuItem>
