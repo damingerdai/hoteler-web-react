@@ -3,6 +3,10 @@ import { toastInstance } from '../components/Toast';
 import { UserToken, UserTokenResponse } from '../types';
 import { toast } from './toast';
 
+function isErrorReponse(error: object): error is Record<'code' | 'message', string> {
+  return 'code' in error && 'message' in error;
+}
+
 /**
  * Create an Axios Client with defaults
  */
@@ -62,17 +66,24 @@ export async function request<T = any>(options: AxiosRequestConfig): Promise<T> 
   try {
     const { data } = await client(options);
     if (data.status === -1) {
-      toastInstance({
-        title: '错误',
-        description: data.error.message,
-        position: 'top-right',
-        status: 'error',
-        duration: 9000,
-        isClosable: true,
-      });
+      const { code, message } = data.error;
+      const active = toastInstance.isActive(code);
+      if (!active) {
+        toastInstance({
+          id: code,
+          title: '错误',
+          description: message,
+          position: 'top-right',
+          status: 'error',
+          duration: 2000,
+          isClosable: true,
+        });
+      }
+      throw data.error;
     }
     return data as T;
   } catch (err) {
+    console.error(err);
     if (err?.response?.status === 401) {
       localStorage.removeItem('user_token');
       window.location.href = '/login';
@@ -90,9 +101,14 @@ export async function request<T = any>(options: AxiosRequestConfig): Promise<T> 
         Headers: err.response.headers,
       });
       throw err.response.data || '';
-    } else {
-      throw err;
+    } else if (isErrorReponse(err)) {
+      const { code } = err;
+      if (['ERR-600010'].includes(code)) {
+        localStorage.removeItem('user_token');
+        window.location.href = '/login';
+      }
     }
+    throw err;
   }
 }
 
