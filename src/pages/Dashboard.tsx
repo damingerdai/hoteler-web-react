@@ -42,7 +42,7 @@ const DefaultRoomStatusDonutOption: ApexOptions = {
 
 const DefaultPastWeekCustomerCountOption: ApexOptions = {
   title: {
-    text: '房间状态统计',
+    text: '过去一周的入住客户数量变化',
   },
   chart: {
     id: 'pastWeekCustomerCountChart',
