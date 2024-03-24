@@ -33,16 +33,19 @@ const UserProfile: React.FC<ChakraProps> = (props) => {
 
   return (
     <Box {...props}>
-      <Menu>
-        <MenuButton>
-          <Avatar size='sm' name={username} />
-        </MenuButton>
-        <Portal>
-          <MenuList>
-            <MenuItem icon={<MdExitToApp />} onClick={() => logout()}>登出</MenuItem>
-          </MenuList>
-        </Portal>
-      </Menu>
+      {username
+        && (
+          <Menu>
+            <MenuButton>
+              <Avatar size='xs' name={username} />
+            </MenuButton>
+            <Portal>
+              <MenuList>
+                <MenuItem icon={<MdExitToApp />} onClick={() => logout()}>登出</MenuItem>
+              </MenuList>
+            </Portal>
+          </Menu>
+        )}
     </Box>
   );
 };
