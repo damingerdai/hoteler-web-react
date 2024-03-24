@@ -75,7 +75,7 @@ const Navgation: React.FC = () => {
       <Box>
         {routes.map((r) => (
           <React.Fragment key={r.to}>
-            <Box h={12} fontSize={16} lineHeight='24px'>
+            <Box h={12} fontSize={16} lineHeight='24px' _hover={{ bg: 'gray.100' }}>
               <NavItem icon={r.icon} path={r.to}>{r.name}</NavItem>
             </Box>
             <Divider />
