@@ -2,7 +2,7 @@
 import { Box, Flex } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import { ApexOptions } from 'apexcharts';
-import { Chart } from '../components/Apexcharts';
+import Chart from 'react-apexcharts';
 import { ProtectRoute } from '../components/ProtectRoute';
 import { useAppDispatch, useAppSelector } from '../lib/reduxHooks';
 import { fecthRoomStatusDonut, fetchPastWeekCustomerCounts } from '../slices/StatSlice';
@@ -97,7 +97,7 @@ const Dashboard = () => {
         mt={4}
       >
         <Box w={{ base: '100', sm: '50%' }} boxShadow='xs' m={2} p={2}>
-          { roomStatusDonutOption && (
+          {roomStatusDonutOption && (
             <Chart
               options={roomStatusDonutOption}
               series={roomStatusDonutOption?.series}
@@ -108,7 +108,7 @@ const Dashboard = () => {
           )}
         </Box>
         <Box w={{ base: '100', sm: '50%' }} boxShadow='xs' m={2} p={2}>
-          { pastWeekCustomerCountOption && (
+          {pastWeekCustomerCountOption && (
             <Chart
               options={pastWeekCustomerCountOption}
               series={pastWeekCustomerCountOption?.series}
