@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unused-prop-types, consistent-return */
 import * as React from 'react';
 import { useEffect, useRef, useImperativeHandle } from 'react';
-import ApexCharts from 'apexcharts';
+import type ApexCharts from 'apexcharts';
 import { ChartType } from './ApexTypes';
 
 declare global {
@@ -9,8 +9,6 @@ declare global {
     ApexCharts: typeof ApexCharts;
   }
 }
-
-// window.ApexCharts = ApexCharts;
 
 interface ApexChartsProps {
   as?: React.ElementType;
@@ -30,17 +28,24 @@ export const Chart = React.forwardRef<HTMLElement, ApexChartsProps>((props, ref)
     if (!chartRef || !chartRef.current) {
       return;
     }
-    const config = {
-      type: rest.type,
-      width: rest.width,
-      height: rest.height,
-      series: rest.series,
-      ...rest.options,
-    };
-    const chart = new ApexCharts(chartRef.current, config);
-    chart.render();
+    let chart: ApexCharts;
+    import('apexcharts').then(((l) => {
+      const ApexChartsContructor = l.default;
+      const config = {
+        type: rest.type,
+        width: rest.width,
+        height: rest.height,
+        series: rest.series,
+        ...rest.options,
+      };
+      chart = new ApexChartsContructor(chartRef.current, config);
+      chart.render();
+    }));
+
     return () => {
-      chart.destroy();
+      if (chart) {
+        chart.destroy();
+      }
     };
   }, [chartRef, rest]);
 
@@ -49,4 +54,4 @@ export const Chart = React.forwardRef<HTMLElement, ApexChartsProps>((props, ref)
   return el;
 });
 
-Chart.displayName = 'Chart';
+Chart.displayName = 'Charts';

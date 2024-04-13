@@ -1,8 +1,8 @@
 /* eslint-disable spaced-comment */
 import { Box, Flex } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
-import { ApexOptions } from 'apexcharts';
-import Chart from 'react-apexcharts';
+import { type ApexOptions } from 'apexcharts';
+import { Chart } from '@/components/Apexcharts';
 import { ProtectRoute } from '../components/ProtectRoute';
 import { useAppDispatch, useAppSelector } from '../lib/reduxHooks';
 import { fecthRoomStatusDonut, fetchPastWeekCustomerCounts } from '../slices/StatSlice';
