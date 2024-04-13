@@ -18,7 +18,7 @@ const Sidebar: React.FC<React.PropsWithChildren> = ({ children }) => {
 
   if (isMobile) {
     return (
-      <Drawer isOpen={siderbar} placement='left' onClose={() => setSiderbar(false)} returnFocusOnClose={false} autoFocus={false} size='full'>
+      <Drawer isOpen={siderbar} placement='left' onClose={() => setSiderbar(false)} returnFocusOnClose={false} autoFocus={false}>
         <DrawerOverlay />
         <DrawerContent>
           {children}
@@ -29,6 +29,7 @@ const Sidebar: React.FC<React.PropsWithChildren> = ({ children }) => {
 
   return (
     <Box
+      as='aside'
       width='180px'
       overflow='auto'
       borderRight='1px solid rgba(0, 0, 0, .12)'

@@ -28,8 +28,7 @@ const NavItem: React.FC<React.PropsWithChildren<NavItemProps>> = ({
     >
       <Flex
         align='center'
-        p='4'
-        mx='4'
+        p='3'
         borderRadius='lg'
         role='group'
         cursor='pointer'

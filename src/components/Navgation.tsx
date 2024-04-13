@@ -1,5 +1,5 @@
 import {
-  Box, CloseButton, Divider, Flex, Text, useBreakpointValue,
+  Box, CloseButton, Flex, VStack, IconButton, Text, useBreakpointValue,
 } from '@chakra-ui/react';
 import * as React from 'react';
 import { useEffect, useState } from 'react';
@@ -65,23 +65,21 @@ const Navgation: React.FC = () => {
   }, [user]);
 
   return (
-    <Box h='100%' w='100%' pt='4' transition='3s ease'>
+    <Box h='100%' w='100%' p={4} pt={2} transition='3s ease'>
       {isMobile && (
-        <Flex h='20' alignItems='center' mx='8' justifyContent='space-between'>
-          <Text fontSize='2xl' fontFamily='monospace' fontWeight='blod'>Hoteler Portal</Text>
-          <CloseButton onClick={() => setSiderStatus(false)} />
+        <Flex h='14' alignItems='center' p='2' justifyContent='space-between' borderEndWidth='1px' borderBottomWidth='1px' borderBottomColor='blackAlpha.200'>
+          <Text fontSize='2xl' fontWeight='blod'>Hoteler Portal</Text>
+          <IconButton icon={<CloseButton />} onClick={() => setSiderStatus(false)} aria-label='close navgation' />
         </Flex>
       )}
-      <Box>
+      <VStack alignItems='normal'>
         {routes.map((r) => (
-          <React.Fragment key={r.to}>
-            <Box h={12} fontSize={16} lineHeight='24px' _hover={{ bg: 'gray.100' }}>
-              <NavItem icon={r.icon} path={r.to}>{r.name}</NavItem>
-            </Box>
-            <Divider />
-          </React.Fragment>
+          <Box key={r.to} h={12} fontSize={16} _hover={{ bg: 'gray.200' }}>
+            <NavItem icon={r.icon} path={r.to}>{r.name}</NavItem>
+          </Box>
+
         ))}
-      </Box>
+      </VStack>
     </Box>
   );
 };
