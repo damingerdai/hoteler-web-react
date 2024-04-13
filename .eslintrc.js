@@ -40,6 +40,7 @@ module.exports = {
       }
     ],
     'import/prefer-default-export': ['off'],
+    'import/extensions': ['off'],
     'react/function-component-definition': [
       'error',
       {
