@@ -1,5 +1,5 @@
 import {
-  Box, Button, Divider, Flex, useDisclosure,
+  Box, Button, Center, Divider, Flex, useDisclosure,
 } from '@chakra-ui/react';
 import React from 'react';
 import useSWR from 'swr';
@@ -42,7 +42,7 @@ const Customer: React.FC = () => {
         justifyContent='start'
         mt='16px'
       >
-        {customers?.map((c) => (
+        {(customers?.length ?? 0) > 0 ? <Center>没有客户</Center> : customers?.map((c) => (
           <Box
             key={c.id}
             pl={2}

@@ -1,5 +1,5 @@
 import {
-  Box, Button, Divider, Flex, useDisclosure,
+  Box, Button, Center, Divider, Flex, useDisclosure,
 } from '@chakra-ui/react';
 import * as React from 'react';
 import useSWR from 'swr';
@@ -43,7 +43,7 @@ const Room: React.FC = () => {
             <RoomCardSkeleton key={i} />
           ))}
         {!isLoading
-          && rooms?.map((r, i) => (
+          && (rooms?.length === 0 ? <Center w='100%' mt={4}>没有房间</Center> : rooms?.map((r, i) => (
             <Box
               key={r.id}
               pl={4}
@@ -65,7 +65,7 @@ const Room: React.FC = () => {
                 }}
               />
             </Box>
-          ))}
+          )))}
       </Flex>
       <CreateRoomModal
         isOpen={isCreateRoomModalOpen}
