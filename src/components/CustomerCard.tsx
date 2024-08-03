@@ -21,9 +21,10 @@ import EditCustomerModal from './EditCustomerModal';
 
 interface CustomerCardProps {
   customer: Customer;
+  deleteCustomerChange?: () => void
 }
 
-const CustomerCard: React.FC<CustomerCardProps> = ({ customer }) => {
+const CustomerCard: React.FC<CustomerCardProps> = ({ customer, deleteCustomerChange }) => {
   const dispatch = useAppDispatch();
   const toast = useToast();
   const {
@@ -105,6 +106,9 @@ const CustomerCard: React.FC<CustomerCardProps> = ({ customer }) => {
         onClose={(confirm) => {
           if (confirm === true && customer.id) {
             deleteCustomer(customer.id);
+            if (deleteCustomerChange) {
+              deleteCustomerChange();
+            }
           } else {
             onConfirmModalClose();
           }
