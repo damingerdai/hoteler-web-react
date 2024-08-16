@@ -1,5 +1,10 @@
 import {
-  Box, Button, Center, Divider, Flex, useDisclosure,
+  Box,
+  Button,
+  Center,
+  Divider,
+  Flex,
+  useDisclosure,
 } from '@chakra-ui/react';
 import React from 'react';
 import useSWR from 'swr';
@@ -42,24 +47,28 @@ const Customer: React.FC = () => {
         justifyContent='start'
         mt='16px'
       >
-        {(customers?.length ?? 0) > 0 ? <Center>没有客户</Center> : customers?.map((c) => (
-          <Box
-            key={c.id}
-            pl={2}
-            pr={2}
-            mb={2}
-            flex='1 1 50%'
-            maxW='450px'
-            width={{
-              base: '100%',
-              sm: '50%',
-              md: '33%',
-              lg: '25%',
-            }}
-          >
-            <CustomerCard customer={c} />
-          </Box>
-        ))}
+        {(customers?.length ?? 0) === 0 ? (
+          <Center>没有客户</Center>
+        ) : (
+          customers?.map((c) => (
+            <Box
+              key={c.id}
+              pl={2}
+              pr={2}
+              mb={2}
+              flex='1 1 50%'
+              maxW='450px'
+              width={{
+                base: '100%',
+                sm: '50%',
+                md: '33%',
+                lg: '25%',
+              }}
+            >
+              <CustomerCard customer={c} />
+            </Box>
+          ))
+        )}
       </Flex>
       <CreateCustomerModal
         isOpen={isCreateCustomerModalOpen}
