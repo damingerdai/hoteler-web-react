@@ -1,5 +1,12 @@
 import {
-  Box, CloseButton, Flex, VStack, IconButton, Text, useBreakpointValue,
+  Box,
+  CloseButton,
+  Flex,
+  VStack,
+  IconButton,
+  Text,
+  useBreakpointValue,
+  useColorModeValue,
 } from '@chakra-ui/react';
 import * as React from 'react';
 import { useEffect, useState } from 'react';
@@ -18,10 +25,13 @@ const Navgation: React.FC = () => {
     { base: true, sm: false },
     { ssr: false },
   );
+  const navitemHoverBgaColor = useColorModeValue('gray.200', 'blackAlpha.600');
   const getToken = () => {
     try {
       const userTokenStr = localStorage.getItem('user_token');
-      const userToken = JSON.parse(userTokenStr ?? '') as { accessToken: string };
+      const userToken = JSON.parse(userTokenStr ?? '') as {
+        accessToken: string;
+      };
       return userToken;
     } catch (err) {
       return { accessToken: '' };
@@ -67,17 +77,32 @@ const Navgation: React.FC = () => {
   return (
     <Box h='100%' w='100%' p={4} pt={2} transition='3s ease'>
       {isMobile && (
-        <Flex h='14' alignItems='center' p='2' justifyContent='space-between' borderEndWidth='1px' borderBottomWidth='1px' borderBottomColor='blackAlpha.200'>
-          <Text fontSize='2xl' fontWeight='blod'>Hoteler Portal</Text>
-          <IconButton icon={<CloseButton />} onClick={() => setSiderStatus(false)} aria-label='close navgation' />
+        <Flex
+          h='14'
+          alignItems='center'
+          p='2'
+          justifyContent='space-between'
+          borderEndWidth='1px'
+          borderBottomWidth='1px'
+          borderBottomColor='blackAlpha.200'
+        >
+          <Text fontSize='2xl' fontWeight='blod'>
+            Hoteler Portal
+          </Text>
+          <IconButton
+            icon={<CloseButton />}
+            onClick={() => setSiderStatus(false)}
+            aria-label='close navgation'
+          />
         </Flex>
       )}
       <VStack alignItems='normal'>
         {routes.map((r) => (
-          <Box key={r.to} h={12} fontSize={16} _hover={{ bg: 'gray.200' }}>
-            <NavItem icon={r.icon} path={r.to}>{r.name}</NavItem>
+          <Box key={r.to} h={12} fontSize={16} _hover={{ bg: navitemHoverBgaColor }}>
+            <NavItem icon={r.icon} path={r.to}>
+              {r.name}
+            </NavItem>
           </Box>
-
         ))}
       </VStack>
     </Box>

@@ -7,14 +7,18 @@ import {
   FormErrorMessage,
   FormHelperText,
   FormLabel,
+  IconButton,
   Input,
+  InputGroup,
+  InputRightElement,
   Text,
 } from '@chakra-ui/react';
 import { Formik } from 'formik';
 import * as React from 'react';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Link as RouteLink, useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
+import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import { fetchToken } from '../slices/TokenSlice';
 import { setUsername } from '../slices/UserSlice';
 import { useAppDispatch, useAppSelector } from '../lib/reduxHooks';
@@ -24,6 +28,7 @@ const Login: React.FC = () => {
   const navigate = useNavigate();
 
   const token = useAppSelector((state) => state.token);
+  const [showPassword, setShowPassword] = useState(false);
   const initialValues = { username: '', password: '' };
   const validationSchemas = Yup.object().shape({
     username: Yup.string().required('请输入用户名').nullable(),
@@ -40,7 +45,11 @@ const Login: React.FC = () => {
     <Container>
       <Center mt={16}>
         <Box boxShadow='base' w='100%' maxWidth='400px' p={2}>
-          <Text as='h1' textAlign='center' size='xl'> Hoteler系统登录 </Text>
+          <Text as='h1' textAlign='center' size='xl'>
+            {' '}
+            Hoteler系统登录
+            {' '}
+          </Text>
           <Formik
             initialValues={initialValues}
             // eslint-disable-next-line react/jsx-props-no-multi-spaces
@@ -63,20 +72,52 @@ const Login: React.FC = () => {
               /* and other goodies */
             }) => (
               <form onSubmit={handleSubmit}>
-                <FormControl marginTop={4} isInvalid={!!errors.username && touched.username}>
+                <FormControl
+                  marginTop={4}
+                  isInvalid={!!errors.username && touched.username}
+                >
                   <FormLabel htmlFor='username'>用户名</FormLabel>
-                  <Input id='username' type='text' onChange={handleChange} onBlur={handleBlur} value={values.username} />
-                  {!!errors.username && touched.username
-                    ? <FormErrorMessage>{errors.username}</FormErrorMessage>
-                    : <FormHelperText>请输入你的用户名</FormHelperText>}
+                  <Input
+                    id='username'
+                    type='text'
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.username}
+                  />
+                  {!!errors.username && touched.username ? (
+                    <FormErrorMessage>{errors.username}</FormErrorMessage>
+                  ) : (
+                    <FormHelperText>请输入你的用户名</FormHelperText>
+                  )}
                 </FormControl>
 
-                <FormControl marginTop={4} isInvalid={!!errors.password && touched.password}>
+                <FormControl
+                  marginTop={4}
+                  isInvalid={!!errors.password && touched.password}
+                >
                   <FormLabel htmlFor='password'>密码</FormLabel>
-                  <Input id='password' type='password' onChange={handleChange} onBlur={handleBlur} value={values.password} />
-                  {errors.password && touched.password
-                    ? <FormErrorMessage>请输入你的密码</FormErrorMessage>
-                    : <FormHelperText>请输入你的密码</FormHelperText>}
+                  <InputGroup>
+                    <Input
+                      id='password'
+                      type={showPassword ? 'text' : 'password'}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={values.password}
+                    />
+
+                    <InputRightElement>
+                      <IconButton
+                        aria-label='switch password mode'
+                        icon={showPassword ? <ViewIcon /> : <ViewOffIcon />}
+                        onClick={() => setShowPassword(!showPassword)}
+                      />
+                    </InputRightElement>
+                  </InputGroup>
+                  {errors.password && touched.password ? (
+                    <FormErrorMessage>请输入你的密码</FormErrorMessage>
+                  ) : (
+                    <FormHelperText>请输入你的密码</FormHelperText>
+                  )}
                 </FormControl>
                 <Button
                   w='100%'

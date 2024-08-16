@@ -5,7 +5,10 @@ import { type ApexOptions } from 'apexcharts';
 import { Chart } from '@/components/Apexcharts';
 import { ProtectRoute } from '../components/ProtectRoute';
 import { useAppDispatch, useAppSelector } from '../lib/reduxHooks';
-import { fecthRoomStatusDonut, fetchPastWeekCustomerCounts } from '../slices/StatSlice';
+import {
+  fecthRoomStatusDonut,
+  fetchPastWeekCustomerCounts,
+} from '../slices/StatSlice';
 
 const DefaultRoomStatusDonutOption: ApexOptions = {
   title: {
@@ -53,13 +56,20 @@ const DefaultPastWeekCustomerCountOption: ApexOptions = {
 
 const Dashboard = () => {
   const dispath = useAppDispatch();
-  const [roomStatusDonutOption, setRoomStatusDonutOption] = useState(DefaultRoomStatusDonutOption);
+  const [roomStatusDonutOption, setRoomStatusDonutOption] = useState(
+    DefaultRoomStatusDonutOption,
+  );
   // eslint-disable-next-line max-len
   const [pastWeekCustomerCountOption, setPastWeekCustomerCountOption] = useState(DefaultPastWeekCustomerCountOption);
-  const { roomStatusDonut, pastWeekCustomerCounts } = useAppSelector((state) => state.stat);
+  const { roomStatusDonut, pastWeekCustomerCounts } = useAppSelector(
+    (state) => state.stat,
+  );
 
   useEffect(() => {
-    Promise.all([dispath(fecthRoomStatusDonut()), dispath(fetchPastWeekCustomerCounts())]);
+    Promise.all([
+      dispath(fecthRoomStatusDonut()),
+      dispath(fetchPastWeekCustomerCounts()),
+    ]);
   }, []);
 
   useEffect(() => {
@@ -75,10 +85,12 @@ const Dashboard = () => {
     if (pastWeekCustomerCounts && pastWeekCustomerCounts.length > 0) {
       setPastWeekCustomerCountOption({
         ...pastWeekCustomerCountOption,
-        series: [{
-          name: '入住客户数量',
-          data: pastWeekCustomerCounts.map((pwcc) => pwcc.customerCount),
-        }],
+        series: [
+          {
+            name: '入住客户数量',
+            data: pastWeekCustomerCounts.map((pwcc) => pwcc.customerCount),
+          },
+        ],
         xaxis: {
           categories: pastWeekCustomerCounts.map((pwcc) => pwcc.checkInDate),
         },
@@ -87,7 +99,7 @@ const Dashboard = () => {
   }, [pastWeekCustomerCounts]);
 
   return (
-    <Box bg='gray.100' m={2}>
+    <Box m={2}>
       <Flex
         flexDir={{ base: 'column', sm: 'row' }}
         alignItems='stretch'

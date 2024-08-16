@@ -1,5 +1,9 @@
 import {
-  Flex, FlexProps, Icon, Link, useColorModeValue,
+  Flex,
+  FlexProps,
+  Icon,
+  Link,
+  useColorModeValue,
 } from '@chakra-ui/react';
 import * as React from 'react';
 import { IconType } from 'react-icons/lib';
@@ -38,7 +42,14 @@ const NavItem: React.FC<React.PropsWithChildren<NavItemProps>> = ({
         // eslint-disable-next-line react/jsx-props-no-spreading
         {...rest}
       >
-        {icon && <Icon mr='4' fontSize='16' _groupHover={{ color: hoverColor }} as={icon} />}
+        {icon && (
+          <Icon
+            mr='4'
+            fontSize='16'
+            _groupHover={{ color: hoverColor }}
+            as={icon}
+          />
+        )}
         {children}
       </Flex>
     </Link>
