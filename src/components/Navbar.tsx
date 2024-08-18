@@ -12,7 +12,6 @@ import {
 import * as React from 'react';
 import { useEffect } from 'react';
 import { useAtom } from 'jotai';
-import { useSystemColorMode } from '../hooks/useSystemColorMode';
 import logo from '../react-logo.svg';
 import GithubIcon from './GithubIcon';
 import UserProfile from './UserProfile';
@@ -33,8 +32,7 @@ interface NavbarProps {
 const Navbar: React.FC<NavbarProps> = ({ showHamburgerIcon = false }) => {
   const dispatch = useAppDispatch();
   const token = useAppSelector((state) => state.token);
-  const systemColorMode = useSystemColorMode();
-  const { colorMode, toggleColorMode, setColorMode } = useColorMode();
+  const { colorMode, toggleColorMode } = useColorMode();
   const [siderbar, setSiderbar] = useAtom(siderbarAtom);
 
   const viewTransitionAnimate = (
@@ -75,10 +73,6 @@ const Navbar: React.FC<NavbarProps> = ({ showHamburgerIcon = false }) => {
       toggleColorMode();
     });
   };
-
-  useEffect(() => {
-    setColorMode(systemColorMode);
-  }, [systemColorMode]);
 
   useEffect(() => {
     if (token && token.accessToken) {
