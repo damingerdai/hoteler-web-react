@@ -109,7 +109,11 @@ const Login: React.FC = () => {
                       <IconButton
                         aria-label='switch password mode'
                         icon={showPassword ? <ViewIcon /> : <ViewOffIcon />}
-                        onClick={() => setShowPassword(!showPassword)}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          setShowPassword(!showPassword);
+                        }}
                       />
                     </InputRightElement>
                   </InputGroup>

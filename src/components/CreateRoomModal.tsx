@@ -75,7 +75,12 @@ const CreateRoomModal: React.FC<CreateRoomModalProps> = (props) => {
         onSubmit={handleSubmit}
       >
         {({
-          values, isValid, errors, handleChange, setFieldValue, isSubmitting,
+          values,
+          isValid,
+          errors,
+          handleChange,
+          setFieldValue,
+          isSubmitting,
         }) => (
           <Form>
             <ModalContent>
@@ -99,7 +104,14 @@ const CreateRoomModal: React.FC<CreateRoomModalProps> = (props) => {
                 </FormControl>
                 <FormControl mt={4}>
                   <FormLabel htmlFor='price'>房间价格</FormLabel>
-                  <NumberInput id='price' value={values.price} min={0} max={99999} onChange={(n) => setFieldValue('price', n, true)} isInvalid={!!errors.price}>
+                  <NumberInput
+                    id='price'
+                    value={values.price}
+                    min={0}
+                    max={99999}
+                    onChange={(n) => setFieldValue('price', n, true)}
+                    isInvalid={!!errors.price}
+                  >
                     <NumberInputField />
                     <NumberInputStepper>
                       <NumberIncrementStepper />
@@ -117,7 +129,12 @@ const CreateRoomModal: React.FC<CreateRoomModalProps> = (props) => {
                 <Button variant='ghost' mr={3} onClick={() => onClose(false)}>
                   关闭
                 </Button>
-                <Button type='submit' colorScheme='teal' disabled={!isValid || isSubmitting} isLoading={isSubmitting}>
+                <Button
+                  type='submit'
+                  colorScheme='teal'
+                  disabled={!isValid || isSubmitting}
+                  isLoading={isSubmitting}
+                >
                   确定
                 </Button>
               </ModalFooter>

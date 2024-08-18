@@ -1,13 +1,31 @@
 import {
-  Box, Button, Divider, Flex, Table, TableContainer, Tbody, Td, Th, Thead, Tr,
+  Box,
+  Button,
+  Divider,
+  Flex,
+  Table,
+  TableContainer,
+  Tbody,
+  Td,
+  Th,
+  Thead,
+  Tr,
+  useDisclosure,
 } from '@chakra-ui/react';
 import * as React from 'react';
 import useSWR from 'swr';
 import { fetchUsers } from '../slices/UserFetcher';
+import { CreateUserModal } from '@/components/CreateUserModal';
 import { Loading } from '@/components/Loading';
 
 const User: React.FC = () => {
   const { data: users, isLoading } = useSWR('api/v1/users', fetchUsers);
+
+  const {
+    isOpen: isCreateUserModalOpen,
+    onOpen: onCreateUserModalOpen,
+    onClose: onCreateUserModalClose,
+  } = useDisclosure();
 
   if (isLoading) {
     return <Loading />;
@@ -16,30 +34,20 @@ const User: React.FC = () => {
   return (
     <Box p={4} h='100%'>
       <Flex p={2} justifyContent='right'>
-        <Button colorScheme='teal' isDisabled>
+        <Button colorScheme='teal' onClick={onCreateUserModalOpen}>
           创建用户
         </Button>
       </Flex>
       <Divider colorScheme='gray' />
       {isLoading && <Loading />}
       {!isLoading && (
-        <Box
-          w='100%'
-          boxShadow='md'
-          borderWidth='1px'
-          // flexDir='row'
-          // flexWrap='wrap'
-          // boxSizing='border-box'
-          // alignContent='center'
-          // justifyContent='start'
-          mt={4}
-        >
+        <Box w='100%' boxShadow='md' borderWidth='1px' mt={4}>
           <TableContainer>
             <Table variant='simple'>
               <Thead>
                 <Tr>
                   <Th>ID</Th>
-                  <Th>User Name</Th>
+                  <Th>用户名</Th>
                 </Tr>
               </Thead>
               <Tbody>
@@ -52,9 +60,12 @@ const User: React.FC = () => {
               </Tbody>
             </Table>
           </TableContainer>
-
         </Box>
       )}
+      <CreateUserModal
+        isOpen={isCreateUserModalOpen}
+        onClose={onCreateUserModalClose}
+      />
     </Box>
   );
 };
