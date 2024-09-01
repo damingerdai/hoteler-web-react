@@ -7,28 +7,24 @@ import {
   FormErrorMessage,
   FormHelperText,
   FormLabel,
-  IconButton,
   Input,
-  InputGroup,
-  InputRightElement,
   Text,
 } from '@chakra-ui/react';
 import { Formik } from 'formik';
 import * as React from 'react';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { Link as RouteLink, useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
-import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import { fetchToken } from '../slices/TokenSlice';
 import { setUsername } from '../slices/UserSlice';
 import { useAppDispatch, useAppSelector } from '../lib/reduxHooks';
+import { PasswordInput } from '@/components/PasswordInput';
 
 const Login: React.FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   const token = useAppSelector((state) => state.token);
-  const [showPassword, setShowPassword] = useState(false);
   const initialValues = { username: '', password: '' };
   const validationSchemas = Yup.object().shape({
     username: Yup.string().required('请输入用户名').nullable(),
@@ -96,27 +92,12 @@ const Login: React.FC = () => {
                   isInvalid={!!errors.password && touched.password}
                 >
                   <FormLabel htmlFor='password'>密码</FormLabel>
-                  <InputGroup>
-                    <Input
-                      id='password'
-                      type={showPassword ? 'text' : 'password'}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      value={values.password}
-                    />
-
-                    <InputRightElement>
-                      <IconButton
-                        aria-label='switch password mode'
-                        icon={showPassword ? <ViewIcon /> : <ViewOffIcon />}
-                        onClick={(e) => {
-                          e.preventDefault();
-                          e.stopPropagation();
-                          setShowPassword(!showPassword);
-                        }}
-                      />
-                    </InputRightElement>
-                  </InputGroup>
+                  <PasswordInput
+                    id='password'
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.password}
+                  />
                   {errors.password && touched.password ? (
                     <FormErrorMessage>请输入你的密码</FormErrorMessage>
                   ) : (

@@ -17,6 +17,7 @@ import * as Yup from 'yup';
 import { toastInstance } from '../components/Toast';
 import { createDomConfett } from '../components/DomConfett';
 import { request } from '../lib/request';
+import { PasswordInput } from '@/components/PasswordInput';
 
 const Register: React.FC = () => {
   const navigate = useNavigate();
@@ -113,9 +114,8 @@ const Register: React.FC = () => {
                   isInvalid={!!errors.password && touched.password}
                 >
                   <FormLabel htmlFor='password'>密码</FormLabel>
-                  <Input
+                  <PasswordInput
                     id='password'
-                    type='password'
                     onChange={handleChange}
                     onBlur={handleBlur}
                     value={values.password}
@@ -134,12 +134,11 @@ const Register: React.FC = () => {
                   }
                 >
                   <FormLabel htmlFor='confirmPassword'>确认密码</FormLabel>
-                  <Input
+                  <PasswordInput
                     id='confirmPassword'
-                    type='password'
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    value={values.confirmPassword}
+                    value={values.password}
                   />
                   {errors.confirmPassword && touched.confirmPassword ? (
                     <FormErrorMessage>
