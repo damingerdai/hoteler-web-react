@@ -101,8 +101,8 @@ devDependencies:
     specifier: 14.5.1
     version: 14.5.1(@testing-library/dom@9.3.4)
   '@types/jest':
-    specifier: 29.5.1
-    version: 29.5.1
+    specifier: 29.5.12
+    version: 29.5.12
   '@types/node':
     specifier: 20.9.2
     version: 20.9.2
@@ -2684,8 +2684,8 @@ packages:
       '@types/istanbul-lib-report': 3.0.0
     dev: true
 
-  /@types/jest@29.5.1:
-    resolution: {integrity: sha512-tEuVcHrpaixS36w7hpsfLBLpjtMRJUE09/MHXn923LOVojDwyC14cWcfc0rDs0VEfUyYmt/+iX1kxxp+gZMcaQ==}
+  /@types/jest@29.5.12:
+    resolution: {integrity: sha512-eDC8bTvT/QhYdxJAulQikueigY5AsdBRH2yDKW3yveW7svY3+DzN84/2NUgkw10RTiJbWqZrTtoGVdYlvFJdLw==}
     dependencies:
       expect: 29.5.0
       pretty-format: 29.5.0
@@ -2760,7 +2760,7 @@ packages:
   /@types/testing-library__jest-dom@5.14.6:
     resolution: {integrity: sha512-FkHXCb+ikSoUP4Y4rOslzTdX5sqYwMxfefKh1GmZ8ce1GOkEHntSp6b5cGadmNfp5e4BMEWOMx+WSKd5/MqlDA==}
     dependencies:
-      '@types/jest': 29.5.1
+      '@types/jest': 29.5.12
     dev: true
 
   /@types/use-sync-external-store@0.0.3:
