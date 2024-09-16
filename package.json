@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "main": "src/index.tsx",
-  "packageManager": "pnpm@8.8.0",
+  "packageManager": "pnpm@8.15.9",
   "scripts": {
     "dev": "vite",
     "dev:debug": "vite --debug",
