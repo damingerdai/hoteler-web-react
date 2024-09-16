@@ -30,8 +30,8 @@ dependencies:
     specifier: 1.9.7
     version: 1.9.7(react-redux@8.0.7)(react@18.3.1)
   apexcharts:
-    specifier: 3.41.1
-    version: 3.41.1
+    specifier: 3.53.0
+    version: 3.53.0
   axios:
     specifier: 1.7.7
     version: 1.7.7
@@ -55,7 +55,7 @@ dependencies:
     version: 18.3.1
   react-apexcharts:
     specifier: 1.4.1
-    version: 1.4.1(apexcharts@3.41.1)(react@18.3.1)
+    version: 1.4.1(apexcharts@3.53.0)(react@18.3.1)
   react-dom:
     specifier: 18.3.1
     version: 18.3.1(react@18.3.1)
@@ -2919,6 +2919,10 @@ packages:
       - '@swc/helpers'
     dev: true
 
+  /@yr/monotone-cubic-spline@1.0.3:
+    resolution: {integrity: sha512-FQXkOta0XBSUPHndIKON2Y9JeQz5ZeMqLYZVVK93FliNBFm7LNMIZmY6FrMEB9XPcDbE2bekMbZD6kzDkxwYjA==}
+    dev: false
+
   /@zag-js/element-size@0.3.2:
     resolution: {integrity: sha512-bVvvigUGvAuj7PCkE5AbzvTJDTw5f3bg9nQdv+ErhVN8SfPPppLJEmmWdxqsRzrHXgx8ypJt/+Ty0kjtISVDsQ==}
     dev: false
@@ -3019,9 +3023,10 @@ packages:
       normalize-path: 3.0.0
       picomatch: 2.3.1
 
-  /apexcharts@3.41.1:
-    resolution: {integrity: sha512-kta8fhXrfZYqW7K9kF7FqZ6imQaC6moyRgcUZjwIky/oeHVVISSN/2rjUIvZXnwxWHiSdDHMqLy+TqJhB4DXFA==}
+  /apexcharts@3.53.0:
+    resolution: {integrity: sha512-QESZHZY3w9LPQ64PGh1gEdfjYjJ5Jp+Dfy0D/CLjsLOPTpXzdxwlNMqRj+vPbTcP0nAHgjWv1maDqcEq6u5olw==}
     dependencies:
+      '@yr/monotone-cubic-spline': 1.0.3
       svg.draggable.js: 2.2.2
       svg.easing.js: 2.0.0
       svg.filter.js: 2.0.2
@@ -5535,13 +5540,13 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
-  /react-apexcharts@1.4.1(apexcharts@3.41.1)(react@18.3.1):
+  /react-apexcharts@1.4.1(apexcharts@3.53.0)(react@18.3.1):
     resolution: {integrity: sha512-G14nVaD64Bnbgy8tYxkjuXEUp/7h30Q0U33xc3AwtGFijJB9nHqOt1a6eG0WBn055RgRg+NwqbKGtqPxy15d0Q==}
     peerDependencies:
       apexcharts: ^3.41.0
       react: '>=0.13'
     dependencies:
-      apexcharts: 3.41.1
+      apexcharts: 3.53.0
       prop-types: 15.8.1
       react: 18.3.1
     dev: false
