@@ -6,11 +6,6 @@ on:
 jobs:
   build-docker:
     runs-on: ubuntu-latest
-    env:
-      MYREGISTRY: 私有仓库
-      MYIMAGE: 镜像名
-      MYCONTAINER: 容器名
-      MYPORT: 端口号
     steps:
       - uses: actions/checkout@master
       - name: Checkout repository code
