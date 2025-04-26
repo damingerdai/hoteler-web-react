@@ -19,12 +19,6 @@ import { useAppDispatch, useAppSelector } from '../lib/reduxHooks';
 import { fetchUser } from '../slices/UserSlice';
 import { siderbarAtom } from '../atom';
 
-declare global {
-  interface Document {
-    startViewTransition: (params: () => void) => { ready: Promise<void> };
-  }
-}
-
 interface NavbarProps {
   showHamburgerIcon?: boolean;
 }
