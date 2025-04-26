@@ -1,0 +1,25 @@
+name: Build and Push Docker Image
+on:
+  push:
+    branches: [master]
+
+jobs:
+  build-docker:
+    runs-on: ubuntu-latest
+    env:
+      MYREGISTRY: 私有仓库
+      MYIMAGE: 镜像名
+      MYCONTAINER: 容器名
+      MYPORT: 端口号
+    steps:
+      - uses: actions/checkout@master
+      - name: Checkout repository code
+        uses: https://gitea.com/actions/checkout@v4
+
+      # Container build
+      - name: Build docker
+        id: build-docker
+        run: |
+          docker build . -t damingerdai/hoteler-web-react:${{ github.sha }} -f Dockerfile
+      - name: Image digest for docker
+        run: echo ${{ steps.build-docker.outputs.digest }}
