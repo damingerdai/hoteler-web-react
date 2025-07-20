@@ -1,4 +1,3 @@
-import { ChakraProvider, ColorModeScript } from '@chakra-ui/react';
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
@@ -6,19 +5,18 @@ import './index.scss';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { store } from './store';
-import theme from './theme';
+import { UIProvider } from './providers';
 import { ToastContainer } from './components/Toast';
 
 const container = document.getElementById('root');
 const root = createRoot(container!);
 const app = (
   <React.StrictMode>
-    <ColorModeScript initialColorMode={theme.config.initialColorMode} />
     <Provider store={store}>
-      <ChakraProvider theme={theme}>
+      <UIProvider>
         <App />
         <ToastContainer />
-      </ChakraProvider>
+      </UIProvider>
     </Provider>
   </React.StrictMode>
 );
