@@ -12,7 +12,6 @@ import React, { useState } from 'react';
 import { useAppDispatch } from '../lib/reduxHooks';
 import { request } from '../lib/request';
 import { fetchRooms, hideRoomById } from '../slices/RoomSlice';
-import { defaultToastOptions } from '../theme';
 import { CommonResponse } from '../types';
 import { Room } from '../types/room';
 import AddCustomerRoomModal from './AddCustomerRoomModal';
