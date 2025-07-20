@@ -1,4 +1,8 @@
-module.exports = {
+/**
+ * @filename: lint-staged.config.js
+ * @type {import('lint-staged').Configuration}
+ */
+export default {
   '**/*.ts?(x)': filenames =>
     filenames.length > 0
       ? 'eslint src/ --ext ts,.tsx --fix'
