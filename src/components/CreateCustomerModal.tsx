@@ -19,7 +19,7 @@ import * as Yup from 'yup';
 import { Form, Formik } from 'formik';
 import React from 'react';
 import { request } from '../lib/request';
-import { defaultToastOptions } from '../theme';
+// import { defaultToastOptions } from '../theme';
 import { CommonResponse } from '../types';
 
 interface CreateCustomerModalProps {
@@ -63,7 +63,7 @@ const CreateCustomerModal: React.FC<CreateCustomerModalProps> = (props) => {
         title: '创建客户成功',
         description: '创建客户成功🚀',
         status: 'success',
-        ...defaultToastOptions,
+        //...defaultToastOptions,
       });
       onClose(true);
     }

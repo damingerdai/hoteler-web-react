@@ -6,7 +6,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { store } from './store';
 import { UIProvider } from './providers';
-import { ToastContainer } from './components/Toast';
+import { Toaster } from "@/components/ui/toaster"
 
 const container = document.getElementById('root');
 const root = createRoot(container!);
@@ -15,7 +15,7 @@ const app = (
     <Provider store={store}>
       <UIProvider>
         <App />
-        <ToastContainer />
+        <Toaster />
       </UIProvider>
     </Provider>
   </React.StrictMode>

@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import {
   Avatar,
-  Box, ChakraProps, Menu, MenuButton, MenuItem, MenuList, Portal,
+  Box, BoxProps, Button, Menu, Portal,
 } from '@chakra-ui/react';
 import React, { useEffect } from 'react';
 import { MdExitToApp } from 'react-icons/md';
@@ -10,8 +10,9 @@ import { useAppDispatch, useAppSelector } from '../lib/reduxHooks';
 import { logout as requestLogout } from '../lib/request';
 import { clearToken } from '../slices/TokenSlice';
 import { fetchUser, resetState } from '../slices/UserSlice';
+import { MenuTrigger, MenuItem } from './ui/menu';
 
-const UserProfile: React.FC<ChakraProps> = (props) => {
+const UserProfile: React.FC<BoxProps> = (props) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const token = useAppSelector((state) => state.token);
@@ -35,16 +36,42 @@ const UserProfile: React.FC<ChakraProps> = (props) => {
     <Box {...props}>
       {username
         && (
-          <Menu>
-            <MenuButton>
-              <Avatar size='xs' name={username} />
-            </MenuButton>
+          <Menu.Root>
+            <MenuTrigger>
+              <Button variant="outline" size="sm">
+                       <Avatar.Root>
+               <Avatar.Fallback name={username} />
+                {/* <Avatar.Image src="https://bit.ly/sage-adebayo" /> */}
+               </Avatar.Root>
+              </Button>
+            </MenuTrigger>
             <Portal>
-              <MenuList>
-                <MenuItem icon={<MdExitToApp />} onClick={() => logout()}>登出</MenuItem>
-              </MenuList>
+              <Menu.Positioner>
+                <Menu.Content>
+                    <MenuItem onClick={() => logout()}>登出</MenuItem>
+  
+                </Menu.Content>
+              </Menu.Positioner>
             </Portal>
-          </Menu>
+          </Menu.Root>
+          // <Menu.Root>
+          //   <Menu.Trigger asChild>
+          //     <Button variant="outline" size="sm">
+          //       Open
+          //     </Button>
+          //   </Menu.Trigger>
+          //   <MenuButton>
+          //     <Avatar.Root>
+          //       <Avatar.Fallback name={username} />
+          //       {/* <Avatar.Image src="https://bit.ly/sage-adebayo" /> */}
+          //     </Avatar.Root>
+          //   </MenuButton>
+          //   <Portal>
+          //     <MenuList>
+          //       <MenuItem icon={<MdExitToApp />} onClick={() => logout()}>登出</MenuItem>
+          //     </MenuList>
+          //   </Portal>
+          // </Menu.Root>
         )}
     </Box>
   );

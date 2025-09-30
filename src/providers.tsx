@@ -1,8 +1,7 @@
-import { ChakraProvider } from '@chakra-ui/react';
-import { system } from './theme';
+import { Provider } from "@/components/ui/provider"
 
 export const UIProvider = ({ children }: { children: React.ReactNode }) => (
-  <ChakraProvider value={system}>
+  <Provider >
     {children}
-  </ChakraProvider>
+  </Provider>
 );

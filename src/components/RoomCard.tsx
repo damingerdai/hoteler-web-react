@@ -57,7 +57,7 @@ const RoomCard: React.FC<RoomCardProps> = (props) => {
         title: '删除房间成功',
         description: '删除房间成功🚀',
         status: 'success',
-        ...defaultToastOptions,
+        //...defaultToastOptions,
       });
       dispatch(hideRoomById(roomId));
     }

@@ -3,7 +3,6 @@ import {
   FlexProps,
   Icon,
   Link,
-  useColorModeValue,
 } from '@chakra-ui/react';
 import * as React from 'react';
 import { IconType } from 'react-icons/lib';
@@ -19,7 +18,7 @@ const NavItem: React.FC<React.PropsWithChildren<NavItemProps>> = ({
   children,
   ...rest
 }) => {
-  const hoverColor = useColorModeValue('black', 'white');
+  const hoverColor = 'black'; //useColorModeValue('black', 'white');
 
   return (
     <Link

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { createBrowserRouter, Navigate } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 import ErrorBoundary from './components/ErrorBoundary';
-import { CommonLayout, LoginLayout } from './components/Layout';
 import { withSuspense } from './components/WithSuspense';
 
 const Dashboard = React.lazy(() => import('./pages/Dashboard'));
@@ -14,36 +14,37 @@ const Forbidden = React.lazy(() => import('./pages/Forbidden'));
 const NotFound = React.lazy(() => import('./pages/NotFound'));
 
 const Router = createBrowserRouter([
+  // {
+  //   path: '/',
+  //   element: <CommonLayout />,
+  //   errorElement: <ErrorBoundary />,
+  //   children: [
+  //     {
+  //       path: '/',
+  //       element: <Navigate replace to='/login' />,
+  //     },
+  //     {
+  //       path: 'dashboard',
+  //       element: withSuspense(<Dashboard />),
+  //     },
+  //     {
+  //       path: 'customer',
+  //       element: withSuspense(<Customer />),
+  //     },
+  //     {
+  //       path: 'room',
+  //       element: withSuspense(<Room />),
+  //     },
+  //     {
+  //       path: 'user',
+  //       element: withSuspense(<User />),
+  //     },
+  //   ],
+  // },
   {
     path: '/',
-    element: <CommonLayout />,
-    errorElement: <ErrorBoundary />,
-    children: [
-      {
-        path: '/',
-        element: <Navigate replace to='/login' />,
-      },
-      {
-        path: 'dashboard',
-        element: withSuspense(<Dashboard />),
-      },
-      {
-        path: 'customer',
-        element: withSuspense(<Customer />),
-      },
-      {
-        path: 'room',
-        element: withSuspense(<Room />),
-      },
-      {
-        path: 'user',
-        element: withSuspense(<User />),
-      },
-    ],
-  },
-  {
-    path: '/',
-    element: <LoginLayout />,
+    // element: <LoginLayout />,
+    element: <div><Outlet /></div>,
     errorElement: <ErrorBoundary />,
     children: [
       {

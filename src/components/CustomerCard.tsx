@@ -14,7 +14,7 @@ import React from 'react';
 import { useAppDispatch } from '../lib/reduxHooks';
 import { request } from '../lib/request';
 import { fetchCustomers } from '../slices/CustomerSlice';
-import { defaultToastOptions } from '../theme';
+// import { defaultToastOptions } from '../theme';
 import { CommonResponse, Customer } from '../types';
 import ConfirmModal from './ConfirmModal';
 import EditCustomerModal from './EditCustomerModal';
@@ -49,7 +49,6 @@ const CustomerCard: React.FC<CustomerCardProps> = ({ customer, deleteCustomerCha
         title: '删除客户成功',
         description: '删除客户成功🚀',
         status: 'success',
-        ...defaultToastOptions,
       });
       dispatch(fetchCustomers());
     }

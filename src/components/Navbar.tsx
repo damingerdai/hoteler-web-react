@@ -1,16 +1,15 @@
-import { HamburgerIcon, MoonIcon, SunIcon } from '@chakra-ui/icons';
 import {
   Flex,
   Button,
   Image,
   Text,
-  useColorMode,
   Spacer,
   Tooltip,
   IconButton,
 } from '@chakra-ui/react';
 import * as React from 'react';
 import { useEffect } from 'react';
+import { GiHamburgerMenu } from 'react-icons/gi';
 import { useAtom } from 'jotai';
 import logo from '../react-logo.svg';
 import GithubIcon from './GithubIcon';
@@ -26,47 +25,47 @@ interface NavbarProps {
 const Navbar: React.FC<NavbarProps> = ({ showHamburgerIcon = false }) => {
   const dispatch = useAppDispatch();
   const token = useAppSelector((state) => state.token);
-  const { colorMode, toggleColorMode } = useColorMode();
+  // const { colorMode, toggleColorMode } = useColorMode();
   const [siderbar, setSiderbar] = useAtom(siderbarAtom);
 
-  const viewTransitionAnimate = (
-    event: React.MouseEvent<HTMLButtonElement>,
-  ) => {
-    const x = event.clientX;
-    const y = event.clientY;
-    const endRadius = Math.hypot(
-      // eslint-disable-next-line no-restricted-globals
-      Math.max(x, innerWidth - x),
-      // eslint-disable-next-line no-restricted-globals
-      Math.max(y, innerHeight - y),
-    );
-    const isDark = colorMode === 'dark';
-    const root = document.documentElement;
-    const transition = document.startViewTransition(() => {
-      root.classList.remove(isDark ? 'chakra-ui-dark' : 'chakra-ui-light');
-      root.classList.add(!isDark ? 'chakra-ui-dark' : 'chakra-ui-light');
-    });
+  // const viewTransitionAnimate = (
+  //   event: React.MouseEvent<HTMLButtonElement>,
+  // ) => {
+  //   const x = event.clientX;
+  //   const y = event.clientY;
+  //   const endRadius = Math.hypot(
+  //     // eslint-disable-next-line no-restricted-globals
+  //     Math.max(x, innerWidth - x),
+  //     // eslint-disable-next-line no-restricted-globals
+  //     Math.max(y, innerHeight - y),
+  //   );
+  //   const isDark = colorMode === 'dark';
+  //   const root = document.documentElement;
+  //   const transition = document.startViewTransition(() => {
+  //     root.classList.remove(isDark ? 'chakra-ui-dark' : 'chakra-ui-light');
+  //     root.classList.add(!isDark ? 'chakra-ui-dark' : 'chakra-ui-light');
+  //   });
 
-    transition.ready.then(() => {
-      const clipPath = [
-        `circle(0px at ${x}px ${y}px)`,
-        `circle(${endRadius}px at ${x}px ${y}px)`,
-      ];
-      document.documentElement.animate(
-        {
-          clipPath: isDark ? [...clipPath].reverse() : clipPath,
-        },
-        {
-          duration: 200,
-          easing: 'ease-in',
-          pseudoElement: isDark
-            ? '::view-transition-old(root)'
-            : '::view-transition-new(root)',
-        },
-      );
-      toggleColorMode();
-    });
-  };
+  //   transition.ready.then(() => {
+  //     const clipPath = [
+  //       `circle(0px at ${x}px ${y}px)`,
+  //       `circle(${endRadius}px at ${x}px ${y}px)`,
+  //     ];
+  //     document.documentElement.animate(
+  //       {
+  //         clipPath: isDark ? [...clipPath].reverse() : clipPath,
+  //       },
+  //       {
+  //         duration: 200,
+  //         easing: 'ease-in',
+  //         pseudoElement: isDark
+  //           ? '::view-transition-old(root)'
+  //           : '::view-transition-new(root)',
+  //       },
+  //     );
+  //     toggleColorMode();
+  //   });
+  // };
 
   useEffect(() => {
     if (token && token.accessToken) {
@@ -92,20 +91,21 @@ const Navbar: React.FC<NavbarProps> = ({ showHamburgerIcon = false }) => {
           bg='teal.500'
           _hover={{ bg: 'teal.500' }}
           _active={{ bg: 'teal.500' }}
-          icon={<HamburgerIcon />}
           aria-label='hamburger menu'
           mr={2}
           onClick={() => {
             setSiderbar(!siderbar);
           }}
-        />
+        >
+          <GiHamburgerMenu/>
+        </IconButton>
       )}
       <Image src={logo} w='26px' h='26px' />
       <Text ml='4px'>Hoteler</Text>
 
       <Spacer />
 
-      <Tooltip label='切换主题'>
+      {/* <Tooltip label='切换主题'>
         <Button
           bg='teal.500'
           variant='ghost'
@@ -122,7 +122,7 @@ const Navbar: React.FC<NavbarProps> = ({ showHamburgerIcon = false }) => {
         >
           {colorMode === 'light' ? <SunIcon /> : <MoonIcon />}
         </Button>
-      </Tooltip>
+      </Tooltip> */}
       <GithubIcon />
       <UserProfile ml={4} />
     </Flex>

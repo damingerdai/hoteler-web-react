@@ -25,7 +25,6 @@ import * as Yup from 'yup';
 import { Room } from '../types/room';
 import { request } from '../lib/request';
 import { CommonResponse } from '../types';
-import { defaultToastOptions } from '../theme';
 
 interface EditRoomModalProps {
   room: Room;
@@ -63,7 +62,6 @@ const EditRoomModal: React.FC<EditRoomModalProps> = ({
         title: '修改房间成功',
         description: '修改房间成功🚀',
         status: 'success',
-        ...defaultToastOptions,
       });
     }
     closeEditRoomModal(true);

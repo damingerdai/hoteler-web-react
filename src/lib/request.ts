@@ -1,7 +1,7 @@
 import axios, { AxiosRequestConfig } from 'axios';
-import { toastInstance } from '../components/Toast';
 import { UserToken, UserTokenResponse } from '../types';
 import { toast } from './toast';
+import { toaster } from '@/components/ui/toaster';
 
 function isErrorReponse(error: object): error is Record<'code' | 'message', string> {
   return 'code' in error && 'message' in error;
@@ -37,7 +37,7 @@ client.interceptors.response.use(
     console.error(err);
     const { code, message } = err;
     const toastId = 'NETWORK_ERROR';
-    const isActive = toastInstance.isActive(toastId);
+    const isActive = toaster.isActive(toastId);
     if (isActive) {
       return Promise.reject(err);
     }
@@ -51,10 +51,10 @@ client.interceptors.response.use(
     if (
       (code === 'ECONNABORTED' || message === 'Network Error')
     ) {
-      toastInstance({ ...toastOption });
+      toaster.create({ ...toastOption });
     }
     if (code === 'ERR_BAD_RESPONSE') {
-      toastInstance({ ...toastOption, title: '服务器错误 - 请稍后再试' });
+      toaster.create({ ...toastOption, title: '服务器错误 - 请稍后再试' });
     }
 
     return Promise.reject(err);

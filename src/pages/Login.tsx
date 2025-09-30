@@ -3,10 +3,8 @@ import {
   Button,
   Center,
   Container,
-  FormControl,
-  FormErrorMessage,
-  FormHelperText,
-  FormLabel,
+  Field,
+   Link as ChakraLink,
   Input,
   Text,
 } from '@chakra-ui/react';
@@ -18,7 +16,8 @@ import * as Yup from 'yup';
 import { fetchToken } from '../slices/TokenSlice';
 import { setUsername } from '../slices/UserSlice';
 import { useAppDispatch, useAppSelector } from '../lib/reduxHooks';
-import { PasswordInput } from '@/components/PasswordInput';
+import { PasswordInput } from "@/components/ui/password-input"
+// import { Field, FieldRoot } from '@/components/ui/field';
 
 const Login: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -41,10 +40,8 @@ const Login: React.FC = () => {
     <Container>
       <Center mt={16}>
         <Box boxShadow='base' w='100%' maxWidth='400px' p={2}>
-          <Text as='h1' textAlign='center' size='xl'>
-            {' '}
+          <Text as='h1' textAlign='center'>
             Hoteler系统登录
-            {' '}
           </Text>
           <Formik
             initialValues={initialValues}
@@ -68,11 +65,14 @@ const Login: React.FC = () => {
               /* and other goodies */
             }) => (
               <form onSubmit={handleSubmit}>
-                <FormControl
+                <Field.Root
                   marginTop={4}
-                  isInvalid={!!errors.username && touched.username}
+                  invalid={!!errors.username && touched.username}
                 >
-                  <FormLabel htmlFor='username'>用户名</FormLabel>
+                  {/* < htmlFor='username'>用户名</FormLabel> */}
+                  <Field.Label>
+                    用户名 <Field.RequiredIndicator />
+                  </Field.Label>
                   <Input
                     id='username'
                     type='text'
@@ -81,17 +81,20 @@ const Login: React.FC = () => {
                     value={values.username}
                   />
                   {!!errors.username && touched.username ? (
-                    <FormErrorMessage>{errors.username}</FormErrorMessage>
+                    <Field.ErrorText>{errors.username}</Field.ErrorText>
                   ) : (
-                    <FormHelperText>请输入你的用户名</FormHelperText>
+                    <Field.HelperText>请输入你的用户名</Field.HelperText>
                   )}
-                </FormControl>
+                </Field.Root>
 
-                <FormControl
+                <Field.Root
                   marginTop={4}
-                  isInvalid={!!errors.password && touched.password}
+                  invalid={!!errors.password && touched.password}
                 >
-                  <FormLabel htmlFor='password'>密码</FormLabel>
+
+                  <Field.Label>
+                    密码 <Field.RequiredIndicator />
+                  </Field.Label>
                   <PasswordInput
                     id='password'
                     onChange={handleChange}
@@ -99,19 +102,19 @@ const Login: React.FC = () => {
                     value={values.password}
                   />
                   {errors.password && touched.password ? (
-                    <FormErrorMessage>请输入你的密码</FormErrorMessage>
+                    <Field.ErrorText>请输入你的密码</Field.ErrorText>
                   ) : (
-                    <FormHelperText>请输入你的密码</FormHelperText>
+                    <Field.HelperText>请输入你的密码</Field.HelperText>
                   )}
-                </FormControl>
+                </Field.Root>
                 <Button
                   w='100%'
                   mt={2}
                   type='submit'
                   colorScheme='teal'
-                  isLoading={isSubmitting}
+                  loading ={isSubmitting}
                   loadingText='提交中'
-                  isDisabled={(touched && !isValid) || isSubmitting}
+                  disabled={(touched && !isValid) || isSubmitting}
                 >
                   登陆
                 </Button>
@@ -120,8 +123,8 @@ const Login: React.FC = () => {
           </Formik>
           <Box mt={8}>
             没有账号?
-            <Box as='span' ml={2} color='teal.500'>
-              <RouteLink to='/register'>点此创建一个</RouteLink>
+            <Box as='span' ml={2}>
+              <ChakraLink asChild textDecoration='underline'><RouteLink to='/register'>点此创建一个</RouteLink></ChakraLink>
             </Box>
           </Box>
         </Box>

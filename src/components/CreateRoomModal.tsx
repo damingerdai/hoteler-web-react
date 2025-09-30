@@ -24,7 +24,7 @@ import * as Yup from 'yup';
 import React from 'react';
 import { CommonResponse } from '../types';
 import { request } from '../lib/request';
-import { defaultToastOptions } from '../theme';
+// import { defaultToastOptions } from '../theme';
 
 interface CreateRoomModalProps {
   isOpen: boolean;
@@ -56,7 +56,7 @@ const CreateRoomModal: React.FC<CreateRoomModalProps> = (props) => {
         title: '创建房间成功',
         description: '创建房间成功🚀',
         status: 'success',
-        ...defaultToastOptions,
+        //...defaultToastOptions,
       });
     }
     onClose(true);

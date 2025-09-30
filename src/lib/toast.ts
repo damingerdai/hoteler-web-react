@@ -1,16 +1,12 @@
-import { ToastPosition } from '@chakra-ui/react';
-import { toastInstance } from '../components/Toast';
+import { toaster } from "@/components/ui/toaster"
 
 export const toast = {
 
-  error: (title: string, description: string, position: ToastPosition = 'top-right') => {
-    toastInstance({
+  error: (title: string, description: string, position: string = 'top-right') => {
+    toaster.create({
       title,
       description,
-      position,
-      status: 'error',
-      duration: 9000,
-      isClosable: true,
-    });
+      type: 'error'
+    })
   },
 };

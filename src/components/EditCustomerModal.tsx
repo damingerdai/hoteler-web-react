@@ -19,7 +19,7 @@ import { Formik, Form } from 'formik';
 import React from 'react';
 import * as Yup from 'yup';
 import { request } from '../lib/request';
-import { defaultToastOptions } from '../theme';
+// import { defaultToastOptions } from '../theme';
 import { CommonResponse, Customer } from '../types';
 
 interface EditCustomerModalProps {
@@ -53,7 +53,7 @@ const EditCustomerModal: React.FC<EditCustomerModalProps> = (props) => {
         title: '修改客户成功',
         description: '修改客户成功🚀',
         status: 'success',
-        ...defaultToastOptions,
+        //...defaultToastOptions,
       });
       onClose(true);
     }

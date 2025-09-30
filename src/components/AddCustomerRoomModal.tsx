@@ -22,7 +22,7 @@ import { format } from '../lib/date';
 import { useAppDispatch, useAppSelector } from '../lib/reduxHooks';
 import { request } from '../lib/request';
 import { fetchCustomers } from '../slices/CustomerSlice';
-import { defaultToastOptions } from '../theme';
+// import { defaultToastOptions } from '../theme';
 import { CommonResponse } from '../types';
 import { Room } from '../types/room';
 
@@ -74,7 +74,7 @@ const AddCustomerRoomModal: React.FC<AddCustomerRoomModalProps> = (props) => {
         title: '入住成功',
         description: '入住客户成功🚀',
         status: 'success',
-        ...defaultToastOptions,
+        // ...defaultToastOptions,
       });
       onClose();
     }
