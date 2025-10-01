@@ -3,10 +3,7 @@ import {
   Button,
   Center,
   Container,
-  FormControl,
-  FormErrorMessage,
-  FormHelperText,
-  FormLabel,
+  Field,
   Input,
   Text,
 } from '@chakra-ui/react';
@@ -14,10 +11,10 @@ import { Formik } from 'formik';
 import * as React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
-import { toastInstance } from '../components/Toast';
 import { createDomConfett } from '../components/DomConfett';
 import { request } from '../lib/request';
-import { PasswordInput } from '@/components/PasswordInput';
+import { toaster } from '@/components/ui/toaster';
+import { PasswordInput } from '@/components/ui/password-input';
 
 const Register: React.FC = () => {
   const navigate = useNavigate();
@@ -35,7 +32,7 @@ const Register: React.FC = () => {
     <Container>
       <Center mt={16}>
         <Box boxShadow='base' w='100%' maxWidth='400px' p={2}>
-          <Text as='h1' textAlign='center' size='xl'>
+          <Text as='h1' textAlign='center'>
             <DomConfettContainer>
               Hoteler系统注册
             </DomConfettContainer>
@@ -65,15 +62,16 @@ const Register: React.FC = () => {
                 },
               });
 
+              console.log(res);
+
               if (res.status !== -1) {
-                navigate('/login');
-                toastInstance({
+                setTimeout(() => {
+                   navigate('/login');
+                }, 3000);
+                toaster.create({
                   title: '成功',
                   description: '用户创建成功',
-                  position: 'top-right',
-                  status: 'success',
-                  duration: 9000,
-                  isClosable: true,
+                  type: 'success'
                 });
                 confett();
               }
@@ -84,79 +82,83 @@ const Register: React.FC = () => {
               errors,
               touched,
               values,
+              isValid,
               handleBlur,
               handleChange,
               handleSubmit,
               isSubmitting,
             }) => (
               <form onSubmit={handleSubmit}>
-                <FormControl
+                <Field.Root
+                id="username"
+                  name="username"
                   marginTop={4}
-                  isInvalid={!!errors.username && touched.username}
+                  invalid={!!errors.username && touched.username}
                 >
-                  <FormLabel htmlFor='username'>用户名</FormLabel>
+                  <Field.Label >用户名</Field.Label>
                   <Input
-                    id='username'
                     type='text'
                     onChange={handleChange}
                     onBlur={handleBlur}
                     value={values.username}
                   />
                   {!!errors.username && touched.username ? (
-                    <FormErrorMessage>{errors.username}</FormErrorMessage>
+                    <Field.ErrorText>{errors.username}</Field.ErrorText>
                   ) : (
-                    <FormHelperText>请输入你的用户名</FormHelperText>
+                    <Field.HelperText>请输入你的用户名</Field.HelperText>
                   )}
-                </FormControl>
+                </Field.Root>
 
-                <FormControl
+                <Field.Root
+                 id='password'
+                 nme="password"
                   marginTop={4}
-                  isInvalid={!!errors.password && touched.password}
+                  invalid={!!errors.password && touched.password}
                 >
-                  <FormLabel htmlFor='password'>密码</FormLabel>
+                  <Field.Label >密码</Field.Label>
                   <PasswordInput
-                    id='password'
                     onChange={handleChange}
                     onBlur={handleBlur}
                     value={values.password}
                   />
                   {errors.password && touched.password ? (
-                    <FormErrorMessage>{errors.username}</FormErrorMessage>
+                    <Field.ErrorText>{errors.username}</Field.ErrorText>
                   ) : (
-                    <FormHelperText>请输入你的密码</FormHelperText>
+                    <Field.HelperText>请输入你的密码</Field.HelperText>
                   )}
-                </FormControl>
+                </Field.Root>
 
-                <FormControl
+                <Field.Root
+                  id='confirmPassword'
+                    name="confirmPassword"
                   marginTop={4}
-                  isInvalid={
+                  invalid={
                     !!errors.confirmPassword && touched.confirmPassword
                   }
                 >
-                  <FormLabel htmlFor='confirmPassword'>确认密码</FormLabel>
+                  <Field.Label >确认密码</Field.Label>
                   <PasswordInput
-                    id='confirmPassword'
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    value={values.password}
+                    value={values.confirmPassword}
                   />
                   {errors.confirmPassword && touched.confirmPassword ? (
-                    <FormErrorMessage>
+                    <Field.ErrorText>
                       {errors.confirmPassword}
-                    </FormErrorMessage>
+                    </Field.ErrorText>
                   ) : (
-                    <FormHelperText>请确认你的密码</FormHelperText>
+                    <Field.HelperText>请确认你的密码</Field.HelperText>
                   )}
-                </FormControl>
+                </Field.Root>
 
                 <Button
                   w='100%'
                   mt={2}
                   type='submit'
                   colorScheme='teal'
-                  isLoading={isSubmitting}
+                  loading={isSubmitting}
                   loadingText='提交中'
-                  disabled={isSubmitting}
+                   disabled={(touched && !isValid) || isSubmitting}
                 >
                   注册
                 </Button>

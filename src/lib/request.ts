@@ -37,7 +37,7 @@ client.interceptors.response.use(
     console.error(err);
     const { code, message } = err;
     const toastId = 'NETWORK_ERROR';
-    const isActive = toaster.isActive(toastId);
+    const isActive = toaster.isVisible(toastId);
     if (isActive) {
       return Promise.reject(err);
     }
@@ -67,14 +67,14 @@ export async function request<T = any>(options: AxiosRequestConfig): Promise<T> 
     const { data } = await client(options);
     if (data.status === -1) {
       const { code, message } = data.error;
-      const active = toastInstance.isActive(code);
+      const active = toaster.isVisible(code);
       if (!active) {
-        toastInstance({
+        toaster.create({
           id: code,
           title: '错误',
           description: message,
           position: 'top-right',
-          status: 'error',
+          type: 'error',
           duration: 2000,
           isClosable: true,
         });

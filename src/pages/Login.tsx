@@ -4,7 +4,7 @@ import {
   Center,
   Container,
   Field,
-   Link as ChakraLink,
+  Link as ChakraLink,
   Input,
   Text,
 } from '@chakra-ui/react';
@@ -116,15 +116,15 @@ const Login: React.FC = () => {
                   loadingText='提交中'
                   disabled={(touched && !isValid) || isSubmitting}
                 >
-                  登陆
+                  登录
                 </Button>
               </form>
             )}
           </Formik>
           <Box mt={8}>
             没有账号?
-            <Box as='span' ml={2}>
-              <ChakraLink asChild textDecoration='underline'><RouteLink to='/register'>点此创建一个</RouteLink></ChakraLink>
+            <Box as='span' ml={2} color='teal.500'>
+             <RouteLink to='/register'>点此创建一个</RouteLink>
             </Box>
           </Box>
         </Box>
