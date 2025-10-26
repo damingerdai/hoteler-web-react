@@ -6,8 +6,7 @@ import {
   IconButton,
   Text,
   useBreakpointValue,
-  useColorModeValue,
-  Divider,
+  Separator,
 } from '@chakra-ui/react';
 import * as React from 'react';
 import { useEffect, useState } from 'react';
@@ -17,6 +16,7 @@ import { IRoute, Routes } from '../lib/route';
 import { fetchCurrenter } from '../slices/UserFetcher';
 import NavItem from './NavItem';
 import { siderbarAtom } from '../atom';
+import { useColorModeValue } from './ui/color-mode';
 
 const Navgation: React.FC = () => {
   const atomSiderbarStatus = useAtom(siderbarAtom);
@@ -91,10 +91,9 @@ const Navgation: React.FC = () => {
             Hoteler Portal
           </Text>
           <IconButton
-            icon={<CloseButton />}
             onClick={() => setSiderStatus(false)}
             aria-label='close navgation'
-          />
+          ><CloseButton /></IconButton>
         </Flex>
       )}
       <VStack alignItems='normal'>
@@ -105,7 +104,7 @@ const Navgation: React.FC = () => {
                 {r.name}
               </NavItem>
             </Box>
-            <Divider />
+            <Separator />
           </React.Fragment>
         ))}
       </VStack>

@@ -67,11 +67,11 @@ const Navbar: React.FC<NavbarProps> = ({ showHamburgerIcon = false }) => {
   //   });
   // };
 
-  useEffect(() => {
-    if (token && token.accessToken) {
-      dispatch(fetchUser(token.accessToken));
-    }
-  }, [token]);
+  // useEffect(() => {
+  //   if (token && token.accessToken) {
+  //     dispatch(fetchUser(token.accessToken));
+  //   }
+  // }, [token]);
 
   return (
     <Flex
@@ -124,7 +124,7 @@ const Navbar: React.FC<NavbarProps> = ({ showHamburgerIcon = false }) => {
         </Button>
       </Tooltip> */}
       <GithubIcon />
-      <UserProfile ml={4} />
+      {/* <UserProfile ml={4} /> */}
     </Flex>
   );
 };

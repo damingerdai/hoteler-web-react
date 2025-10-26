@@ -2,13 +2,13 @@ import {
   Box,
   Button,
   Center,
-  Divider,
+  Separator,
   Flex,
   useDisclosure,
 } from '@chakra-ui/react';
 import React from 'react';
 import useSWR from 'swr';
-import CreateCustomerModal from '../components/CreateCustomerModal';
+// import CreateCustomerModal from '../components/CreateCustomerModal';
 import CustomerCard from '../components/CustomerCard';
 import GlobalLoading from '../components/GlobalLoading';
 import { ProtectRoute } from '../components/ProtectRoute';
@@ -22,7 +22,7 @@ const Customer: React.FC = () => {
   } = useSWR('api/v1/customers', fetchCustomers);
 
   const {
-    isOpen: isCreateCustomerModalOpen,
+    open: isCreateCustomerModalOpen,
     onOpen: onCreateCustomerModalOpen,
     onClose: onCreateCustomerModalClose,
   } = useDisclosure();
@@ -38,7 +38,7 @@ const Customer: React.FC = () => {
           创建客户
         </Button>
       </Flex>
-      <Divider />
+      <Separator />
       <Flex
         flexDir='row'
         flexWrap='wrap'
@@ -70,7 +70,7 @@ const Customer: React.FC = () => {
           ))
         )}
       </Flex>
-      <CreateCustomerModal
+      {/* <CreateCustomerModal
         isOpen={isCreateCustomerModalOpen}
         onClose={(res) => {
           onCreateCustomerModalClose();
@@ -78,7 +78,7 @@ const Customer: React.FC = () => {
             mutate();
           }
         }}
-      />
+      /> */}
     </Box>
   );
 };

@@ -1,8 +1,11 @@
-/* eslint-disable react/jsx-props-no-spreading */
-import {
-  Box, Fade, Flex, Text, useColorModeValue,
-} from '@chakra-ui/react';
-import { FoldingCube } from './FoldingCube';
+// /* eslint-disable react/jsx-props-no-spreading */
+// import {
+//   Box, Fade, Flex, Text, useColorModeValue,
+// } from '@chakra-ui/react';
+// import { FoldingCube } from './FoldingCube';
+
+import { Box, Flex } from "@chakra-ui/react";
+import { useColorModeValue } from "./ui/color-mode";
 
 const GlobalLoading = ({ ...rest }) => {
   const bg = useColorModeValue('white', 'gray.700');
@@ -22,17 +25,14 @@ const GlobalLoading = ({ ...rest }) => {
       px='1rem'
       {...rest}
     >
-      <FoldingCube />
-      <Fade in>
-        <Box mt='1rem'>
-          <Box textAlign='center'>
-            <Text>请稍等一下</Text>
-            <Text color='teal.500' fontWeight='bold'>
-              正在加载数据。。。
-            </Text>
+      <Box mt='1rem'>
+        <Box textAlign='center'>
+          <Box>请稍等一下</Box>
+          <Box color='teal.500' fontWeight='bold'>
+            正在加载数据。。。
           </Box>
         </Box>
-      </Fade>
+      </Box>
     </Flex>
   );
 };

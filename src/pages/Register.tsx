@@ -61,9 +61,6 @@ const Register: React.FC = () => {
                   password,
                 },
               });
-
-              console.log(res);
-
               if (res.status !== -1) {
                 setTimeout(() => {
                    navigate('/login');

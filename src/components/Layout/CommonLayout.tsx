@@ -16,6 +16,7 @@ export const CommonLayout = React.memo(() => (
         <Outlet />
       </Box>
     </Box>
+    <Outlet />
   </>
 ));
 

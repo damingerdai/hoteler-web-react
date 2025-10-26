@@ -1,7 +1,6 @@
 import {
   useBreakpointValue,
   Drawer,
-  DrawerOverlay,
   DrawerContent,
   Box,
 } from '@chakra-ui/react';
@@ -16,16 +15,16 @@ const Sidebar: React.FC<React.PropsWithChildren> = ({ children }) => {
     { ssr: false },
   );
 
-  if (isMobile) {
-    return (
-      <Drawer isOpen={siderbar} placement='left' onClose={() => setSiderbar(false)} returnFocusOnClose={false} autoFocus={false}>
-        <DrawerOverlay />
-        <DrawerContent>
-          {children}
-        </DrawerContent>
-      </Drawer>
-    );
-  }
+  // if (isMobile) {
+  //   return (
+  //     <Drawer.Root open={siderbar} placement='start' onClose={() => setSiderbar(false)} returnFocusOnClose={false} autoFocus={false}>
+  //       <DrawerOverlay />
+  //       <DrawerContent>
+  //         {children}
+  //       </DrawerContent>
+  //     </Drawer.Root>
+  //   );
+  // }
 
   return (
     <Box

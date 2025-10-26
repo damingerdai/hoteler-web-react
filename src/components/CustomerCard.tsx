@@ -8,7 +8,6 @@ import {
   Stack,
   Text,
   useDisclosure,
-  useToast,
 } from '@chakra-ui/react';
 import React from 'react';
 import { useAppDispatch } from '../lib/reduxHooks';
@@ -16,8 +15,9 @@ import { request } from '../lib/request';
 import { fetchCustomers } from '../slices/CustomerSlice';
 // import { defaultToastOptions } from '../theme';
 import { CommonResponse, Customer } from '../types';
-import ConfirmModal from './ConfirmModal';
-import EditCustomerModal from './EditCustomerModal';
+// import ConfirmModal from './ConfirmModal';
+// import EditCustomerModal from './EditCustomerModal';
+import { toaster } from "@/components/ui/toaster"
 
 interface CustomerCardProps {
   customer: Customer;
@@ -26,14 +26,13 @@ interface CustomerCardProps {
 
 const CustomerCard: React.FC<CustomerCardProps> = ({ customer, deleteCustomerChange }) => {
   const dispatch = useAppDispatch();
-  const toast = useToast();
   const {
-    isOpen: isConfirmModalOpen,
+    open: isConfirmModalOpen,
     onOpen: onConfirmModalOpen,
     onClose: onConfirmModalClose,
   } = useDisclosure();
   const {
-    isOpen: isEditCustomerModalOpen,
+    open: isEditCustomerModalOpen,
     onOpen: onEditCustomerModalOpen,
     onClose: onEditCustomerModalClose,
   } = useDisclosure();
@@ -45,7 +44,7 @@ const CustomerCard: React.FC<CustomerCardProps> = ({ customer, deleteCustomerCha
     });
     if (res.status === 200) {
       onConfirmModalClose();
-      toast({
+      toaster({
         title: '删除客户成功',
         description: '删除客户成功🚀',
         status: 'success',
@@ -63,7 +62,9 @@ const CustomerCard: React.FC<CustomerCardProps> = ({ customer, deleteCustomerCha
         _hover={{ transform: 'scale(1.05)', boxShadow: 'lg' }}
       >
         <Flex direction='row'>
-          <Avatar name={customer.name} />
+          <Avatar.Root>
+            <Avatar.Fallback name={customer.name} />
+          </Avatar.Root>
           <Text ml={2} mt={2} fontSize='xl' fontWeight='bold'>
             {customer.name}
             {customer.gender === 'F' && (
@@ -91,7 +92,7 @@ const CustomerCard: React.FC<CustomerCardProps> = ({ customer, deleteCustomerCha
             <Text>{customer.cardId}</Text>
           </Flex>
         </Stack>
-        <Stack direction='row' spacing={4} mt={8}>
+        <Stack direction='row' mt={8}>
           <Button colorScheme='teal' variant='solid' onClick={onEditCustomerModalOpen}>
             修改
           </Button>
@@ -100,7 +101,7 @@ const CustomerCard: React.FC<CustomerCardProps> = ({ customer, deleteCustomerCha
           </Button>
         </Stack>
       </Box>
-      <ConfirmModal
+      {/* <ConfirmModal
         isOpen={isConfirmModalOpen}
         onClose={(confirm) => {
           if (confirm === true && customer.id) {
@@ -114,8 +115,8 @@ const CustomerCard: React.FC<CustomerCardProps> = ({ customer, deleteCustomerCha
         }}
         title='确定删除'
         description='一旦删除，将不能够恢复'
-      />
-      <EditCustomerModal
+      /> */}
+      {/* <EditCustomerModal
         isOpen={isEditCustomerModalOpen}
         customer={customer}
         onClose={(res) => {
@@ -124,7 +125,7 @@ const CustomerCard: React.FC<CustomerCardProps> = ({ customer, deleteCustomerCha
             dispatch(fetchCustomers());
           }
         }}
-      />
+      /> */}
     </>
   );
 };
