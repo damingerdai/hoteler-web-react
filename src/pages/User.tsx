@@ -1,28 +1,22 @@
 import {
   Box,
   Button,
-  Divider,
+  Separator,
   Flex,
   Table,
-  TableContainer,
-  Tbody,
-  Td,
-  Th,
-  Thead,
-  Tr,
   useDisclosure,
 } from '@chakra-ui/react';
 import * as React from 'react';
 import useSWR from 'swr';
 import { fetchUsers } from '../slices/UserFetcher';
-import { CreateUserModal } from '@/components/CreateUserModal';
+// import { CreateUserModal } from '@/components/CreateUserModal';
 import { Loading } from '@/components/Loading';
 
 const User: React.FC = () => {
   const { data: users, isLoading } = useSWR('api/v1/users', fetchUsers);
 
   const {
-    isOpen: isCreateUserModalOpen,
+    open: isCreateUserModalOpen,
     onOpen: onCreateUserModalOpen,
     onClose: onCreateUserModalClose,
   } = useDisclosure();
@@ -38,34 +32,33 @@ const User: React.FC = () => {
           创建用户
         </Button>
       </Flex>
-      <Divider colorScheme='gray' />
+      <Separator colorScheme='gray' />
       {isLoading && <Loading />}
       {!isLoading && (
         <Box w='100%' boxShadow='md' borderWidth='1px' mt={4}>
-          <TableContainer>
-            <Table variant='simple'>
-              <Thead>
-                <Tr>
-                  <Th>ID</Th>
-                  <Th>用户名</Th>
-                </Tr>
-              </Thead>
-              <Tbody>
+          <Table.Root>
+            <Table.Header>
+              <Table.Row>        
+                  <Table.ColumnHeader>ID</Table.ColumnHeader>
+                  <Table.ColumnHeader>用户名</Table.ColumnHeader>
+                 
+              </Table.Row>
+              </Table.Header>
+              <Table.Body>
                 {users?.map((user) => (
-                  <Tr key={user.id}>
-                    <Td>{user.id}</Td>
-                    <Td>{user.username}</Td>
-                  </Tr>
+                  <Table.Row key={user.id}>
+                    <Table.Cell>{user.id}</Table.Cell>
+                    <Table.Cell>{user.username}</Table.Cell>
+                  </Table.Row>
                 ))}
-              </Tbody>
-            </Table>
-          </TableContainer>
+              </Table.Body>
+          </Table.Root>
         </Box>
       )}
-      <CreateUserModal
+      {/* <CreateUserModal
         isOpen={isCreateUserModalOpen}
         onClose={onCreateUserModalClose}
-      />
+      /> */}
     </Box>
   );
 };

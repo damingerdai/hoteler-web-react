@@ -32,14 +32,14 @@ const Router = createBrowserRouter([
         path: 'customer',
         element: withSuspense(<Customer />),
       },
-      // {
-      //   path: 'room',
-      //   element: withSuspense(<Room />),
-      // },
-      // {
-      //   path: 'user',
-      //   element: withSuspense(<User />),
-      // },
+      {
+        path: 'room',
+        element: withSuspense(<Room />),
+      },
+      {
+        path: 'user',
+        element: withSuspense(<User />),
+      },
     ],
   },
   {

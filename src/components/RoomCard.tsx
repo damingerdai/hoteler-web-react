@@ -6,17 +6,17 @@ import {
   Stack,
   Text,
   useDisclosure,
-  useToast,
 } from '@chakra-ui/react';
 import React, { useState } from 'react';
 import { useAppDispatch } from '../lib/reduxHooks';
 import { request } from '../lib/request';
 import { fetchRooms, hideRoomById } from '../slices/RoomSlice';
 import { CommonResponse } from '../types';
-import { Room } from '../types/room';
-import AddCustomerRoomModal from './AddCustomerRoomModal';
+import { type Room } from '../types/room';
+// import AddCustomerRoomModal from './AddCustomerRoomModal';
 import ConfirmModal from './ConfirmModal';
 import EditRoomModal from './EditRoomModal';
+import { toaster } from "@/components/ui/toaster"
 
 interface RoomCardProps {
   room: Room & { url?: string };
@@ -26,23 +26,22 @@ const RoomCard: React.FC<RoomCardProps> = (props) => {
   const { room } = props;
   const dispatch = useAppDispatch();
 
-  const toast = useToast();
   const [blurValue, setBlurValue] = useState<string>('10px');
 
   const {
-    isOpen: isConfirmModalOpen,
+    open: isConfirmModalOpen,
     onOpen: onConfirmModalOpen,
     onClose: onConfirmModalClose,
   } = useDisclosure();
 
   const {
-    isOpen: isEditRoomModalOpen,
+    open: isEditRoomModalOpen,
     onOpen: onEditRoomModalOpen,
     onClose: onEditRoomModalClose,
   } = useDisclosure();
 
   const {
-    isOpen: isAddCustomerRoomModalOpen,
+    open: isAddCustomerRoomModalOpen,
     onOpen: onAddCustomerRoomModalOpen,
     onClose: onAddCustomerRoomModalClose,
   } = useDisclosure();
@@ -53,7 +52,7 @@ const RoomCard: React.FC<RoomCardProps> = (props) => {
       method: 'delete',
     });
     if (res.status === 200) {
-      toast({
+      toaster({
         title: '删除房间成功',
         description: '删除房间成功🚀',
         status: 'success',
@@ -102,7 +101,7 @@ const RoomCard: React.FC<RoomCardProps> = (props) => {
           />
         </Box>
         <Box mt={4}>
-          <Stack direction='row' spacing={4} align='center'>
+          <Stack direction='row'  align='center'>
             <Button
               colorScheme='teal'
               disabled={isAddCustomerRoomModalOpen}
@@ -127,7 +126,7 @@ const RoomCard: React.FC<RoomCardProps> = (props) => {
           </Stack>
         </Box>
       </Box>
-      <ConfirmModal
+      {/* <ConfirmModal
         isOpen={isConfirmModalOpen}
         onClose={(confirm) => {
           if (confirm === true && room.id) {
@@ -152,7 +151,7 @@ const RoomCard: React.FC<RoomCardProps> = (props) => {
         isOpen={isAddCustomerRoomModalOpen}
         onClose={onAddCustomerRoomModalClose}
         room={room}
-      />
+      /> */}
     </>
   );
 };

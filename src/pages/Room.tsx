@@ -1,5 +1,5 @@
 import {
-  Box, Button, Center, Divider, Flex, useDisclosure,
+  Box, Button, Center, Separator, Flex, useDisclosure,
 } from '@chakra-ui/react';
 import * as React from 'react';
 import useSWR from 'swr';
@@ -17,7 +17,7 @@ const Room: React.FC = () => {
   } = useSWR('/api/v1/rooms', fetchRooms);
 
   const {
-    isOpen: isCreateRoomModalOpen,
+    open: isCreateRoomModalOpen,
     onOpen: onCreateRoomModalOpen,
     onClose: onCreateRoomModalClose,
   } = useDisclosure();
@@ -29,7 +29,7 @@ const Room: React.FC = () => {
           创建房间
         </Button>
       </Flex>
-      <Divider />
+      <Separator />
       <Flex
         flexDir='row'
         flexWrap='wrap'
@@ -67,7 +67,7 @@ const Room: React.FC = () => {
             </Box>
           )))}
       </Flex>
-      <CreateRoomModal
+      {/* <CreateRoomModal
         isOpen={isCreateRoomModalOpen}
         onClose={(res) => {
           onCreateRoomModalClose();
@@ -75,7 +75,7 @@ const Room: React.FC = () => {
             mutate();
           }
         }}
-      />
+      /> */}
     </Box>
   );
 };
