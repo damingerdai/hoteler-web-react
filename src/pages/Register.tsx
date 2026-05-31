@@ -138,7 +138,7 @@ const Register: React.FC = () => {
                     id='confirmPassword'
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    value={values.password}
+                    value={values.confirmPassword}
                   />
                   {errors.confirmPassword && touched.confirmPassword ? (
                     <FormErrorMessage>
