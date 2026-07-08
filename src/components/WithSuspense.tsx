@@ -2,7 +2,7 @@ import * as React from 'react';
 import GlobalLoading from './GlobalLoading';
 
 export const withSuspense = (ui: React.ReactElement) => {
-  const Wrapper = ({ children }: React.PropsWithChildren<{}>): JSX.Element => (
+  const Wrapper = ({ children }: React.PropsWithChildren<{}>): React.JSX.Element => (
     <React.Suspense fallback={<GlobalLoading />}>
       {children}
     </React.Suspense>
