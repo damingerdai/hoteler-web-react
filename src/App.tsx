@@ -1,10 +1,11 @@
-import * as React from 'react';
-import { RouterProvider } from 'react-router-dom';
-import Router from './Router';
-import './App.scss';
+import './App.css';
 
-const App: React.FC = () => (
-  <RouterProvider router={Router} />
-);
+function App() {
+  return (
+    <div className="flex items-center justify-center h-screen">
+      <h1 className="text-4xl font-bold text-gray-800">Hello, World!</h1>
+    </div>
+  );
+}
 
 export default App;
