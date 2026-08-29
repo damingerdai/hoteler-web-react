@@ -14,7 +14,7 @@ export default defineConfig({
   plugins: [
     svgr(),
     react(),
-    // tailwindcss(),
+    tailwindcss(),
     babel({ presets: [reactCompilerPreset()] })
   ],
   resolve: {
