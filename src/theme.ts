@@ -1,31 +1,11 @@
-import { createTheme } from "@mui/material/styles";
-
-declare module "@mui/material/styles" {
-  interface Palette {
-    darkBgLight: Palette["primary"];
-  }
-
-  interface PaletteOptions {
-    darkBgLight?: PaletteOptions["primary"];
-  }
-}
-
+import { createTheme } from '@mui/material/styles';
 export const theme = createTheme({
-  palette: {
-    primary: {
-      main: "#5330bc",
-    },
-    darkBgLight: {
-      main: "#1a1a1a",
-    },
-  },
+  colorSchemes: { light: true, dark: true },
+  palette: { primary: { main: '#5330bc' } },
+  typography: { fontFamily: 'Roboto, "Noto Sans SC", sans-serif' },
+  shape: { borderRadius: 10 },
   components: {
-    MuiButton: {
-      styleOverrides: {
-        root: {
-          textTransform: "none",
-        },
-      },
-    },
-  },
+    MuiButton: { styleOverrides: { root: { textTransform: 'none' } } },
+    MuiTextField: { defaultProps: { fullWidth: true } }
+  }
 });
