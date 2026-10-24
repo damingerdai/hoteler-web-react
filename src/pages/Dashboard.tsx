@@ -1,137 +1,99 @@
-/* eslint-disable spaced-comment */
-import { Box, Flex } from '@chakra-ui/react';
-import { useEffect, useState } from 'react';
-import { type ApexOptions } from 'apexcharts';
-import { Chart } from '@/components/Apexcharts';
-import { ProtectRoute } from '../components/ProtectRoute';
-import { useAppDispatch, useAppSelector } from '../lib/reduxHooks';
-import {
-  fecthRoomStatusDonut,
-  fetchPastWeekCustomerCounts,
-} from '../slices/StatSlice';
-
-const DefaultRoomStatusDonutOption: ApexOptions = {
-  title: {
-    text: '房间状态统计',
-  },
-  labels: ['占用', '空闲'],
-  chart: {
-    id: 'roomStatusDonutChart',
-    type: 'donut',
-  },
-  xaxis: {
-    categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999],
-  },
-  series: [],
-  plotOptions: {
-    pie: {
-      donut: {
-        labels: {
-          show: true,
-          name: {
-            show: true,
-          },
-          value: {
-            show: true,
-          },
-          total: {
-            show: true,
-          },
-        },
-      },
-    },
-  },
-};
-
-const DefaultPastWeekCustomerCountOption: ApexOptions = {
-  title: {
-    text: '过去一周的入住客户数量变化',
-  },
-  chart: {
-    id: 'pastWeekCustomerCountChart',
-    type: 'line',
-  },
-  series: [],
-};
-
-const Dashboard = () => {
-  const dispath = useAppDispatch();
-  const [roomStatusDonutOption, setRoomStatusDonutOption] = useState(
-    DefaultRoomStatusDonutOption,
+import { Box, Paper, Typography, useTheme } from '@mui/material';
+import Chart from 'react-apexcharts';
+import useSWR from 'swr';
+import { request } from '../lib/request';
+import type {
+  DataResponse,
+  PastWeekCustomerCounts,
+  RoomStatusDonut
+} from '../types';
+import GlobalLoading from '../components/GlobalLoading';
+import LoadError from '../components/LoadError';
+export default function Dashboard() {
+  const theme = useTheme();
+  const rooms = useSWR('/api/v1/stat/rooms/nums', () =>
+    request<DataResponse<RoomStatusDonut>>({ url: '/api/v1/stat/rooms/nums' })
   );
-  // eslint-disable-next-line max-len
-  const [pastWeekCustomerCountOption, setPastWeekCustomerCountOption] = useState(DefaultPastWeekCustomerCountOption);
-  const { roomStatusDonut, pastWeekCustomerCounts } = useAppSelector(
-    (state) => state.stat,
+  const customers = useSWR('/api/v1/stat/customers/counts', () =>
+    request<DataResponse<{ pastWeekCustomerCounts: PastWeekCustomerCounts }>>({
+      url: '/api/v1/stat/customers/counts'
+    })
   );
-
-  useEffect(() => {
-    Promise.all([
-      dispath(fecthRoomStatusDonut()),
-      dispath(fetchPastWeekCustomerCounts()),
-    ]);
-  }, []);
-
-  useEffect(() => {
-    if (roomStatusDonut.totalNums) {
-      setRoomStatusDonutOption({
-        ...roomStatusDonutOption,
-        series: [roomStatusDonut.inUseNums, roomStatusDonut.notUsedNums],
-      });
-    }
-  }, [roomStatusDonut]);
-
-  useEffect(() => {
-    if (pastWeekCustomerCounts && pastWeekCustomerCounts.length > 0) {
-      setPastWeekCustomerCountOption({
-        ...pastWeekCustomerCountOption,
-        series: [
-          {
-            name: '入住客户数量',
-            data: pastWeekCustomerCounts.map((pwcc) => pwcc.customerCount),
-          },
-        ],
-        xaxis: {
-          categories: pastWeekCustomerCounts.map((pwcc) => pwcc.checkInDate),
-        },
-      });
-    }
-  }, [pastWeekCustomerCounts]);
-
+  const roomData = rooms.data?.data;
+  const counts = customers.data?.data.pastWeekCustomerCounts || [];
+  const chartTheme = { mode: theme.palette.mode };
   return (
-    <Box m={2}>
-      <Flex
-        flexDir={{ base: 'column', sm: 'row' }}
-        alignItems='stretch'
-        justifyContent='center'
-        width='100%'
-        m={2}
-        mt={4}
+    <>
+      <Typography component="h1" variant="h5" sx={{ mb: 3 }}>
+        仪表盘
+      </Typography>
+      <Box
+        sx={{
+          display: 'grid',
+          gridTemplateColumns: { xs: '1fr', lg: '1fr 1fr' },
+          gap: 3
+        }}
       >
-        <Box w={{ base: '100', sm: '50%' }} boxShadow='xs' m={2} p={2}>
-          {roomStatusDonutOption && (
+        <Paper sx={{ p: 2, minWidth: 0 }}>
+          <Typography component="h2" variant="h6">
+            房间状态统计
+          </Typography>
+          {rooms.isLoading ? (
+            <GlobalLoading />
+          ) : rooms.error ? (
+            <LoadError retry={rooms.mutate} />
+          ) : (
             <Chart
-              options={roomStatusDonutOption}
-              series={roomStatusDonutOption?.series}
-              type='donut'
-              width='100%'
+              type="donut"
               height={320}
+              series={[roomData?.inUseNums || 0, roomData?.notUsedNums || 0]}
+              options={{
+                theme: chartTheme,
+                chart: { background: 'transparent' },
+                labels: ['占用', '空闲'],
+                noData: { text: '暂无数据' },
+                plotOptions: {
+                  pie: {
+                    donut: {
+                      labels: {
+                        show: true,
+                        total: { show: true, label: '房间总数' }
+                      }
+                    }
+                  }
+                }
+              }}
             />
           )}
-        </Box>
-        <Box w={{ base: '100', sm: '50%' }} boxShadow='xs' m={2} p={2}>
-          {pastWeekCustomerCountOption && (
+        </Paper>
+        <Paper sx={{ p: 2, minWidth: 0 }}>
+          <Typography component="h2" variant="h6">
+            过去一周的入住客户数量变化
+          </Typography>
+          {customers.isLoading ? (
+            <GlobalLoading />
+          ) : customers.error ? (
+            <LoadError retry={customers.mutate} />
+          ) : (
             <Chart
-              options={pastWeekCustomerCountOption}
-              series={pastWeekCustomerCountOption?.series}
-              type='line'
-              width='100%'
+              type="line"
               height={320}
+              series={[
+                {
+                  name: '入住客户数量',
+                  data: counts.map(item => item.customerCount)
+                }
+              ]}
+              options={{
+                theme: chartTheme,
+                chart: { background: 'transparent', toolbar: { show: false } },
+                xaxis: { categories: counts.map(item => item.checkInDate) },
+                noData: { text: '暂无数据' }
+              }}
             />
           )}
-        </Box>
-      </Flex>
-    </Box>
+        </Paper>
+      </Box>
+    </>
   );
-};
-export default ProtectRoute(Dashboard);
+}

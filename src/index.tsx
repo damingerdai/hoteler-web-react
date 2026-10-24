@@ -1,30 +1,18 @@
-import { ChakraProvider, ColorModeScript } from '@chakra-ui/react';
-import React from 'react';
+import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import { Provider } from 'react-redux';
-import './index.scss';
+import { CssBaseline, ThemeProvider } from '@mui/material';
+import '@fontsource/roboto/400.css';
+import '@fontsource/roboto/500.css';
+import '@fontsource/roboto/700.css';
+import './index.css';
 import App from './App';
-import reportWebVitals from './reportWebVitals';
-import { store } from './store';
-import theme from './theme';
-import { ToastContainer } from './components/Toast';
+import { theme } from './theme';
 
-const container = document.getElementById('root');
-const root = createRoot(container!);
-const app = (
-  <React.StrictMode>
-    <ColorModeScript initialColorMode={theme.config.initialColorMode} />
-    <Provider store={store}>
-      <ChakraProvider theme={theme}>
-        <App />
-        <ToastContainer />
-      </ChakraProvider>
-    </Provider>
-  </React.StrictMode>
+createRoot(document.getElementById('root')!).render(
+  <StrictMode>
+    <ThemeProvider theme={theme} defaultMode="system">
+      <CssBaseline />
+      <App />
+    </ThemeProvider>
+  </StrictMode>
 );
-root.render(app);
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();

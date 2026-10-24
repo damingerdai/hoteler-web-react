@@ -4,4 +4,7 @@ export interface RoomStatusDonut {
   notUsedNums: number;
 }
 
-export type PastWeekCustomerCounts = Array<{ checkInDate: string; customerCount: number }>;
+export type PastWeekCustomerCounts = Array<{
+  checkInDate: string;
+  customerCount: number;
+}>;

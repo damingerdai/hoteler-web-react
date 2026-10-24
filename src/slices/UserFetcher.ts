@@ -2,14 +2,14 @@ import { request } from '../lib';
 import { DataResponse, ListResponse, User } from '../types';
 
 export const fetchCurrenter = async (token?: string) => {
-  const headers = {} as any;
+  const headers: Record<string, string> = {};
   if (token) {
     headers.Authorization = `Bearer ${token}`;
   }
   const res = await request<DataResponse<User>>({
     url: '/api/v1/user',
     method: 'get',
-    headers,
+    headers
   });
 
   return res;
@@ -18,7 +18,7 @@ export const fetchCurrenter = async (token?: string) => {
 export const fetchUsers = async () => {
   const res = await request<ListResponse<User>>({
     url: '/api/v1/users',
-    method: 'get',
+    method: 'get'
   });
 
   return res.data;

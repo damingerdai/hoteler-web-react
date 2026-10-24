@@ -1,194 +1,104 @@
-import {
-  Button,
-  FormControl,
-  FormErrorMessage,
-  FormHelperText,
-  FormLabel,
-  Input,
-  Modal,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  ModalOverlay,
-  Select,
-  useToast,
-} from '@chakra-ui/react';
-import { Formik, Form } from 'formik';
-import React, { useEffect } from 'react';
+import useSWR from 'swr';
 import * as Yup from 'yup';
+import {
+  Alert,
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle
+} from '@mui/material';
+import { fetchCustomers } from '../slices/CustomerFetcher';
 import { format } from '../lib/date';
-import { useAppDispatch, useAppSelector } from '../lib/reduxHooks';
 import { request } from '../lib/request';
-import { fetchCustomers } from '../slices/CustomerSlice';
-import { defaultToastOptions } from '../theme';
-import { CommonResponse } from '../types';
-import { Room } from '../types/room';
+import { toast } from '../lib/toast';
+import type { Room } from '../types';
+import FormDialog from './FormDialog';
+import GlobalLoading from './GlobalLoading';
+import LoadError from './LoadError';
 
-interface AddCustomerRoomModalProps {
-  isOpen: boolean;
-  onClose: () => void;
+const schema = Yup.object({
+  customerId: Yup.string().required('请选择客户'),
+  beginDate: Yup.date().typeError('请选择入住时间').required('请选择入住时间'),
+  endDate: Yup.date()
+    .typeError('请选择离开时间')
+    .required('请选择离开时间')
+    .test('after-start', '离开时间必须晚于入住时间', function (value) {
+      return !!value && value > this.parent.beginDate;
+    })
+});
+export default function AddCustomerRoomModal({
+  room,
+  onClose,
+  onSuccess
+}: {
   room: Room;
-}
-
-const AddCustomerRoomModal: React.FC<AddCustomerRoomModalProps> = (props) => {
-  const { isOpen, onClose, room } = props;
-  const dispatch = useAppDispatch();
-  const { list: customerList } = useAppSelector((state) => state.customer);
-  const toast = useToast();
-  const currentDate = new Date();
-  const nextDate = new Date(currentDate.getTime() + 1000 * 60 * 60 * 24);
-  const initialValues = {
-    customerId: customerList[0]?.id,
-    roomId: room.id,
-    beginDate: format(currentDate, 'yyyy-MM-dd'),
-    endDate: format(nextDate, 'yyyy-MM-dd'),
-  };
-  const validationSchemas = Yup.object().shape({
-    customerId: Yup.string().required('请选择客户').nullable(),
-    roomId: Yup.string().required('请选择房间').nullable(),
-    beginDate: Yup.string().required('请选择开始时间').nullable(),
-    endDate: Yup.string().required('请选择结束时间').nullable(),
-  });
-
-  useEffect(() => {
-    if (!customerList || customerList.length === 0) {
-      dispatch(fetchCustomers());
-    }
-  }, []);
-
-  const handleSubmit = async (values) => {
-    const res = await request<CommonResponse>({
-      url: 'api/v1/customer-checkin-record',
-      method: 'post',
-      data: {
-        ...values,
-        beginDate: new Date(`${values.beginDate} 12:00:000`),
-        endDate: new Date(`${values.endDate} 12:00:000`),
-      },
-    });
-
-    if (res.status === 200) {
-      toast({
-        title: '入住成功',
-        description: '入住客户成功🚀',
-        status: 'success',
-        ...defaultToastOptions,
-      });
-      onClose();
-    }
-  };
-
+  onClose: () => void;
+  onSuccess: () => Promise<unknown>;
+}) {
+  const {
+    data: customers,
+    error,
+    isLoading,
+    mutate
+  } = useSWR('/api/v1/customers', fetchCustomers);
+  if (isLoading || error || !customers?.length)
+    return (
+      <Dialog open onClose={onClose} aria-labelledby="checkin-title">
+        <DialogTitle id="checkin-title">客人入住 · {room.roomname}</DialogTitle>
+        <DialogContent>
+          {isLoading ? (
+            <GlobalLoading />
+          ) : error ? (
+            <LoadError retry={mutate} />
+          ) : (
+            <Alert severity="info">请先在客户信息页面创建客户。</Alert>
+          )}
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={onClose}>关闭</Button>
+        </DialogActions>
+      </Dialog>
+    );
+  const today = new Date();
+  const tomorrow = new Date(today);
+  tomorrow.setDate(tomorrow.getDate() + 1);
   return (
-    <Modal isOpen={isOpen} onClose={onClose}>
-      <ModalOverlay />
-      <Formik
-        initialValues={initialValues}
-        validationSchema={validationSchemas}
-        validateOnBlur
-        enableReinitialize
-        validateOnChange
-        validateOnMount
-        onSubmit={handleSubmit}
-      >
-        {({
-          values,
-          errors,
-          isValid,
-          isSubmitting,
-          handleChange,
-        }) => (
-          <Form>
-            <ModalContent>
-              <ModalHeader>客人入住</ModalHeader>
-              <ModalCloseButton />
-              <ModalBody>
-                <FormControl>
-                  <FormLabel htmlFor='customerId'>客户</FormLabel>
-                  <Select
-                    id='customerId'
-                    value={values.customerId}
-                    onChange={handleChange}
-                  >
-                    {customerList.map((customer) => (
-                      <option key={customer.id} value={customer.id}>
-                        {customer.name}
-                      </option>
-                    ))}
-                  </Select>
-                  {errors?.customerId ? (
-                    <FormErrorMessage>请选择客户</FormErrorMessage>
-                  ) : (
-                    <FormHelperText>请选择客户</FormHelperText>
-                  )}
-                </FormControl>
-                <FormControl mt={4}>
-                  <FormLabel htmlFor='roomId'>房间</FormLabel>
-                  <Input
-                    id='roomId'
-                    type='text'
-                    value={room.roomname}
-                    readOnly
-                  />
-                  {errors?.roomId && (
-                    <FormErrorMessage>
-                      {errors.roomId ?? '请选择房间'}
-                    </FormErrorMessage>
-                  )}
-                </FormControl>
-                <FormControl mt={4}>
-                  <FormLabel htmlFor='beginDate'>入住时间</FormLabel>
-                  <Input
-                    id='beginDate'
-                    type='datetime'
-                    value={values.beginDate}
-                    readOnly
-                  />
-                  {errors?.beginDate && (
-                    <FormErrorMessage>
-                      {errors.roomId ?? '请选择入住时间'}
-                    </FormErrorMessage>
-                  )}
-                </FormControl>
-                <FormControl mt={4}>
-                  <FormLabel htmlFor='endDate'>离开时间</FormLabel>
-                  <Input
-                    id='endDate'
-                    type='datetime'
-                    value={values.endDate}
-                    readOnly
-                  />
-                  {errors?.endDate && (
-                    <FormErrorMessage>
-                      {errors.roomId ?? '请选择离开时间'}
-                    </FormErrorMessage>
-                  )}
-                </FormControl>
-              </ModalBody>
-              <ModalFooter>
-                <Button
-                  colorScheme='blue'
-                  mr={3}
-                  onClick={onClose}
-                >
-                  关闭
-                </Button>
-                <Button
-                  type='submit'
-                  variant='ghost'
-                  disabled={!isValid || isSubmitting}
-                  isLoading={isSubmitting}
-                >
-                  确定
-                </Button>
-              </ModalFooter>
-            </ModalContent>
-          </Form>
-        )}
-      </Formik>
-    </Modal>
+    <FormDialog
+      title={`客人入住 · ${room.roomname}`}
+      onClose={onClose}
+      schema={schema}
+      initialValues={{
+        customerId: customers[0].id ?? '',
+        beginDate: format(today, 'yyyy-MM-dd'),
+        endDate: format(tomorrow, 'yyyy-MM-dd')
+      }}
+      fields={[
+        {
+          name: 'customerId',
+          label: '客户',
+          options: customers.map(customer => ({
+            value: customer.id!,
+            label: customer.name
+          }))
+        },
+        { name: 'beginDate', label: '入住时间', type: 'date' },
+        { name: 'endDate', label: '离开时间', type: 'date' }
+      ]}
+      onSubmit={async values => {
+        await request({
+          url: '/api/v1/customer-checkin-record',
+          method: 'post',
+          data: {
+            ...values,
+            roomId: room.id,
+            beginDate: new Date(`${values.beginDate}T12:00:00`).toISOString(),
+            endDate: new Date(`${values.endDate}T12:00:00`).toISOString()
+          }
+        });
+        toast.success('入住成功');
+        await onSuccess();
+      }}
+    />
   );
-};
-
-export default AddCustomerRoomModal;
+}

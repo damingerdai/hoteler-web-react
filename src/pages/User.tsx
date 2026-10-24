@@ -1,73 +1,84 @@
+import { useState } from 'react';
 import {
-  Box,
-  Button,
-  Divider,
-  Flex,
+  Alert,
+  Paper,
   Table,
+  TableBody,
+  TableCell,
   TableContainer,
-  Tbody,
-  Td,
-  Th,
-  Thead,
-  Tr,
-  useDisclosure,
-} from '@chakra-ui/react';
-import * as React from 'react';
+  TableHead,
+  TableRow
+} from '@mui/material';
 import useSWR from 'swr';
+import * as Yup from 'yup';
 import { fetchUsers } from '../slices/UserFetcher';
-import { CreateUserModal } from '@/components/CreateUserModal';
-import { Loading } from '@/components/Loading';
-
-const User: React.FC = () => {
-  const { data: users, isLoading } = useSWR('api/v1/users', fetchUsers);
-
-  const {
-    isOpen: isCreateUserModalOpen,
-    onOpen: onCreateUserModalOpen,
-    onClose: onCreateUserModalClose,
-  } = useDisclosure();
-
-  if (isLoading) {
-    return <Loading />;
-  }
-
-  return (
-    <Box p={4} h='100%'>
-      <Flex p={2} justifyContent='right'>
-        <Button colorScheme='teal' onClick={onCreateUserModalOpen}>
-          创建用户
-        </Button>
-      </Flex>
-      <Divider colorScheme='gray' />
-      {isLoading && <Loading />}
-      {!isLoading && (
-        <Box w='100%' boxShadow='md' borderWidth='1px' mt={4}>
-          <TableContainer>
-            <Table variant='simple'>
-              <Thead>
-                <Tr>
-                  <Th>ID</Th>
-                  <Th>用户名</Th>
-                </Tr>
-              </Thead>
-              <Tbody>
-                {users?.map((user) => (
-                  <Tr key={user.id}>
-                    <Td>{user.id}</Td>
-                    <Td>{user.username}</Td>
-                  </Tr>
-                ))}
-              </Tbody>
-            </Table>
-          </TableContainer>
-        </Box>
-      )}
-      <CreateUserModal
-        isOpen={isCreateUserModalOpen}
-        onClose={onCreateUserModalClose}
-      />
-    </Box>
+import { request } from '../lib/request';
+import { toast } from '../lib/toast';
+import FormDialog from '../components/FormDialog';
+import PageHeader from '../components/PageHeader';
+import GlobalLoading from '../components/GlobalLoading';
+import LoadError from '../components/LoadError';
+const schema = Yup.object({
+  username: Yup.string().trim().required('请输入用户名'),
+  password: Yup.string().required('请输入密码')
+});
+export default function User() {
+  const { data, error, isLoading, mutate } = useSWR(
+    '/api/v1/users',
+    fetchUsers
   );
-};
-
-export default User;
+  const [creating, setCreating] = useState(false);
+  return (
+    <>
+      <PageHeader
+        title="用户管理"
+        action="创建用户"
+        onCreate={() => setCreating(true)}
+      />
+      {isLoading && <GlobalLoading />}
+      {error && <LoadError retry={mutate} />}
+      {data?.length === 0 && <Alert severity="info">暂无用户。</Alert>}
+      {!!data?.length && (
+        <TableContainer component={Paper}>
+          <Table aria-label="用户列表">
+            <TableHead>
+              <TableRow>
+                <TableCell>ID</TableCell>
+                <TableCell>用户名</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {data.map(user => (
+                <TableRow key={user.id}>
+                  <TableCell>{user.id}</TableCell>
+                  <TableCell>{user.username}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      )}
+      {creating && (
+        <FormDialog
+          title="创建用户"
+          initialValues={{ username: '', password: '' }}
+          schema={schema}
+          fields={[
+            { name: 'username', label: '用户名' },
+            { name: 'password', label: '密码', type: 'password' }
+          ]}
+          onClose={() => setCreating(false)}
+          onSubmit={async values => {
+            await request({
+              url: '/api/v1/user',
+              method: 'post',
+              data: values
+            });
+            toast.success('创建用户成功');
+            await mutate();
+          }}
+        />
+      )}
+    </>
+  );
+}

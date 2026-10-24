@@ -1,33 +1,32 @@
-/* eslint-disable react/jsx-props-no-spreading */
-import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
-import {
-  IconButton, Input, InputGroup, InputProps, InputRightElement,
-} from '@chakra-ui/react';
-import * as React from 'react';
 import { useState } from 'react';
-
-export const PasswordInput: React.FC<Exclude<InputProps, 'type'>> = (props) => {
-  const [showPassword, setShowPassword] = useState(false);
-
+import {
+  IconButton,
+  InputAdornment,
+  TextField,
+  type TextFieldProps
+} from '@mui/material';
+import { Visibility, VisibilityOff } from '@mui/icons-material';
+export function PasswordInput(props: TextFieldProps) {
+  const [visible, setVisible] = useState(false);
   return (
-    <InputGroup>
-      <Input
-        type={showPassword ? 'text' : 'password'}
-        {...props}
-      />
-      <InputRightElement>
-        <IconButton
-          background='transparent'
-          aria-label='switch password mode'
-          icon={showPassword ? <ViewIcon /> : <ViewOffIcon />}
-          _hover={{ background: 'transparent' }}
-          onClick={(e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            setShowPassword(!showPassword);
-          }}
-        />
-      </InputRightElement>
-    </InputGroup>
+    <TextField
+      {...props}
+      type={visible ? 'text' : 'password'}
+      slotProps={{
+        input: {
+          endAdornment: (
+            <InputAdornment position="end">
+              <IconButton
+                aria-label={visible ? '隐藏密码' : '显示密码'}
+                onClick={() => setVisible(!visible)}
+                edge="end"
+              >
+                {visible ? <VisibilityOff /> : <Visibility />}
+              </IconButton>
+            </InputAdornment>
+          )
+        }
+      }}
+    />
   );
-};
+}

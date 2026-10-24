@@ -4,7 +4,7 @@ import { request } from '../lib';
 export const fetchRooms = async () => {
   const res = await request<ListResponse<Room>>({
     url: '/api/v1/rooms',
-    method: 'get',
+    method: 'get'
   });
 
   return res.data;
