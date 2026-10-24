@@ -68,14 +68,23 @@ export default function Customer() {
                 sx={{ mb: 2, alignItems: 'center' }}
               >
                 <Avatar>{customer.name.slice(0, 1)}</Avatar>
-                <Typography variant="h6">{customer.name}</Typography>
+                <Typography variant="h6" sx={{ fontWeight: 600 }}>
+                  {customer.name}
+                </Typography>
                 <Chip
                   size="small"
+                  color="primary"
+                  variant="outlined"
                   label={{ M: '男', F: '女', N: '未知' }[customer.gender]}
                 />
               </Stack>
-              <Typography>手机号码：{customer.phone}</Typography>
-              <Typography sx={{ overflowWrap: 'anywhere' }}>
+              <Typography color="text.secondary">
+                手机号码：{customer.phone}
+              </Typography>
+              <Typography
+                color="text.secondary"
+                sx={{ overflowWrap: 'anywhere', mt: 0.5 }}
+              >
                 身份证：{customer.cardId}
               </Typography>
             </CardContent>

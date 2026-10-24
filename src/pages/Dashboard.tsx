@@ -1,4 +1,5 @@
 import { Box, Paper, Typography, useTheme } from '@mui/material';
+import { alpha } from '@mui/material/styles';
 import Chart from 'react-apexcharts';
 import useSWR from 'swr';
 import { request } from '../lib/request';
@@ -9,6 +10,7 @@ import type {
 } from '../types';
 import GlobalLoading from '../components/GlobalLoading';
 import LoadError from '../components/LoadError';
+import PageHeader from '../components/PageHeader';
 export default function Dashboard() {
   const theme = useTheme();
   const rooms = useSWR('/api/v1/stat/rooms/nums', () =>
@@ -22,11 +24,15 @@ export default function Dashboard() {
   const roomData = rooms.data?.data;
   const counts = customers.data?.data.pastWeekCustomerCounts || [];
   const chartTheme = { mode: theme.palette.mode };
+  const paperSx = {
+    p: 3,
+    minWidth: 0,
+    borderRadius: 3,
+    border: `1px solid ${alpha(theme.palette.primary.main, 0.16)}`
+  };
   return (
     <>
-      <Typography component="h1" variant="h5" sx={{ mb: 3 }}>
-        仪表盘
-      </Typography>
+      <PageHeader title="仪表盘" />
       <Box
         sx={{
           display: 'grid',
@@ -34,8 +40,12 @@ export default function Dashboard() {
           gap: 3
         }}
       >
-        <Paper sx={{ p: 2, minWidth: 0 }}>
-          <Typography component="h2" variant="h6">
+        <Paper elevation={0} sx={paperSx}>
+          <Typography
+            component="h2"
+            variant="h6"
+            sx={{ fontWeight: 600, mb: 1 }}
+          >
             房间状态统计
           </Typography>
           {rooms.isLoading ? (
@@ -49,6 +59,7 @@ export default function Dashboard() {
               series={[roomData?.inUseNums || 0, roomData?.notUsedNums || 0]}
               options={{
                 theme: chartTheme,
+                colors: ['#5330bc', '#c4b5fd'],
                 chart: { background: 'transparent' },
                 labels: ['占用', '空闲'],
                 noData: { text: '暂无数据' },
@@ -66,8 +77,12 @@ export default function Dashboard() {
             />
           )}
         </Paper>
-        <Paper sx={{ p: 2, minWidth: 0 }}>
-          <Typography component="h2" variant="h6">
+        <Paper elevation={0} sx={paperSx}>
+          <Typography
+            component="h2"
+            variant="h6"
+            sx={{ fontWeight: 600, mb: 1 }}
+          >
             过去一周的入住客户数量变化
           </Typography>
           {customers.isLoading ? (
@@ -86,6 +101,8 @@ export default function Dashboard() {
               ]}
               options={{
                 theme: chartTheme,
+                colors: ['#7B1FA1'],
+                stroke: { curve: 'smooth', width: 3 },
                 chart: { background: 'transparent', toolbar: { show: false } },
                 xaxis: { categories: counts.map(item => item.checkInDate) },
                 noData: { text: '暂无数据' }

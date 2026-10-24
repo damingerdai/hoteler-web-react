@@ -5,7 +5,7 @@ import {
   TextField,
   type TextFieldProps
 } from '@mui/material';
-import { Visibility, VisibilityOff } from '@mui/icons-material';
+import { LockOutlined, Visibility, VisibilityOff } from '@mui/icons-material';
 export function PasswordInput(props: TextFieldProps) {
   const [visible, setVisible] = useState(false);
   return (
@@ -14,6 +14,11 @@ export function PasswordInput(props: TextFieldProps) {
       type={visible ? 'text' : 'password'}
       slotProps={{
         input: {
+          startAdornment: (
+            <InputAdornment position="start">
+              <LockOutlined fontSize="small" color="action" />
+            </InputAdornment>
+          ),
           endAdornment: (
             <InputAdornment position="end">
               <IconButton

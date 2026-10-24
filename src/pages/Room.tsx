@@ -64,10 +64,12 @@ export default function Room() {
           <Card key={room.id} variant="outlined">
             <CardContent>
               <Stack direction="row" spacing={2} sx={{ alignItems: 'center' }}>
-                <Typography variant="h6">{room.roomname}</Typography>
+                <Typography variant="h6" sx={{ fontWeight: 600 }}>
+                  {room.roomname}
+                </Typography>
                 <Chip
                   size="small"
-                  color={room.status === 1 ? 'success' : 'default'}
+                  color={room.status === 1 ? 'success' : 'secondary'}
                   label={
                     room.status === 1
                       ? '空闲'
@@ -77,7 +79,16 @@ export default function Room() {
                   }
                 />
               </Stack>
-              <Typography sx={{ mt: 2 }}>¥ {room.price} / 晚</Typography>
+              <Typography
+                sx={{
+                  mt: 2,
+                  color: 'primary.main',
+                  fontWeight: 700,
+                  fontSize: '1.1rem'
+                }}
+              >
+                ¥ {room.price} / 晚
+              </Typography>
             </CardContent>
             <CardActions>
               <Button
