@@ -57,6 +57,8 @@ export async function login(username: string, password: string) {
     const { data } = await client.request<UserTokenResponse>({
       url: '/api/v1/token',
       method: 'post',
+      // Keep the JSON Content-Type header in Axios's browser adapter.
+      data: {},
       headers: { username, password }
     });
     if (data.status === -1) throw new Error(data.error.message);

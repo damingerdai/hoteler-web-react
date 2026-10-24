@@ -174,9 +174,11 @@ describe('MUI migration workflows', () => {
     expect(await screen.findByText('已登录')).toBeVisible();
     expect(readToken()?.accessToken).toBe('test-token');
     expect(submitted('/api/v1/token', 'post')[0].headers).toMatchObject({
+      'Content-Type': 'application/json',
       username: 'admin',
       password: 'secret'
     });
+    expect(submitted('/api/v1/token', 'post')[0].data).toBe('{}');
   });
 
   it('rejects mismatched registration passwords and registers after correction', async () => {

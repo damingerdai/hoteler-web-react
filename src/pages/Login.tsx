@@ -49,7 +49,9 @@ export default function Login({ register = false }: { register?: boolean }) {
       }
     }
   });
-  if (readToken()) return <Navigate to="/dashboard" replace />;
+  if (readToken()) {
+    return <Navigate to="/dashboard" replace />;
+  }
   const field = (name: keyof typeof form.values) => ({
     ...form.getFieldProps(name),
     fullWidth: true,
