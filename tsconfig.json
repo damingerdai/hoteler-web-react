@@ -19,25 +19,7 @@
     "noFallthroughCasesInSwitch": true,
     "noImplicitAny": false,
     "useUnknownInCatchVariables": false,
-    "paths": {
-      "@/atom": ["./src/atom"],
-      "@/atom/*": ["./src/atom/*"],
-      "@/components": ["./src/components"],
-      "@/components/*": ["./src/components/*"],
-      "@/hooks": ["./src/hooks"],
-      "@/hooks/*": ["./src/hooks/*"],
-      "@/lib": ["./src/lib"],
-      "@/lib/*": ["./src/lib/*"],
-      "@/page": ["./src/page"],
-      "@/pages/*": ["./src/pages/*"],
-      "@/slices": ["./src/slices"],
-      "@/slices/*": ["./src/slices"],
-      "@/styles": ["./src/styles"],
-      "@/styles/*": ["./src/styles"],
-      "@/types": ["./src/types"],
-      "@/types/*": ["./src/types"]
-    },
-    "types": ["vite/client", "jest"]
+    "types": ["vite/client"]
   },
   "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]
