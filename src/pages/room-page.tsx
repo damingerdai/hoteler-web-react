@@ -12,16 +12,16 @@ import {
 } from '@mui/material';
 import useSWR from 'swr';
 import * as Yup from 'yup';
-import { fetchRooms } from '../slices/RoomFetcher';
+import { fetchRooms } from '../slices/room-fetcher';
 import type { Room as RoomType } from '../types';
 import { request } from '../lib/request';
 import { toast } from '../lib/toast';
-import FormDialog from '../components/FormDialog';
-import ConfirmModal from '../components/ConfirmModal';
-import AddCustomerRoomModal from '../components/AddCustomerRoomModal';
-import PageHeader from '../components/PageHeader';
-import GlobalLoading from '../components/GlobalLoading';
-import LoadError from '../components/LoadError';
+import FormDialog from '../components/form-dialog';
+import ConfirmModal from '../components/confirm-modal';
+import AddCustomerRoomModal from '../components/add-customer-room-modal';
+import PageHeader from '../components/page-jeader';
+import GlobalLoading from '../components/global-loading';
+import LoadError from '../components/load-error';
 const schema = Yup.object({
   roomname: Yup.string().trim().required('请输入房间名字'),
   price: Yup.number()

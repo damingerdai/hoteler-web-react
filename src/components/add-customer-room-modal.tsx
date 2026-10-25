@@ -8,14 +8,14 @@ import {
   DialogContent,
   DialogTitle
 } from '@mui/material';
-import { fetchCustomers } from '../slices/CustomerFetcher';
+import { fetchCustomers } from '../slices/customer-fetcher';
 import { format } from '../lib/date';
 import { request } from '../lib/request';
 import { toast } from '../lib/toast';
 import type { Room } from '../types';
-import FormDialog from './FormDialog';
-import GlobalLoading from './GlobalLoading';
-import LoadError from './LoadError';
+import FormDialog from './form-dialog';
+import GlobalLoading from './global-loading';
+import LoadError from './load-error';
 
 const schema = Yup.object({
   customerId: Yup.string().required('请选择客户'),

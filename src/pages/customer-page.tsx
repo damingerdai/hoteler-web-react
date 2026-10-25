@@ -13,15 +13,15 @@ import {
 } from '@mui/material';
 import useSWR from 'swr';
 import * as Yup from 'yup';
-import { fetchCustomers } from '../slices/CustomerFetcher';
+import { fetchCustomers } from '../slices/customer-fetcher';
 import type { Customer as CustomerType } from '../types';
 import { request } from '../lib/request';
 import { toast } from '../lib/toast';
-import FormDialog from '../components/FormDialog';
-import ConfirmModal from '../components/ConfirmModal';
-import PageHeader from '../components/PageHeader';
-import GlobalLoading from '../components/GlobalLoading';
-import LoadError from '../components/LoadError';
+import FormDialog from '../components/form-dialog';
+import ConfirmModal from '../components/confirm-modal';
+import PageHeader from '../components/page-jeader';
+import GlobalLoading from '../components/global-loading';
+import LoadError from '../components/load-error';
 
 const schema = Yup.object({
   name: Yup.string().trim().required('请输入客户名字'),

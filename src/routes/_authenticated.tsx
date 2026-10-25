@@ -1,6 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router';
-import Layout from '../components/Layout';
+import CommonLayout from '../components/comm-layout';
 
 export const Route = createFileRoute('/_authenticated')({
-  component: Layout
+  component: CommonLayout
 });
