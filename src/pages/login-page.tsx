@@ -18,7 +18,7 @@ import {
   useNavigate
 } from '@tanstack/react-router';
 import * as Yup from 'yup';
-import { PasswordInput } from '../components/PasswordInput';
+import { PasswordInput } from '../components/password-input';
 import { errorMessage, login, readToken, request } from '../lib/request';
 import { toast } from '../lib/toast';
 

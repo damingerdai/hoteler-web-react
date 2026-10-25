@@ -21,13 +21,13 @@ import type { ReactNode } from 'react';
 import type { AxiosRequestConfig } from 'axios';
 import { client, readToken } from './lib/request';
 import { theme } from './theme';
-import Login from './pages/Login';
-import Customer from './pages/Customer';
-import Room from './pages/Room';
-import User from './pages/User';
-import Dashboard from './pages/Dashboard';
-import Layout from './components/Layout';
-import AddCustomerRoomModal from './components/AddCustomerRoomModal';
+import Login from './pages/login-page';
+import Customer from './pages/customer-page';
+import Room from './pages/room-page';
+import User from './pages/user-page';
+import Dashboard from './pages/dashboard-page';
+import Layout from './components/comm-layout';
+import AddCustomerRoomModal from './components/add-customer-room-modal';
 
 vi.mock('react-apexcharts', () => ({
   default: ({ series }: { series: unknown }) => (

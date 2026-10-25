@@ -11,13 +11,13 @@ import {
 } from '@mui/material';
 import useSWR from 'swr';
 import * as Yup from 'yup';
-import { fetchUsers } from '../slices/UserFetcher';
+import { fetchUsers } from '../slices/user-fetcher';
 import { request } from '../lib/request';
 import { toast } from '../lib/toast';
-import FormDialog from '../components/FormDialog';
-import PageHeader from '../components/PageHeader';
-import GlobalLoading from '../components/GlobalLoading';
-import LoadError from '../components/LoadError';
+import FormDialog from '../components/form-dialog';
+import PageHeader from '../components/page-jeader';
+import GlobalLoading from '../components/global-loading';
+import LoadError from '../components/load-error';
 const schema = Yup.object({
   username: Yup.string().trim().required('请输入用户名'),
   password: Yup.string().required('请输入密码')

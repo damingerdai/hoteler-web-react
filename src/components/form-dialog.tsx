@@ -13,7 +13,7 @@ import {
 import { useFormik } from 'formik';
 import type { AnyObjectSchema } from 'yup';
 import { errorMessage } from '../lib/request';
-import { PasswordInput } from './PasswordInput';
+import { PasswordInput } from './password-input';
 
 export interface Field {
   name: string;

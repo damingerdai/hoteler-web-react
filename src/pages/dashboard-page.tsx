@@ -8,9 +8,9 @@ import type {
   PastWeekCustomerCounts,
   RoomStatusDonut
 } from '../types';
-import GlobalLoading from '../components/GlobalLoading';
-import LoadError from '../components/LoadError';
-import PageHeader from '../components/PageHeader';
+import GlobalLoading from '../components/global-loading';
+import LoadError from '../components/load-error';
+import PageHeader from '../components/page-jeader';
 export default function Dashboard() {
   const theme = useTheme();
   const rooms = useSWR('/api/v1/stat/rooms/nums', () =>

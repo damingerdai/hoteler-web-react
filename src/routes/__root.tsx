@@ -1,6 +1,6 @@
 import { Alert, Button, Container } from '@mui/material';
 import { createRootRoute, Link, Outlet } from '@tanstack/react-router';
-import Toast from '../components/Toast';
+import Toast from '../components/app-toast';
 
 function RootComponent() {
   return (

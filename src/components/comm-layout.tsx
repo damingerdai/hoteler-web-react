@@ -34,11 +34,11 @@ import {
   useNavigate
 } from '@tanstack/react-router';
 import useSWR, { useSWRConfig } from 'swr';
-import { fetchCurrenter } from '../slices/UserFetcher';
+import { fetchCurrenter } from '../slices/user-fetcher';
 import { logout, readToken } from '../lib/request';
 import { routes } from '../lib/route';
 import { BRAND_GRADIENT } from '../theme';
-import GlobalLoading from './GlobalLoading';
+import GlobalLoading from './global-loading';
 
 const routeIcons: Record<string, ReactNode> = {
   '/dashboard': <DashboardRounded />,
@@ -47,7 +47,7 @@ const routeIcons: Record<string, ReactNode> = {
   '/user': <ManageAccountsRounded />
 };
 
-export default function Layout() {
+export default function CommonLayout() {
   const token = readToken();
   const { data, error, mutate } = useSWR(
     token ? ['/api/v1/user', token.accessToken] : null,
