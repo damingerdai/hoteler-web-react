@@ -12,4 +12,4 @@ export const routes = [
   },
   { to: '/room', name: '房间信息', permission: PermissionEnum.MANAGE_ROOM },
   { to: '/user', name: '用户管理', permission: PermissionEnum.MANAGE_USER }
-];
+] as const;

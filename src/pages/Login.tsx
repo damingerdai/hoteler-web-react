@@ -12,7 +12,11 @@ import {
 } from '@mui/material';
 import { PersonOutlined } from '@mui/icons-material';
 import { useFormik } from 'formik';
-import { Link as RouterLink, Navigate, useNavigate } from 'react-router-dom';
+import {
+  Link as RouterLink,
+  Navigate,
+  useNavigate
+} from '@tanstack/react-router';
 import * as Yup from 'yup';
 import { PasswordInput } from '../components/PasswordInput';
 import { errorMessage, login, readToken, request } from '../lib/request';
@@ -79,10 +83,10 @@ export default function Login({ register = false }: { register?: boolean }) {
             data: { username, password }
           });
           toast.success('用户创建成功');
-          navigate('/login');
+          navigate({ to: '/login' });
         } else {
           await login(username, password);
-          navigate('/dashboard', { replace: true });
+          navigate({ to: '/dashboard', replace: true });
         }
       } catch (error) {
         helpers.setStatus(errorMessage(error));
@@ -222,11 +226,7 @@ export default function Login({ register = false }: { register?: boolean }) {
               >
                 {register ? '注册' : '登录'}
               </Button>
-              <Typography
-                variant="body2"
-                align="center"
-                color="text.secondary"
-              >
+              <Typography variant="body2" align="center" color="text.secondary">
                 <Link
                   component={RouterLink}
                   to={register ? '/login' : '/register'}

@@ -7,7 +7,14 @@ import {
   within
 } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { MemoryRouter, Route, Routes } from 'react-router-dom';
+import {
+  createMemoryHistory,
+  createRootRoute,
+  createRoute,
+  createRouter,
+  RouterProvider,
+  type AnyRoute
+} from '@tanstack/react-router';
 import { SWRConfig } from 'swr';
 import { ThemeProvider } from '@mui/material';
 import type { ReactNode } from 'react';
@@ -136,7 +143,7 @@ beforeEach(() => {
     return { config, data, status: 200, statusText: 'OK', headers: {} };
   };
 });
-function renderPage(node: ReactNode, path = '/') {
+function renderProviders(ui: ReactNode) {
   return render(
     <ThemeProvider theme={theme}>
       <SWRConfig
@@ -146,10 +153,25 @@ function renderPage(node: ReactNode, path = '/') {
           shouldRetryOnError: false
         }}
       >
-        <MemoryRouter initialEntries={[path]}>{node}</MemoryRouter>
+        {ui}
       </SWRConfig>
     </ThemeProvider>
   );
+}
+function renderPage(node: ReactNode) {
+  return renderProviders(node);
+}
+async function renderRoutes<TRouteTree extends AnyRoute>(
+  routeTree: TRouteTree,
+  initialPath: string
+) {
+  const router = createRouter({
+    routeTree,
+    history: createMemoryHistory({ initialEntries: [initialPath] }),
+    context: {}
+  });
+  await router.load();
+  return renderProviders(<RouterProvider router={router} />);
 }
 const submitted = (url: string, method: string) =>
   calls.filter(call => call.url === url && call.method === method);
@@ -157,11 +179,21 @@ const submitted = (url: string, method: string) =>
 describe('MUI migration workflows', () => {
   it('validates login and stores the backend token before navigating', async () => {
     const user = userEvent.setup();
-    renderPage(
-      <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/dashboard" element={<div>已登录</div>} />
-      </Routes>
+    const rootRoute = createRootRoute();
+    await renderRoutes(
+      rootRoute.addChildren([
+        createRoute({
+          getParentRoute: () => rootRoute,
+          path: '/',
+          component: () => <Login />
+        }),
+        createRoute({
+          getParentRoute: () => rootRoute,
+          path: '/dashboard',
+          component: () => <div>已登录</div>
+        })
+      ]),
+      '/'
     );
     await user.click(screen.getByRole('button', { name: '登录' }));
     expect(await screen.findByText('请输入用户名')).toBeVisible();
@@ -183,11 +215,21 @@ describe('MUI migration workflows', () => {
 
   it('rejects mismatched registration passwords and registers after correction', async () => {
     const user = userEvent.setup();
-    renderPage(
-      <Routes>
-        <Route path="/" element={<Login register />} />
-        <Route path="/login" element={<div>请登录</div>} />
-      </Routes>
+    const rootRoute = createRootRoute();
+    await renderRoutes(
+      rootRoute.addChildren([
+        createRoute({
+          getParentRoute: () => rootRoute,
+          path: '/',
+          component: () => <Login register />
+        }),
+        createRoute({
+          getParentRoute: () => rootRoute,
+          path: '/login',
+          component: () => <div>请登录</div>
+        })
+      ]),
+      '/'
     );
     await user.type(screen.getByLabelText(/用户名/), 'newuser');
     await user.type(screen.getByLabelText(/^密码/), 'secret');
@@ -304,13 +346,27 @@ describe('MUI migration workflows', () => {
 
   it('redirects an unauthenticated direct visit without fetching protected data', async () => {
     localStorage.setItem('user_token', '{invalid');
-    renderPage(
-      <Routes>
-        <Route element={<Layout />}>
-          <Route path="/room" element={<Room />} />
-        </Route>
-        <Route path="/login" element={<div>请登录</div>} />
-      </Routes>,
+    const rootRoute = createRootRoute();
+    const layoutRoute = createRoute({
+      getParentRoute: () => rootRoute,
+      id: 'layout',
+      component: Layout
+    });
+    await renderRoutes(
+      rootRoute.addChildren([
+        layoutRoute.addChildren([
+          createRoute({
+            getParentRoute: () => layoutRoute,
+            path: '/room',
+            component: Room
+          })
+        ]),
+        createRoute({
+          getParentRoute: () => rootRoute,
+          path: '/login',
+          component: () => <div>请登录</div>
+        })
+      ]),
       '/room'
     );
     expect(await screen.findByText('请登录')).toBeVisible();
@@ -324,13 +380,27 @@ describe('MUI migration workflows', () => {
     );
     localStorage.setItem('preference', 'keep');
     const user = userEvent.setup();
-    renderPage(
-      <Routes>
-        <Route element={<Layout />}>
-          <Route path="/customer" element={<Customer />} />
-        </Route>
-        <Route path="/login" element={<div>请登录</div>} />
-      </Routes>,
+    const rootRoute = createRootRoute();
+    const layoutRoute = createRoute({
+      getParentRoute: () => rootRoute,
+      id: 'layout',
+      component: Layout
+    });
+    await renderRoutes(
+      rootRoute.addChildren([
+        layoutRoute.addChildren([
+          createRoute({
+            getParentRoute: () => layoutRoute,
+            path: '/customer',
+            component: Customer
+          })
+        ]),
+        createRoute({
+          getParentRoute: () => rootRoute,
+          path: '/login',
+          component: () => <div>请登录</div>
+        })
+      ]),
       '/customer/'
     );
     expect(
@@ -414,11 +484,21 @@ describe('MUI migration workflows', () => {
       data: { status: -1, error: { code: 'AUTH', message: '用户名或密码错误' } }
     });
     const user = userEvent.setup();
-    renderPage(
-      <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/dashboard" element={<div>已登录</div>} />
-      </Routes>
+    const rootRoute = createRootRoute();
+    await renderRoutes(
+      rootRoute.addChildren([
+        createRoute({
+          getParentRoute: () => rootRoute,
+          path: '/',
+          component: () => <Login />
+        }),
+        createRoute({
+          getParentRoute: () => rootRoute,
+          path: '/dashboard',
+          component: () => <div>已登录</div>
+        })
+      ]),
+      '/'
     );
     await user.type(screen.getByLabelText(/用户名/), 'admin');
     await user.type(screen.getByLabelText(/^密码/), 'secret');

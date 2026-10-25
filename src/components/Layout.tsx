@@ -28,12 +28,11 @@ import {
 } from '@mui/icons-material';
 import {
   Link,
-  matchPath,
   Navigate,
   Outlet,
-  useLocation,
+  useMatches,
   useNavigate
-} from 'react-router-dom';
+} from '@tanstack/react-router';
 import useSWR, { useSWRConfig } from 'swr';
 import { fetchCurrenter } from '../slices/UserFetcher';
 import { logout, readToken } from '../lib/request';
@@ -57,7 +56,7 @@ export default function Layout() {
   const { cache } = useSWRConfig();
   const [open, setOpen] = useState(false);
   const { mode, systemMode, setMode } = useColorScheme();
-  const location = useLocation();
+  const matches = useMatches();
   const navigate = useNavigate();
   if (!token) return <Navigate to="/login" replace />;
   if (error)
@@ -75,7 +74,9 @@ export default function Layout() {
       permission => permission.name === route.permission
     )
   );
-  const active = routes.find(route => matchPath(route.to, location.pathname));
+  const active = routes.find(route =>
+    matches.some(match => match.fullPath === route.to)
+  );
   const dark = (mode === 'system' ? systemMode : mode) === 'dark';
   const navigation = (
     <Box sx={{ width: 240 }}>
@@ -219,7 +220,7 @@ export default function Layout() {
             onClick={() => {
               logout();
               for (const key of cache.keys()) cache.delete(key);
-              navigate('/login', { replace: true });
+              navigate({ to: '/login', replace: true });
             }}
           >
             登出

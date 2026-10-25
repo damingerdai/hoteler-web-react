@@ -19,5 +19,13 @@ export default defineConfig([
       ecmaVersion: 2020,
       globals: globals.browser
     }
+  },
+  {
+    // TanStack Router file-based routes export a `Route` object alongside
+    // components; the router plugin handles HMR for these files.
+    files: ['src/routes/**/*.tsx'],
+    rules: {
+      'react-refresh/only-export-components': 'off'
+    }
   }
 ]);
