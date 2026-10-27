@@ -23,7 +23,7 @@
     "@tanstack/react-router": "^1.170.46",
     "apexcharts": "3.54.1",
     "axios": "1.16.1",
-    "formik": "2.4.6",
+    "formik": "2.4.9",
     "react": "19.2.0",
     "react-apexcharts": "1.4.1",
     "react-dom": "19.2.0",
